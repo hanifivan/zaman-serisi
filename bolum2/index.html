@@ -228,6 +228,42 @@
   .parca-no { margin-left: auto; font-size: .75em; color: #a8c8d8; font-weight: 600; }
   @media print { #sunum-ac, #sunum-bar { display: none !important; } }
 </style>
+<style>
+  /* ---------- slayt düzeni (2026-10-14, bu derse özel deneme) ----------
+     Her slayt 1280x720 sabit bir sahnede kurulur ve ekrana ölçeklenir (PowerPoint gibi).
+     Yazılar sahneye göre büyük; projektörde ekranı doldurur. Eski düzen: yedek/2026-10-14_eski_sunum/ */
+  body.sunum #main { background: #0f172a; }
+  body.sunum .slide-on { top: calc((100vh - 56px) / 2); left: 50%; right: auto; bottom: auto; width: 1280px; height: 720px;
+    transform: translate(-50%, -50%) scale(var(--s, 1)); transform-origin: center; background: #fff; overflow: hidden; }
+  body.sunum .slide-on.ileri, body.sunum .slide-on.geri { animation: slaytBelir .35s ease; }
+  @keyframes slaytBelir { from { opacity: 0; } to { opacity: 1; } }
+  body.sunum .hero.slide-on { background: linear-gradient(135deg, #1E2D5E, #2c4a8a); }
+  body.sunum .hero h1 { font-size: 68px; }
+  body.sunum .hero p { font-size: 30px; max-width: 1050px; }
+  body.sunum .hero .yazar { font-size: 30px; }
+  body.sunum .hero .yazar span { font-size: 22px; }
+  body.sunum .section-header { font-size: 38px; padding: 20px 52px; }
+  body.sunum .section-header .num { width: 50px; height: 50px; font-size: 24px; }
+  body.sunum .section-body { font-size: 28px; line-height: 1.45; padding: 26px 56px 30px; max-width: none; }
+  body.sunum .section-body > p { margin-bottom: 18px; }
+  body.sunum .card, body.sunum .info-box, body.sunum .warn-box, body.sunum details.kd .kd-body { font-size: 25px; line-height: 1.45; }
+  body.sunum .card h4 { font-size: 27px; }
+  body.sunum .formula { font-size: 32px; }
+  body.sunum table { font-size: 23px; }
+  body.sunum .chart-wrap { height: 400px; }
+  body.sunum .chart-wrap-sm { height: 310px; }
+  body.sunum .stat-card .value { font-size: 38px; }
+  body.sunum .stat-card .label { font-size: 19px; }
+  body.sunum button { font-size: 21px; padding: 8px 18px; }
+  body.sunum .controls label { font-size: 23px; }
+  body.sunum input[type=range] { width: 260px; }
+  body.sunum .steps, body.sunum .step { font-size: 24px; }
+  body.sunum .note { font-size: 20px; }
+  body.sunum #s11 #fa-tablo { font-size: 20px; }
+  body.sunum #s11 .info-box { font-size: 22px; }
+  body.sunum #s3 .chart-wrap, body.sunum #s9 .chart-wrap { height: 380px; }
+  body.sunum #sunum-bar .bilgi { font-size: 16px; }
+</style>
 
 <style>
   .lagtab td, .lagtab th { text-align: center; }
@@ -235,11 +271,98 @@
   .lagtab tr.top td { background: #DDF4EE !important; font-weight: 700; }
   .sonuc { font-size: 15px; margin-top: .6rem; }
   .sonuc b { color: var(--teal); }
-  /* sunum modu: 12 satırlık tablolar ve 14. bölüm grafiği tek slayta sığsın */
-  body.sunum .lagtab { font-size: min(15px, 1.75vh); }
-  body.sunum .lagtab td, body.sunum .lagtab th { padding: .12em .6em; }
-  body.sunum #s14 .chart-wrap { height: min(320px, 30vh); }
+  /* sunum modu (1280x720 sahne): 12 satırlık tablolar ve 14. bölüm grafiği tek slayta sığsın */
+  body.sunum .lagtab { font-size: 19px; }
+  body.sunum .lagtab td, body.sunum .lagtab th { padding: .1em .6em; }
+  body.sunum #s14 .chart-wrap { height: 300px; }
   body.sunum #s14 .stat-card { padding: .3em .6em; }
+  body.sunum #s14 .stat-card .value { font-size: 30px; }
+
+  /* ---------- adım adım kalıbı (4: r_k hesabı, 6: Ljung-Box) ----------
+     Üstte değer panosu (adım geldikçe dolar, kısa parlama), her seferinde tek adım.
+     Renkler formülde de aynı: mavi #378ADD, turuncu #EF9F27, mor #7F77DD, lacivert #1E2D5E, camgöbeği #028090 */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 .15em; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 .4em .1em; }
+  .frac > span:last-child { padding: 0 .2em; }
+  .karar { font-size: 14px; font-weight: 700; padding: .55rem .9rem; border-radius: 6px; margin-top: .6rem; }
+  .karar.red { background: #FDECEC; color: #8a2020; }
+  .karar.kabul { background: #E6F7F0; color: #0d5c43; }
+  .rs-kutu { border: 1px solid var(--border); border-radius: 10px; padding: .6rem .8rem; background: #fff; }
+  .rs-kutu > .controls { margin: .2rem 0 .4rem; }
+  .rs-pano { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin: .4rem 0 .7rem; }
+  .rk-pano { grid-template-columns: .8fr 1fr .8fr 1.3fr .8fr; }
+  .lb-pano { grid-template-columns: .7fr 2.2fr 1fr .7fr; }
+  .rs-hucre { border: 2px dashed #cfd8e3; border-radius: 10px; padding: .35rem .5rem; text-align: center; background: #fafbfc; transition: all .4s; min-width: 0; }
+  .rs-hucre span { display: block; font-size: 12px; color: var(--gray); }
+  .rs-hucre b { display: block; font-size: 22px; color: #b8c2cf; font-family: "SF Mono", Menlo, monospace; overflow-wrap: anywhere; }
+  .rs-hucre b.uzun { font-size: 14px; line-height: 1.45; }
+  .rs-hucre i { display: block; font-size: 11px; color: #b8c2cf; font-style: normal; }
+  .rs-hucre.dolu { border-style: solid; background: #fff; }
+  .rs-hucre.dolu i { visibility: hidden; }
+  .rs-hucre.c-mavi.dolu { border-color: #378ADD; } .rs-hucre.c-mavi.dolu b, .c-mavi-y { color: #378ADD; }
+  .rs-hucre.c-tur.dolu { border-color: #EF9F27; } .rs-hucre.c-tur.dolu b, .c-tur-y { color: #d4860f; }
+  .rs-hucre.c-mor.dolu { border-color: #7F77DD; } .rs-hucre.c-mor.dolu b, .c-mor-y { color: #7F77DD; }
+  .rs-hucre.c-lac.dolu { border-color: #1E2D5E; } .rs-hucre.c-lac.dolu b, .c-lac-y { color: #1E2D5E; }
+  .rs-hucre.c-teal.dolu { border-color: #028090; } .rs-hucre.c-teal.dolu b, .c-teal-y { color: #028090; }
+  .c-mavi-y, .c-tur-y, .c-mor-y, .c-lac-y, .c-teal-y { font-weight: 700; }
+  .rs-hucre.yanip { animation: rsYan 1.2s ease; }
+  @keyframes rsYan { 0% { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(239,159,39,.35); } 100% { transform: none; box-shadow: none; } }
+  .rs-adimlar { display: flex; gap: .3rem; flex-wrap: wrap; margin-bottom: .5rem; }
+  .rs-adimlar button { font-size: 12.5px; padding: 4px 10px; border-radius: 16px; }
+  .rs-adimlar button.gecti { background: #E6F7F0; border-color: #1D9E75; color: #0d5c43; }
+  .rs-adimlar button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .rs-icerik h5 { margin: .2rem 0 .4rem; font-size: 15px; color: var(--navy); }
+  .rs-gez { display: flex; justify-content: space-between; margin-top: .6rem; }
+  .rs-yaz { background: #F3F7FB; border-radius: 8px; padding: .5rem .8rem; margin-top: .5rem; }
+  .rs-f { font-size: 18px; text-align: center; line-height: 2.1; }
+  .rs-sd-kutu { background: #F7F5FF; border: 1px solid #d9d4f7; border-radius: 8px; padding: .5rem .8rem; margin-top: .5rem; }
+  .rs-sd-kutu label { margin-right: .8rem; white-space: nowrap; }
+  .rs-sd-kutu input { width: 4.2em; font-size: inherit; padding: 2px 6px; border: 1px solid #b9b2ee; border-radius: 6px; }
+  .rs-sd-kutu button { margin: .3rem .3rem 0 0; }
+  .rs-grafik { margin-top: .5rem; }
+  /* 4: tablo solda, adımın anlatımı sağda */
+  .rk-yan { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: start; }
+  .rk-yan .lagtab { width: auto; }
+  .lagtab th.c-tur { background: #EF9F27; } .lagtab th.c-mavi { background: #378ADD; }
+  .lagtab td.yeni-sut { background: #FFF7E8; }
+  .lagtab tr.hl td.c-tur-y { color: #d4860f; } .lagtab tr.hl td.c-mavi-y { color: #378ADD; }
+  /* 6: r_k şeridi ve Q terimleri */
+  .lb-r { width: auto; margin-top: .5rem; }
+  .lb-r td, .lb-r th { text-align: center; padding: 4px 8px; }
+  .lb-r td.sec { background: #E3EFFB; color: #378ADD; font-weight: 700; }
+  .lb-terim { display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin-top: .4rem; font-size: 13px; }
+  .lb-terim span { background: #fff; border: 1px solid #b9d3f0; border-radius: 12px; padding: 0 .55em; white-space: nowrap; }
+  #lb-tab tr.sec td { outline: 2px solid #EF9F27; outline-offset: -2px; }
+  @media(max-width:900px) { .rk-yan { grid-template-columns: minmax(0, 1fr); } .rk-yan .tscroll { overflow-x: auto; } }
+  @media(max-width:700px) { .rs-pano, .rk-pano, .lb-pano { grid-template-columns: repeat(2, 1fr); } .lb-pano .rs-hucre:nth-child(2) { grid-column: span 2; } .rk-pano .rs-hucre:last-child { grid-column: span 2; } .lb-r { display: block; overflow-x: auto; } }
+  body.sunum .rs-kutu { border: 0; padding: 0; }
+  body.sunum .rs-kutu > .controls { margin: 0 0 .2rem; }
+  body.sunum .rs-kutu > .controls button { font-size: 19px; padding: 4px 13px; }
+  body.sunum .rs-pano { margin: .2rem 0 .35rem; } body.sunum .rs-hucre { padding: .15rem .5rem; }
+  body.sunum .rs-hucre span { font-size: 15px; } body.sunum .rs-hucre b { font-size: 25px; } body.sunum .rs-hucre b.uzun { font-size: 16px; } body.sunum .rs-hucre i { display: none; }
+  body.sunum .rs-adimlar { margin-bottom: .3rem; } body.sunum .rs-adimlar button { font-size: 16px; padding: 3px 12px; }
+  body.sunum .rs-icerik h5 { font-size: 23px; margin: .1rem 0 .3rem; }
+  body.sunum .rs-yaz { font-size: 20px; line-height: 1.4; padding: .35rem .7rem; margin-top: .35rem; }
+  body.sunum .rs-f { font-size: 25px; line-height: 1.9; }
+  body.sunum .rs-sd-kutu { font-size: 20px; padding: .35rem .7rem; }
+  body.sunum .rs-sd-kutu button { font-size: 18px; padding: 4px 12px; }
+  body.sunum .karar { font-size: 20px; padding: .4rem .8rem; margin-top: .35rem; }
+  body.sunum .rs-grafik { height: 250px; }
+  body.sunum .rs-gez { display: none; }
+  body.sunum #s4 .lagtab { font-size: 17px; }
+  body.sunum #s4 .lagtab td, body.sunum #s4 .lagtab th { padding: .06em .5em; }
+  body.sunum #rk-grafik { height: 200px; }
+  body.sunum #lb-grafik { height: 225px; }
+  body.sunum .lb-r { font-size: 19px; }
+  body.sunum .lb-terim { font-size: 17px; }
+  body.sunum #lb-tab { font-size: 17px; }
+  /* not sarmalın içinde: sunumda gizlemek slayt bölücünün ölçümünü bozmaz */
+  body.sunum #s6 .lb-ozet .note { display: none; }
+  body.sunum #s6 .warn-box { margin-top: .4rem; padding: .4rem .8rem; font-size: 21px; }
+  body.sunum #s6 .formula { font-size: 24px; margin: .2rem 0; padding: .3rem; }
+  /* sunumda 4. bölümün giriş paragrafı gizli: adımlar aynı şeyi anlatıyor */
+  body.sunum #s4 .rk-giris { display: none; }
+  body.sunum #lb-tab td, body.sunum #lb-tab th { padding: .12em .6em; }
 </style>
 </head>
 <body>
@@ -251,7 +374,7 @@
   <a href="#s2">2. Otokorelasyon Nedir?</a>
   <div class="section-label">2. Otokorelasyon Katsayısı</div>
   <a href="#s3">3. Gecikmeli Değer</a>
-  <a href="#s4">4. r<sub>k</sub> Adım Adım</a>
+  <a href="#s4">4. rₖ Adım Adım</a>
   <a href="#s5">5. Korelogram</a>
   <a href="#s6">6. Ljung-Box Testi</a>
   <div class="section-label">3. Korelogramı Okumak</div>
@@ -351,14 +474,27 @@
 </section>
 
 <section class="section" id="s4">
-  <div class="section-header"><span class="num">4</span>r<sub>k</sub> Adım Adım</div>
+  <div class="section-header"><span class="num">4</span>rₖ Adım Adım</div>
   <div class="section-body">
-    <p>Önce her gözlemden ortalamayı (142) çıkarın, sonra t dönemindeki sapmayı t − k dönemindeki sapmayla çarpın. Çarpımların toplamı pay, kare sapmaların toplamı paydadır. k = 1 sunumdaki hesaptır.</p>
-    <div class="controls">
-      <span class="kayd"><label>Gecikme k = <b id="h-k-l">1</b></label><input type="range" id="h-k" min="1" max="10" step="1" value="1"></span>
+    <div class="rs-kutu" id="rk-kutu" data-adimli>
+      <p class="rk-giris">Önce her gözlemden ortalamayı (142) çıkarın, sonra t dönemindeki sapmayı t − k dönemindeki sapmayla çarpın. Çarpımların toplamı pay, kare sapmaların toplamı paydadır. k = 1 sunumdaki hesaptır.</p>
+      <div class="controls">
+        <span class="kayd"><label>Gecikme k = <b id="h-k-l">1</b></label><input type="range" id="h-k" min="1" max="10" step="1" value="1"></span>
+      </div>
+      <div class="rs-pano rk-pano">
+        <div class="rs-hucre c-teal" id="rk-p-ort"><span>Ȳ</span><b>?</b><i>1. adım</i></div>
+        <div class="rs-hucre c-mavi" id="rk-p-payda"><span>payda: Σ(Y<sub>t</sub> − Ȳ)²</span><b>?</b><i>2. adım</i></div>
+        <div class="rs-hucre c-mor" id="rk-p-say"><span>çarpım sayısı (n − k)</span><b>?</b><i>3. adım</i></div>
+        <div class="rs-hucre c-tur" id="rk-p-pay"><span>pay: Σ(Y<sub>t</sub> − Ȳ)(Y<sub>t−k</sub> − Ȳ)</span><b>?</b><i>4. adım</i></div>
+        <div class="rs-hucre c-lac" id="rk-p-r"><span>r<sub>k</sub></span><b>?</b><i>5. adım</i></div>
+      </div>
+      <div class="rs-adimlar" id="rk-adimlar"></div>
+      <div class="rk-yan">
+        <div class="tscroll" style="max-height:none"><table class="lagtab" id="h-tab"></table></div>
+        <div><div class="rs-icerik" id="rk-icerik"></div><div class="chart-wrap-sm rs-grafik" id="rk-grafik"><canvas id="c-rk"></canvas></div></div>
+      </div>
+      <div class="rs-gez"><button id="rk-geri">‹ Önceki adım</button><button id="rk-ileri">Sonraki adım ›</button></div>
     </div>
-    <div class="tscroll" style="max-height:none"><table class="lagtab" id="h-tab"></table></div>
-    <div class="sonuc" id="h-sonuc"></div>
   </div>
 </section>
 
@@ -375,11 +511,25 @@
 <section class="section" id="s6">
   <div class="section-header"><span class="num">6</span>Ljung-Box Testi</div>
   <div class="section-body">
-    <p>Tek tek katsayılara bakmak yerine ilk m katsayının birlikte sıfır olup olmadığı sınanır. H<sub>0</sub>: seri tesadüfidir (beyaz gürültü), yani <span class="eq">ρ<sub>1</sub> = … = ρ<sub>m</sub> = 0</span>.</p>
+    <p>Tek tek katsayılara bakmak yerine ilk m katsayının birlikte sıfır olup olmadığı sınanır. H<sub>0</sub>: ilk m otokorelasyon katsayısı sıfırdır (bu gecikmelerde seri tesadüfi gibi davranır), <span class="eq">ρ<sub>1</sub> = … = ρ<sub>m</sub> = 0</span>.</p>
+    <div class="rs-kutu" id="lb-kutu" data-adimli>
+      <div class="controls" id="lb-m-btn"><label>Birlikte sınanan gecikme sayısı m =</label></div>
+      <div class="rs-pano lb-pano">
+        <div class="rs-hucre c-lac" id="lb-p-n"><span>n (gözlem)</span><b>?</b><i>1. adım</i></div>
+        <div class="rs-hucre c-mavi" id="lb-p-r"><span>r<sub>1</sub> … r<sub>m</sub></span><b>?</b><i>1. adım</i></div>
+        <div class="rs-hucre c-tur" id="lb-p-q"><span>Q<sub>m</sub></span><b>?</b><i>3. adım</i></div>
+        <div class="rs-hucre c-mor" id="lb-p-sd"><span>sd</span><b>?</b><i>5. adım</i></div>
+      </div>
+      <div class="rs-adimlar" id="lb-adimlar"></div>
+      <div class="rs-icerik" id="lb-icerik"></div>
+      <div class="chart-wrap-sm rs-grafik" id="lb-grafik"><canvas id="c-lb"></canvas></div>
+      <div class="rs-gez"><button id="lb-geri">‹ Önceki adım</button><button id="lb-ileri">Sonraki adım ›</button></div>
+    </div>
+    <h4 style="margin-top:1rem">Bütün m değerleri için sonuç</h4>
     <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>Q</mi><mi>m</mi></msub><mo>=</mo><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>2</mn><mo stretchy="false">)</mo><munderover><mo movablelimits="false">∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>m</mi></mrow></munderover><mstyle displaystyle="true" scriptlevel="0"><mfrac><mstyle displaystyle="true" scriptlevel="0"><mrow><msubsup><mi>r</mi><mi>k</mi><mn>2</mn></msubsup></mrow></mstyle><mstyle displaystyle="true" scriptlevel="0"><mrow><mi>n</mi><mo>−</mo><mi>k</mi></mrow></mstyle></mfrac></mstyle><mi>~</mi><msubsup><mi>χ</mi><mi>m</mi><mn>2</mn></msubsup></mrow></math></div>
-    <div class="tscroll" style="max-height:none"><table id="lb-tab"></table></div>
+    <div class="lb-ozet"><div class="tscroll" style="max-height:none"><table id="lb-tab"></table></div>
     <div class="note">Tablo tarayıcıda ders verisinden hesaplanır; sunumdaki SPSS çıktısıyla aynıdır.</div>
-    <div class="warn-box">m = 1 için Q = 4,995 ve p = 0,025: %5 düzeyinde H<sub>0</sub> reddedilir, seri tesadüfi değildir. Ardışık aylar birbirine bağlıdır.</div>
+    <div class="warn-box">m = 1 için Q = 4,995 ve p = 0,025: %5 düzeyinde H<sub>0</sub> reddedilir, seri tesadüfi değildir. Ardışık aylar birbirine bağlıdır.</div></div>
   </div>
 </section>
 
@@ -612,6 +762,54 @@ function histCfg(lab, sets, xlab, cizgi) {
       scales: { x: { title: { display: true, text: xlab }, ticks: { maxTicksLimit: 9 } }, y: { title: { display: true, text: 'Örnek sayısı' } } } } };
 }
 
+// Adım adım bloklar: sunum modunda ok tuşu/kumanda önce bunların adımlarını gezer (parca_sunum.js, adimla).
+const ADIMLI = [];
+function adimliKaydet(el, al, N, git) { ADIMLI.push({ el, ileri: () => al() < N ? (git(al() + 1), true) : false, geri: () => al() > 1 ? (git(al() - 1), true) : false }); }
+// Pano hücresi: değer gelince dolar; ilk dolduğunda ya da değer değişince kısa parlama.
+function panoDol(id, deger) {
+  const h = $(id), b = h.querySelector('b'), dolu = deger !== null, once = h.classList.contains('dolu'), eski = b.innerHTML;
+  h.classList.toggle('dolu', dolu); b.innerHTML = dolu ? deger : '?';
+  if (!dolu) h.classList.remove('yanip');
+  else if (!once || eski !== b.innerHTML) { h.classList.remove('yanip'); void h.offsetWidth; h.classList.add('yanip'); }
+}
+// Sunumda içerik uzunluğu değişince slaytı yeniden sığdır (BOLUMLER, SLAYT, sigdir sunum parçasında).
+function sunumSigdir(kap) { if (document.body.classList.contains('sunum')) { const el = BOLUMLER[SLAYT[si].b]; if (el.contains(kap)) sigdir(el); } }
+// Adım çubuğu ve Önceki/Sonraki düğmeleri
+function adimCubugu(id, adlar, A, git) {
+  $(id).innerHTML = adlar.map((a, k) => `<button data-a="${k + 1}" class="${k + 1 === A ? 'active' : k + 1 < A ? 'gecti' : ''}">${k + 1}. ${a}</button>`).join('');
+  $(id).querySelectorAll('button').forEach(b => b.onclick = () => git(+b.dataset.a));
+}
+// Yeni grafiklerde y ekseni tikleri ondalık virgülle
+const virgulY = cfg => { const y = cfg.options.scales.y; y.ticks = { ...(y.ticks || {}), callback: d => Number(d).toLocaleString('tr-TR', { maximumFractionDigits: 3 }) }; return cfg; };
+// Grafiğe düşey çizgi (turuncu: bizim değer; kesikli: kritik değer)
+function dikeyCizgi(c, px, renk, yazi, kesik, sira, hiza) {
+  const Yy = c.scales.y, X = c.scales.x, g = c.ctx;
+  g.save(); g.strokeStyle = renk; g.lineWidth = 3; g.setLineDash(kesik ? [6, 4] : []); g.beginPath(); g.moveTo(px, Yy.top); g.lineTo(px, Yy.bottom); g.stroke();
+  g.fillStyle = renk; g.font = `bold ${Chart.defaults.font.size + 2}px sans-serif`; g.textAlign = hiza || (px > X.right - 170 ? 'right' : 'left');
+  // Yazı grafikten taşacaksa çizginin öbür yanına ve bir satır aşağı al.
+  const w = g.measureText(' ' + yazi + ' ').width;
+  if (g.textAlign === 'left' && px + w > X.right) { g.textAlign = 'right'; sira++; } else if (g.textAlign === 'right' && px - w < X.left) { g.textAlign = 'left'; sira++; }
+  g.fillText(' ' + yazi + ' ', px, Yy.top + 16 + sira * (Chart.defaults.font.size + 5)); g.restore();
+}
+// Birden çok düşey çizginin etiketleri: hiçbir çizgi yazıyı kesmesin, etiketler üst üste binmesin.
+// Sıra: çizginin dış yanı; sığmazsa grafiğin sağ kenarına yaslı ve bir satır aşağı; sonra çizginin iç yanı; en son sol kenar.
+function cizgiEtiketleri(c, ets) {
+  const Yy = c.scales.y, A = c.chartArea, g = c.ctx, fs = Chart.defaults.font.size + 2, satir = fs + 5, xs = ets.map(e => e.px), yer = [];
+  g.save(); g.font = `bold ${fs}px sans-serif`; g.textBaseline = 'alphabetic';
+  ets.forEach(e => { e.kesik = !!e.kesik; g.strokeStyle = e.renk; g.lineWidth = 3; g.setLineDash(e.kesik ? [6, 4] : []); g.beginPath(); g.moveTo(e.px, Yy.top); g.lineTo(e.px, Yy.bottom); g.stroke(); });
+  g.setLineDash([]);
+  ets.forEach(e => {
+    const w = g.measureText(e.yazi).width + 8, dis = e.yan === 'sol' ? [e.px - 3 - w, e.px - 3] : [e.px + 3, e.px + 3 + w], ic = e.yan === 'sol' ? [e.px + 3, e.px + 3 + w] : [e.px - 3 - w, e.px - 3];
+    const aday = [[dis, 0], [[A.right - w, A.right], 1], [[A.right - w, A.right], 2], [ic, 1], [ic, 0], [[A.left, A.left + w], 1]];
+    const uygun = ([x0, x1], r) => x0 >= A.left && x1 <= A.right && !xs.some(x => x > x0 - 2 && x < x1 + 2) && !yer.some(q => q.r === r && q.x0 < x1 && x0 < q.x1);
+    const [[x0, x1], r] = aday.find(([sp, r]) => uygun(sp, r)) || aday[1];
+    yer.push({ x0, x1, r });
+    const y = Yy.top + 16 + r * satir;
+    g.fillStyle = 'rgba(255,255,255,.9)'; g.fillRect(x0, y - fs, x1 - x0, fs + 5);
+    g.fillStyle = e.renk; g.textAlign = 'left'; g.fillText(e.yazi, x0 + 4, y);
+  });
+  g.restore();
+}
 
 // ---------- veriler ve ortak hesaplar ----------
 const AY = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
@@ -652,28 +850,212 @@ function gecikme(k) {
 }
 grupla([...document.querySelectorAll('#g-btn button')], b => gecikme(+b.dataset.i)); gecikme(1);
 
-// ---------- 4: adım adım ----------
-function adim() {
-  const k = +$('h-k').value; $('h-k-l').textContent = k;
-  const m = ort(Y), d = Y.map(a => a - m); let pay = 0, payda = 0;
-  let h = `<tr><th>Ay</th><th>Y<sub>t</sub></th><th>Y<sub>t</sub> − Ȳ</th><th>Y<sub>t−${k}</sub></th><th>Y<sub>t−${k}</sub> − Ȳ</th><th>Çarpım</th><th>(Y<sub>t</sub> − Ȳ)<sup>2</sup></th></tr>`;
-  AY.forEach((a, t) => { const ok = t - k >= 0, c = ok ? d[t] * d[t - k] : 0; pay += c; payda += d[t] ** 2;
-    h += `<tr><td>${a}</td><td>${Y[t]}</td><td>${v(d[t], 0)}</td>` + (ok ? `<td>${Y[t - k]}</td><td>${v(d[t - k], 0)}</td><td>${v(c, 0)}</td>` : '<td class="bos">·</td><td class="bos">·</td><td class="bos">·</td>') + `<td>${d[t] ** 2}</td></tr>`; });
-  h += `<tr class="hl"><td>Toplam</td><td>1704</td><td>0</td><td></td><td></td><td>${v(pay, 0)}</td><td>${payda}</td></tr>`;
-  $('h-tab').innerHTML = h;
-  $('h-sonuc').innerHTML = `r<sub>${k}</sub> = ${v(pay, 0)} / ${payda} = <b>${v(pay / payda)}</b> &nbsp;·&nbsp; ${12 - k} çarpım toplandı.`;
+// ---------- 4: r_k adım adım ----------
+// Kurgu: ortalama ve sapmalar → payda (bütün seri) → seriyi k kaydır, kaç çarpım? (öğrenci bulur) → pay → r_k = pay / payda.
+// Tablo adım geldikçe sütun kazanır; yeni sütun açık renkle vurgulanır. Sayılar SPSS ACF çıktısıyla aynı (r_1 = 0,572).
+let rkA = 1, rkAcik = false;
+const AYDAN = ['Ocak\'tan', 'Şubat\'tan', 'Mart\'tan', 'Nisan\'dan', 'Mayıs\'tan', 'Haziran\'dan', 'Temmuz\'dan', 'Ağustos\'tan', 'Eylül\'den', 'Ekim\'den', 'Kasım\'dan', 'Aralık\'tan'];
+const RK_ADIM = ['Ortalama ve sapmalar', 'Payda', 'Kaç çarpım?', 'Pay', 'r<sub>k</sub>'], RK_N = RK_ADIM.length, RK_R = acf(Y, 10);
+function rkHesap() {
+  const k = +$('h-k').value, m = ort(Y), d = Y.map(a => a - m);
+  let pay = 0; for (let t = k; t < 12; t++) pay += d[t] * d[t - k];
+  return { k, m, d, pay, payda: d.reduce((s, a) => s + a * a, 0), say: 12 - k };
 }
-$('h-k').oninput = adim; adim();
+function rkTablo(H) {
+  const A = rkA, k = H.k, kare = A >= 2, kay = A >= 3, car = A >= 4, yeni = s => s === A ? ' yeni-sut' : '';
+  let h = `<tr><th>Ay</th><th>Y<sub>t</sub></th><th>Y<sub>t</sub> − Ȳ</th>` + (kay ? `<th>Y<sub>t−${k}</sub></th><th>Y<sub>t−${k}</sub> − Ȳ</th>` : '') + (car ? '<th class="c-tur">Çarpım</th>' : '') + (kare ? '<th class="c-mavi">(Y<sub>t</sub> − Ȳ)<sup>2</sup></th>' : '') + '</tr>';
+  AY.forEach((a, t) => { const ok = t - k >= 0;
+    h += `<tr><td>${a}</td><td>${Y[t]}</td><td class="${yeni(1)}">${v(H.d[t], 0)}</td>`
+      + (kay ? (ok ? `<td class="${yeni(3)}">${Y[t - k]}</td><td class="${yeni(3)}">${v(H.d[t - k], 0)}</td>` : `<td class="bos${yeni(3)}">·</td><td class="bos${yeni(3)}">·</td>`) : '')
+      + (car ? (ok ? `<td class="${yeni(4)}">${v(H.d[t] * H.d[t - k], 0)}</td>` : `<td class="bos${yeni(4)}">·</td>`) : '')
+      + (kare ? `<td class="${yeni(2)}">${H.d[t] ** 2}</td>` : '') + '</tr>'; });
+  h += `<tr class="hl"><td>Toplam</td><td>1704</td><td>0</td>` + (kay ? '<td></td><td></td>' : '') + (car ? `<td class="c-tur-y">${v(H.pay, 0)}</td>` : '') + (kare ? `<td class="c-mavi-y">${H.payda}</td>` : '') + '</tr>';
+  $('h-tab').innerHTML = h;
+}
+function rkIcerik() {
+  const H = rkHesap(), k = H.k; $('h-k-l').textContent = k;
+  rkTablo(H);
+  const T = `<span class="c-teal-y">142</span>`, PD = `<span class="c-mavi-y">${H.payda}</span>`, PY = `<span class="c-tur-y">${v(H.pay, 0)}</span>`, S = `<span class="c-mor-y">${H.say}</span>`, r = H.pay / H.payda;
+  const ic = {
+    1: () => `<h5>1. adım: Ortalamayı bul, sapmaları yaz</h5>
+      <div class="rs-yaz">Ȳ = 1704 / 12 = ${T} → panoya. Her gözlemden 142 çıkarılır: ortalamanın altındaki aylar negatif, üstündekiler pozitif sapma verir. Sapmaların toplamı her zaman 0'dır.</div>`,
+    2: () => `<h5>2. adım: Payda: serinin toplam değişkenliği</h5>
+      <div class="rs-yaz">Sapmaların kareleri toplanır: Σ(Y<sub>t</sub> − Ȳ)² = ${PD} → panoya.</div>
+      <div class="rs-yaz">Payda 12 terimin <b>hepsini</b> kullanır ve k'ye bağlı değildir. Her gecikme aynı ölçüye bölündüğü için r<sub>1</sub>, r<sub>2</sub>, … birbiriyle karşılaştırılabilir ve −1 ≤ r<sub>k</sub> ≤ 1 olur.</div>`,
+    3: () => `<h5>3. adım: Seriyi k = ${k} dönem kaydır: kaç çarpım çıkar?</h5>
+      <div class="rs-yaz">Y<sub>t−${k}</sub> sütunu Y<sub>t</sub>'nin ${k} satır aşağı kaydırılmış hâlidir (3. bölüm). Pay, aynı satırdaki iki sapmanın çarpımlarının toplamıdır; çarpım yalnız iki sütunun da dolu olduğu satırlarda vardır. <b>Önce siz bulun:</b></div>
+      <div class="rs-sd-kutu"><label>Paydaki çarpım sayısı = <input id="rk-say" type="number" min="0" step="1"></label>
+        <button id="rk-kontrol">Kontrol et</button><button id="rk-goster">Cevabı göster</button><div id="rk-geri-bildirim"></div></div>`,
+    4: () => `<h5>4. adım: Pay: çarpımların toplamı</h5>
+      <div class="rs-yaz">${S} çarpımın toplamı Σ(Y<sub>t</sub> − Ȳ)(Y<sub>t−${k}</sub> − Ȳ) = ${PY} → panoya.</div>
+      <div class="rs-yaz"><b>Neden pay ${H.say}, payda 12 terim?</b> Payda serinin kendi değişkenliğidir; bütün gözlemler bilinir. Pay yalnız birbirinden ${k} dönem uzak çiftlerden gelir ve böyle n − k = ${H.say} çift vardır. k büyüdükçe çift azalır: uzak gecikmelerin katsayıları daha az veriye dayanır ve sıfıra doğru küçülür.</div>`,
+    5: () => `<h5>5. adım: r<sub>${k}</sub> = pay / payda</h5>
+      <div class="rs-f">r<sub>${k}</sub> = <span class="frac"><span class="c-tur-y">Σ(Y<sub>t</sub> − Ȳ)(Y<sub>t−${k}</sub> − Ȳ)</span><span class="c-mavi-y">Σ(Y<sub>t</sub> − Ȳ)²</span></span>
+        = <span class="frac"><span>${PY}</span><span>${PD}</span></span> = <b class="c-lac-y">${v(r)}</b></div>
+      <div class="rs-yaz">${H.say} çarpım toplandı. SPSS ACF çıktısındaki değerle aynı (5. bölüm). k'yi değiştirin: turuncu çubuk seçilen gecikme.</div>` };
+  $('rk-icerik').innerHTML = ic[rkA]();
+  if (rkA === 3) rkSayBagla(H);
+  $('rk-grafik').style.display = rkA === 5 ? '' : 'none';
+  if (rkA === 5) {
+    const cfg = korCfg(RK_R, 12); cfg.data.datasets[0].backgroundColor = RK_R.map((_, i) => i + 1 === k ? C.orange : C.gray);
+    cfg.options.animation = false; ciz('c-rk', virgulY(cfg));
+  }
+  const sayGor = rkAcik || rkA >= 4;
+  panoDol('rk-p-ort', '142'); panoDol('rk-p-payda', rkA >= 2 ? String(H.payda) : null);
+  panoDol('rk-p-say', rkA >= 3 && sayGor ? String(H.say) : null);
+  panoDol('rk-p-pay', rkA >= 4 ? v(H.pay, 0) : null); panoDol('rk-p-r', rkA >= 5 ? v(r) : null);
+  adimCubugu('rk-adimlar', RK_ADIM, rkA, rkGit);
+  $('rk-geri').disabled = rkA === 1; $('rk-ileri').disabled = rkA === RK_N;
+  sunumSigdir($('rk-kutu'));
+}
+// 3. adım alıştırması: paydaki çarpım sayısını (n − k) öğrenci bulur; sık hatalar tanınır.
+function rkSayBagla(H) {
+  const k = H.k, dogru = () => { rkAcik = true; panoDol('rk-p-say', String(H.say));
+    $('rk-geri-bildirim').innerHTML = `<div class="karar kabul">Doğru: n − k = 12 − ${k} = ${H.say}. İlk ${k} satırda Y<sub>t−${k}</sub> boş; ${AYDAN[k]} Aralık'a kadar her satırda bir çarpım var.</div>`; sunumSigdir($('rk-kutu')); };
+  const yaz = h => { rkAcik = false; panoDol('rk-p-say', rkA >= 4 ? String(H.say) : null); $('rk-geri-bildirim').innerHTML = `<div class="karar red">${h}</div>`; sunumSigdir($('rk-kutu')); };
+  if (rkAcik) { $('rk-say').value = H.say; dogru(); }
+  $('rk-goster').onclick = () => { $('rk-say').value = H.say; dogru(); };
+  $('rk-kontrol').onclick = () => {
+    const g = $('rk-say').value, a = +g;
+    if (g === '') return yaz('Kutuyu doldurun.');
+    if (a === H.say) return dogru();
+    yaz(a === 12 ? `12 bütün gözlemlerin sayısı (n). İlk ${k} satırda Y<sub>t−${k}</sub> boş; o satırlarda çarpım yok.`
+      : a === 11 ? `11 yalnız k = 1 için doğru. Burada k = ${k}: başta ${k} satır boş kalıyor.`
+      : a === k ? `${k}, boş kalan satırların sayısı. Çarpım sayısı geri kalan, iki sütunun da dolu olduğu satırlardır.`
+      : a === H.say - 1 ? `Bir eksik saydınız. Dolu satırları sayın: ${k + 1}. satırdan (${AY[k]}) 12. satıra (Aralık) kadar.`
+      : a === H.say + 1 ? `Bir fazla saydınız: ${k}. satırda (${AY[k - 1]}) Y<sub>t−${k}</sub> hâlâ boş. ${AYDAN[k]} Aralık'a kadar sayın.`
+      : `${a} değil. Y<sub>t−${k}</sub> sütununda kaç dolu hücre var? ${AYDAN[k]} Aralık'a kadar sayın.`);
+  };
+}
+function rkGit(a) { rkA = Math.max(1, Math.min(RK_N, a)); rkIcerik(); }
+$('rk-geri').onclick = () => rkGit(rkA - 1); $('rk-ileri').onclick = () => rkGit(rkA + 1);
+// k ilk iki adımda bir şey değiştirmez (ortalama ve payda k'ye bağlı değil): etkisinin göründüğü 3. adıma geç.
+$('h-k').oninput = () => { rkAcik = false; if (rkA < 3) rkA = 3; rkIcerik(); };
+// Sunumda kaydırıcı bırakılınca odak ondan alınır: yoksa ok tuşları adımları değil kaydırıcıyı oynatır. Normal görünümde odak kalır.
+$('h-k').addEventListener('change', () => { if (document.body.classList.contains('sunum')) $('h-k').blur(); });
+adimliKaydet($('rk-kutu'), () => rkA, RK_N, rkGit);
+rkIcerik();
 
 // ---------- 5-6: korelogram ve Ljung-Box ----------
 const R = acf(Y, 10);
 ciz('c-kor', korCfg(R, 12));
-(() => {
-  let h = '<tr><th>Gecikme</th><th>r<sub>k</sub></th><th>Std. hata</th><th>Q</th><th>sd</th><th>p</th></tr>', Q = 0;
-  R.forEach((r, i) => { const k = i + 1; Q += r * r / (12 - k); const q = 12 * 14 * Q, p = pChi(q, k);
-    h += `<tr class="${p < 0.05 ? 'hl' : ''}"><td>${k}</td><td>${v(r)}</td><td>${v(seK(12, k))}</td><td>${v(q)}</td><td>${k}</td><td>${v(p)}</td></tr>`; });
+function lbQ(r, n, m) { let s = 0; for (let k = 1; k <= m; k++) s += r[k - 1] ** 2 / (n - k); return n * (n + 2) * s; }
+function lbTablo() {
+  let h = '<tr><th>Gecikme</th><th>r<sub>k</sub></th><th>Std. hata</th><th>Q</th><th>sd</th><th>p</th></tr>';
+  R.forEach((r, i) => { const k = i + 1, q = lbQ(R, 12, k), p = pChi(q, k);
+    h += `<tr class="${p < 0.05 ? 'hl' : ''}${k === lbM ? ' sec' : ''}"><td>${k}</td><td>${v(r)}</td><td>${v(seK(12, k))}</td><td>${v(q)}</td><td>${k}</td><td>${v(p)}</td></tr>`; });
   $('lb-tab').innerHTML = h;
-})();
+}
+
+// ---------- 6: Ljung-Box (adım adım) ----------
+// Kurgu: seri ve r_k'ler → şüphe (korelogramda ilk çubuk; neden birlikte test) → Q kavram, formül, sayılar
+// → "şans eseri mi?" (n = 12 beyaz gürültü, 4000 deneme) → sd = m alıştırması → χ²(m) yoğunluğunda karar.
+// Q yuvarlanmamış r_k'lerle hesaplanır (SPSS gibi); m = 1: Q = 4,995, p = 0,025.
+let lbM = 1, lbA = 1, lbSans = null, lbAcik = false;
+const LB_ADIM = ['Seri ve r<sub>k</sub>', 'Şüphe: korelogram', 'Q istatistiği', 'Şans eseri mi?', 'Serbestlik derecesi', 'Karar'], LB_N = LB_ADIM.length;
+function lbHesap() {
+  const m = lbM, Q = lbQ(R, 12, m), p = pChi(Q, m), kr = kritik(x => pChi(x, m));
+  return { m, Q, p, kr, terim: R.slice(0, m).map((r, i) => r * r / (12 - i - 1)) };
+}
+// Şans denemesi: gerçekten tesadüfi (beyaz gürültü) 12 gözlemlik seri üret, aynı Q_m'yi hesapla; 4000 tekrar.
+function lbSansHesap(L) {
+  const rr = mulberry32(12), nr = () => { let u = 0; while (u === 0) u = rr(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * rr()); }, qs = [];
+  for (let t = 0; t < 4000; t++) { const y = Array.from({ length: 12 }, nr); qs.push(lbQ(acf(y, L.m), 12, L.m)); }
+  qs.sort((a, b) => a - b);
+  lbSans = { qs, ort: ort(qs), oran: qs.filter(q => q >= L.Q).length / qs.length };
+}
+const chiYog = (x, k) => x <= 0 ? 0 : Math.exp((k / 2 - 1) * Math.log(x) - x / 2 - (k / 2) * Math.log(2) - gammaln(k / 2));
+const yuzde = x => '%' + (100 * x).toFixed(1).replace('.', ',');
+function lbIcerik() {
+  const L = lbHesap(), m = L.m, Qs = `<span class="c-tur-y">${v(L.Q)}</span>`, Ms = `<span class="c-mor-y">${m}</span>`, Ns = '<span class="c-lac-y">12</span>';
+  if (lbA >= 4 && !lbSans) lbSansHesap(L);
+  const S = lbSans;
+  const ic = {
+    1: () => `<h5>1. adım: Seri ve otokorelasyon katsayıları</h5>
+      <div class="rs-yaz">Seri: ${Y.join(', ')}. Gözlem sayısı n = ${Ns} → panoya. r<sub>k</sub>'ler 4. bölümdeki gibi hesaplandı (SPSS üç basamak gösterir: ,572). Test ilk m = ${Ms} katsayıyı kullanır (mavi) → panoya.</div>
+      <table class="lb-r"><tr><th>k</th>${R.map((_, i) => `<td class="${i < m ? 'sec' : ''}">${i + 1}</td>`).join('')}</tr><tr><th>r<sub>k</sub></th>${R.map((r, i) => `<td class="${i < m ? 'sec' : ''}">${v(r, 4)}</td>`).join('')}</tr></table>`,
+    2: () => `<h5>2. adım: Şüphe: korelogramda ilk çubuk</h5>
+      <div class="rs-yaz">r<sub>1</sub> = 0,572, ±1,96·s(r<sub>1</sub>) = ±0,502 sınırının hemen dışında. Ama her çubuğa ayrı %5 testi uygularsak, 20 çubuktan biri seri tesadüfi olsa bile dışarı taşar (8. bölüm). Bu yüzden soru: ilk m katsayı <b>birlikte</b> sıfır mı? Mavi çubuklar teste giren m = ${Ms} katsayı; m'yi değiştirip bakın.</div>`,
+    3: () => `<h5>3. adım: m katsayıyı tek sayıda topla: Q</h5>
+      <div class="rs-yaz">Her r<sub>k</sub> kendi standart hatasına bölünüp karesi alınır: işareti değil büyüklüğü önemli. 5. bölümdeki s(r<sub>k</sub>)² = (n − k) / (n(n + 2)) yerine konunca küçük örneklem düzeltmesi n(n + 2)/(n − k) kendiliğinden gelir. Seri tesadüfiyse r<sub>k</sub>'ler sıfıra yakın, Q küçüktür.</div>
+      <div class="rs-f">Q<sub>m</sub> = <span class="c-lac-y">n</span>(<span class="c-lac-y">n</span> + 2) Σ<sub>k=1</sub><sup>m</sup> <span class="frac"><span><span class="c-mavi-y">r<sub>k</sub></span>²</span><span><span class="c-lac-y">n</span> − k</span></span>
+        = ${Ns} · 14 · ( ${R.slice(0, Math.min(m, 2)).map((r, i) => `<span class="frac"><span><span class="c-mavi-y">${v(r, 4)}</span>²</span><span>${11 - i}</span></span>`).join(' + ')}${m > 2 ? ' + …' : ''} )</div>
+      <div class="lb-terim">${L.terim.map((t, i) => `<span>k = ${i + 1}: ${v(t, 5)}</span>`).join('')}<span>Σ = ${v(L.terim.reduce((a, b) => a + b, 0), 5)}</span></div>
+      <div class="rs-yaz">Q<sub>${m}</sub> = 168 × ${v(L.terim.reduce((a, b) => a + b, 0), 5)} = <b>${Qs}</b> → panoya.${m >= 7 ? ' (Q, SPSS gibi yuvarlanmamış r<sub>k</sub>\'lerle hesaplandı; dört basamakla elle hesap son basamakta farklı çıkabilir.)' : ''}</div>`,
+    4: () => `<h5>4. adım: Q = ${Qs} büyük mü? Şans eseri çıkabilir mi?</h5>
+      <div class="rs-yaz">Deneme: gerçekten tesadüfi (beyaz gürültü) 12 gözlemlik seriler üretip her birinde aynı Q<sub>${m}</sub>'yi hesapladık, 4000 kez (gri çubuklar). Tesadüfi serilerde Q ortalama <b>${v(S.ort, 2)}</b>; bizim Q (turuncu çizgi) <b>${v(L.Q)}</b>. Bu kadar büyük Q denemelerin <b>${yuzde(S.oran)}</b>'inde çıktı: ${S.oran < 0.05 ? 'şansla açıklanamayacak kadar büyük.' : 'şansla rahatça açıklanabilir.'}</div>`,
+    5: () => `<h5>5. adım: Q hangi dağılıma uyar? Serbestlik derecesi kaç?</h5>
+      <div class="rs-yaz">H<sub>0</sub> doğruysa Q'daki her terim yaklaşık bir standart normalin karesidir; bunların toplamı ki-kare (χ²) dağılımına uyar. Serbestlik derecesini <b>önce siz bulun:</b></div>
+      <div class="rs-sd-kutu"><label>sd = <input id="lb-sd" type="number" min="0" step="1"></label>
+        <button id="lb-kontrol">Kontrol et</button><button id="lb-goster">Cevabı göster</button><div id="lb-geri-bildirim"></div></div>`,
+    6: () => { const ret = L.p < 0.05, sRet = S.oran < 0.05;
+      return `<h5>6. adım: Karar: Q, χ²(${Ms}) dağılımının neresinde?</h5>
+      <div class="rs-yaz">H<sub>0</sub> doğruysa Q, χ²(${m}) dağılımına uyar; değerlerin yalnız %5'i <b>χ² kritik = ${v(L.kr)}</b> değerini aşar (kırmızı bölge). χ² tablosunda <b>satır sd = ${m}, sütun α = 0,05</b>.</div>
+      <div class="karar ${ret ? 'red' : 'kabul'}">${ret ? `Q = ${v(L.Q)} > ${v(L.kr)}: kırmızı bölgede. H<sub>0</sub> reddedilir, seri tesadüfi değil (p = ${v(L.p)}).` : `Q = ${v(L.Q)} < ${v(L.kr)}: kırmızı bölgede değil. H<sub>0</sub> reddedilemez (p = ${v(L.p)}).`}</div>
+      <div class="rs-yaz">${ret === sRet ? `4. adımdaki deneme oranı (${yuzde(S.oran)}) χ² yaklaşımındaki p ile aynı kararı veriyor.` : `Dikkat: deneme oranı ${yuzde(S.oran)}, χ² yaklaşımındaki p = ${v(L.p)}; ikisi %5'in farklı yanında. n = 12 küçük olduğu için Q'nun dağılımı χ²'ye tam uymaz, sınırdaki sonuçları temkinli okuyun.`}</div>`; } };
+  $('lb-icerik').innerHTML = ic[lbA]();
+  if (lbA === 5) lbSdBagla(L);
+  $('lb-grafik').style.display = [2, 4, 6].includes(lbA) ? '' : 'none';
+  if (lbA === 2) {
+    const cfg = korCfg(R, 12); cfg.data.datasets[0].backgroundColor = R.map((_, i) => i < m ? C.blue : C.gray); cfg.options.animation = false; ciz('c-lb', virgulY(cfg));
+  }
+  if (lbA === 4) {
+    const ust = Math.max(S.qs[Math.floor(0.99 * S.qs.length)], L.Q) * 1.08, H = hist([S.qs], 0, ust, 30), nb = H.lab.length;
+    const lab = H.lab.map((_, q) => v(ust * (q + 0.5) / nb, 1));
+    const cfg = histCfg(lab, [{ l: `Tesadüfi serilerde Q${m} (4000 deneme)`, d: H.h[0], c: C.gray }], 'Q');
+    cfg.options.animation = false; cfg.options.scales.x.ticks.maxTicksLimit = 8;
+    cfg.plugins = [{ id: 'lbq', afterDraw: c => dikeyCizgi(c, c.scales.x.getPixelForValue(Math.min((L.Q / ust) * nb - 0.5, nb - 1)), C.orange, 'bizim Q = ' + v(L.Q), false, 0) }];
+    ciz('c-lb', virgulY(cfg));
+  }
+  if (lbA === 6) {
+    const ust = Math.max(L.Q, L.kr) * 1.3, N = 160, xs = Array.from({ length: N + 1 }, (_, i) => ust * Math.max(i, 0.5) / N), ys = xs.map(x => chiYog(x, m));
+    const ymax = m === 1 ? 0.5 : m === 2 ? 0.52 : undefined, yer = (c, x) => c.scales.x.getPixelForValue(Math.round(x / ust * N));
+    ciz('c-lb', virgulY({ type: 'line', data: { labels: xs.map(x => v(x, 1)), datasets: [
+      { label: `χ²(${m}) yoğunluğu (H₀ doğruysa)`, data: ys, borderColor: C.navy, pointRadius: 0, borderWidth: 2, fill: false },
+      { label: 'Kritik bölge (%5)', data: ys.map((y, i) => xs[i] >= L.kr ? y : null), borderColor: C.red, backgroundColor: C.red + '55', pointRadius: 0, fill: 'origin' }] },
+      options: { maintainAspectRatio: false, animation: false, scales: { x: { ticks: { maxTicksLimit: 9 }, title: { display: true, text: 'Q' } }, y: { min: 0, max: ymax, title: { display: true, text: 'yoğunluk' } } } },
+      plugins: [{ id: 'lbk', afterDraw: c => { const dar = c.chartArea.right - c.chartArea.left < 420, sag = L.Q >= L.kr;
+        // Etiketler çizgilerin dış yanlarına (dar ekranda kısa yazı, metinle aynı 3 ondalık).
+        cizgiEtiketleri(c, [{ px: yer(c, L.kr), renk: C.red, kesik: true, yan: sag ? 'sol' : 'sag', yazi: (dar ? 'kritik ' : 'χ² kritik ') + v(L.kr) },
+          { px: yer(c, L.Q), renk: C.orange, yan: sag ? 'sag' : 'sol', yazi: (dar ? 'Q ' : 'Q = ') + v(L.Q) }]); } }] }));
+  }
+  const sdGor = lbAcik || lbA >= 6;
+  panoDol('lb-p-n', '12');
+  const rp = $('lb-p-r').querySelector('b'); rp.classList.toggle('uzun', m > 2);
+  panoDol('lb-p-r', R.slice(0, m).map(r => v(r, 4)).join(' · '));
+  panoDol('lb-p-q', lbA >= 3 ? v(L.Q) : null); panoDol('lb-p-sd', sdGor ? String(m) : null);
+  adimCubugu('lb-adimlar', LB_ADIM, lbA, lbGit);
+  $('lb-geri').disabled = lbA === 1; $('lb-ileri').disabled = lbA === LB_N;
+  lbTablo();
+  sunumSigdir($('lb-kutu'));
+}
+// 5. adım alıştırması: sd = m; sık hatalar tanınır.
+function lbSdBagla(L) {
+  const m = L.m, dogru = () => { lbAcik = true; panoDol('lb-p-sd', String(m));
+    $('lb-geri-bildirim').innerHTML = `<div class="karar kabul">Doğru: sd = m = ${m}. Q'da ${m} kare terim var (k = 1${m > 1 ? `, …, ${m}` : ''}); tahmin edilip düşülen bir parametre yok.</div>`; sunumSigdir($('lb-kutu')); };
+  const yaz = h => { lbAcik = false; panoDol('lb-p-sd', lbA >= 6 ? String(m) : null); $('lb-geri-bildirim').innerHTML = `<div class="karar red">${h}</div>`; sunumSigdir($('lb-kutu')); };
+  if (lbAcik) { $('lb-sd').value = m; dogru(); }
+  $('lb-goster').onclick = () => { $('lb-sd').value = m; dogru(); };
+  $('lb-kontrol').onclick = () => {
+    const g = $('lb-sd').value, a = +g;
+    if (g === '') return yaz('Kutuyu doldurun.');
+    if (a === m) return dogru();
+    yaz(a === 12 ? '12 gözlem sayısı (n). sd gözlem sayısı değil, Q\'ya giren kare terimlerin sayısıdır.'
+      : a === 11 ? 'n − 1 = 11, örneklem varyansından ya da t testinden tanıdık. Burada sd, Q\'daki kare terimlerin sayısıdır.'
+      : a === 12 - m ? `n − m = ${12 - m}: r<sub>k</sub> paydalarındaki n − k ile karıştı. O, her r<sub>k</sub>'nin varyans düzeltmesi; sd'yi belirlemez.`
+      : a === m - 1 && m > 1 ? `m − 1 = ${m - 1}: bir eksik. Ham seride tahmin edilen bir parametre yok, hiçbir şey düşülmez. (ARMA kalıntılarına uygulanınca tahmin edilen parametre sayısı düşülür; ileride.)`
+      : a === 1 ? `1, tek bir gecikme. Q, m = ${m} gecikmeyi birlikte topluyor.`
+      : a === 14 || a === 168 ? `${a}: bu n + 2 ya da n(n + 2), Q'daki düzeltme çarpanı. sd ile ilgisi yok.`
+      : `${a} değil. Q'da kaç tane r<sub>k</sub>² terimi toplanıyor?`);
+  };
+}
+function lbGit(a) { lbA = Math.max(1, Math.min(LB_N, a)); lbIcerik(); }
+$('lb-geri').onclick = () => lbGit(lbA - 1); $('lb-ileri').onclick = () => lbGit(lbA + 1);
+$('lb-m-btn').insertAdjacentHTML('beforeend', R.map((_, i) => `<button data-m="${i + 1}" class="${i ? '' : 'active'}">${i + 1}</button>`).join(''));
+// m değişince deneme ve alıştırma sıfırlanır; içinde bulunulan adım m'ye göre yeniden çizilir (her adımda görünür etkisi var).
+grupla([...document.querySelectorAll('#lb-m-btn button')], b => { lbM = +b.dataset.m; lbSans = null; lbAcik = false; lbIcerik(); });
+adimliKaydet($('lb-kutu'), () => lbA, LB_N, lbGit);
+lbIcerik();
 
 // ---------- simülasyon üreteçleri ----------
 const MEV = [1, -0.5, -1.5, 1];
@@ -756,18 +1138,19 @@ $('d-cek').onclick = duragan; duragan();
 
 // ---------- sunum modu ----------
 // Her bölüm, ekran yüksekliğine göre ölçülüp birkaç slayda bölünür.
-// Başlık (h4) ve düğme satırı (.controls) ardındaki içerikten ayrılmaz.
+// Başlık (h4) ve düğme satırı (.controls) ardındaki içerikten ayrılmaz. class="yeni-slayt" taşıyan öğe yeni slayt başlatır.
 const BOLUMLER = [document.querySelector('.hero'), ...document.querySelectorAll('.section')];
 const KISIM = BOLUMLER.map(el => { let p = el.previousElementSibling; while (p && !p.classList.contains('part-title')) { if (p.classList.contains('hero')) return ''; p = p.previousElementSibling; } return p ? p.textContent : ''; });
 const BASLIK = BOLUMLER.map((el, i) => i === 0 ? 'Kapak' : el.querySelector('.section-header').innerText.replace(/^\S+\s*/, ''));
 BOLUMLER.slice(1).forEach(el => el.querySelector('.section-header').insertAdjacentHTML('beforeend', '<span class="parca-no"></span>'));
+// Slayt düzeninde açıklama paragrafı kaydırıcılardan ayrılabilir: başlık + açıklama bir önceki slayta, kaydırıcı + grafik + sonuçlar kendi slaytına.
 const bitisik = el => el.tagName === 'H4' || el.classList.contains('controls') || el.classList.contains('kwn') ||
-  (el.tagName === 'P' && el.nextElementSibling && el.nextElementSibling.classList.contains('controls'));
+  (el.classList.contains('chart-wrap') && el.nextElementSibling && el.nextElementSibling.classList.contains('stat-grid'));
 let SLAYT = [], si = 0, sonGorunen = 0;
 function parcala() {
   SLAYT = [{ b: 0, parca: null, k: 1, n: 1 }];
   BOLUMLER.slice(1).forEach((sec, i) => {
-    const body = sec.querySelector('.section-body'), kids = [...body.children];
+    const body = sec.querySelector('.section-body'), kids = [...body.children]; Object.assign(body.style, { transform: '', transformOrigin: '', width: '', marginBottom: '' });
     const zorla = [...sec.querySelectorAll('[data-olc]')].map(e => [e, e.style.display]);
     zorla.forEach(([e]) => e.style.display = '');
     kids.forEach(c => c.classList.remove('gizli-p'));
@@ -780,7 +1163,7 @@ function parcala() {
     const birim = []; let cur = null;
     kids.forEach((c, j) => { if (!cur) cur = { el: [], h: 0 }; cur.el.push(c); cur.h += yuk[j]; if (!bitisik(c) || j === kids.length - 1) { birim.push(cur); cur = null; } });
     const dagit = L => { const out = []; let p = null;
-      birim.forEach(u => { if (p && p.h + u.h > L) { out.push(p); p = null; } if (!p) p = { el: [], h: 0 }; p.el.push(...u.el); p.h += u.h; });
+      birim.forEach(u => { if (p && (p.h + u.h > L || u.el[0].classList.contains('yeni-slayt'))) { out.push(p); p = null; } if (!p) p = { el: [], h: 0 }; p.el.push(...u.el); p.h += u.h; });
       if (p) out.push(p); return out; };
     // Slayt sayısını artırmadan içeriği dengeli dağıt: sonda küçük artık kalmasın.
     const n = dagit(bos).length; let lo = Math.max(...birim.map(u => u.h)), hi = Math.max(bos, lo);
@@ -798,16 +1181,35 @@ function slaytGoster(i, yon) {
     el.querySelector('.parca-no').textContent = S.n > 1 ? `(${S.k}/${S.n})` : '';
   }
   void el.offsetWidth; el.classList.add('slide-on', yon < 0 ? 'geri' : 'ileri'); el.scrollTop = 0;
+  sigdir(el);
   $('sb-bilgi').textContent = `${si + 1} / ${SLAYT.length}  ·  ${KISIM[S.b] ? KISIM[S.b] + '  ·  ' : ''}${BASLIK[S.b]}`;
   $('sb-ilerleme').style.width = (100 * (si + 1) / SLAYT.length) + '%';
   $('sb-geri').disabled = si === 0; $('sb-ileri').disabled = si === SLAYT.length - 1;
   requestAnimationFrame(() => el.querySelectorAll('canvas').forEach(c => { const ch = Chart.getChart(c); if (ch) ch.resize(); }));
 }
-function sunumAc() { document.body.classList.add('sunum'); parcala(); slaytGoster(SLAYT.findIndex(x => x.b === sonGorunen), 1); }
+// Slayt düzeni: 1280x720 sahne ekrana ölçeklenir; grafik yazıları sahneye göre büyür.
+const SAHNE = { w: 1280, h: 720 };
+function olcekle() { document.documentElement.style.setProperty('--s', Math.min(innerWidth / SAHNE.w, (innerHeight - 56) / SAHNE.h)); }
+function grafikYazi(px) { Chart.defaults.font.size = px; Object.values(charts).forEach(c => c.update('none')); }
+// Bölünemeyen blok slayta sığmıyorsa içeriği küçült (PowerPoint'teki "taşarsa sığdır" gibi).
+// CSS zoom değil transform: zoom, Chart.js'in tıklama koordinatlarını bozuyor (gösterge tıklaması çalışmıyordu).
+function sigdir(el) {
+  const g = el.querySelector('.section-body'); if (!g) return;
+  Object.assign(g.style, { transform: '', transformOrigin: '', width: '', marginBottom: '' });
+  const alan = el.clientHeight - g.offsetTop - 4; if (g.offsetHeight <= alan) return;
+  // Genişliği 1/f kat açınca içerik yayılır ve kısalır; sığan en büyük f'yi ikili aramayla bul.
+  const sigar = f => { g.style.width = (100 / f) + '%'; return g.offsetHeight * f <= alan; };
+  let lo = 0.55, hi = 1;
+  for (let k = 0; k < 10; k++) { const mid = (lo + hi) / 2; if (sigar(mid)) lo = mid; else hi = mid; }
+  const f = lo; g.style.width = (100 / f) + '%';
+  Object.assign(g.style, { transformOrigin: 'top left', transform: `scale(${f.toFixed(3)})`, marginBottom: -(g.offsetHeight * (1 - f)) + 'px' });
+}
+function sunumAc() { document.body.classList.add('sunum'); olcekle(); grafikYazi(17); parcala(); slaytGoster(SLAYT.findIndex(x => x.b === sonGorunen), 1); }
 function sunumKapat() {
-  document.body.classList.remove('sunum');
+  document.body.classList.remove('sunum'); grafikYazi(12);
   BOLUMLER.forEach(el => el.classList.remove('slide-on', 'ileri', 'geri'));
   document.querySelectorAll('.gizli-p').forEach(c => c.classList.remove('gizli-p'));
+  document.querySelectorAll('.section-body').forEach(g => Object.assign(g.style, { transform: '', transformOrigin: '', width: '', marginBottom: '' }));
   document.querySelectorAll('.parca-no').forEach(x => x.textContent = '');
   if (document.fullscreenElement) document.exitFullscreen();
   BOLUMLER[SLAYT[si].b].scrollIntoView(); Object.values(charts).forEach(c => c.resize());
@@ -815,18 +1217,24 @@ function sunumKapat() {
 let boyutZaman = null;
 window.addEventListener('resize', () => {
   if (!document.body.classList.contains('sunum')) return;
-  clearTimeout(boyutZaman);
+  olcekle(); clearTimeout(boyutZaman);
   boyutZaman = setTimeout(() => { const S = SLAYT[si]; document.querySelectorAll('.gizli-p').forEach(c => c.classList.remove('gizli-p')); parcala();
     const j = SLAYT.findIndex(x => x.b === S.b && S.parca && x.parca && x.parca.includes(S.parca[0])); slaytGoster(j >= 0 ? j : SLAYT.findIndex(x => x.b === S.b), 1); }, 250);
 });
 $('sunum-ac').onclick = sunumAc; $('sb-cik').onclick = sunumKapat;
-$('sb-ileri').onclick = () => slaytGoster(si + 1, 1); $('sb-geri').onclick = () => slaytGoster(si - 1, -1);
+// Görünen slaytta adım adım ilerleyen bir blok varsa (ADIMLI), ok tuşları ve › ‹ düğmeleri önce adımları gezer.
+function adimla(yon) {
+  if (typeof ADIMLI === 'undefined') return false;
+  const el = BOLUMLER[SLAYT[si].b], a = ADIMLI.find(x => x.el && el.contains(x.el) && !x.el.closest('.gizli-p'));
+  return a ? a[yon]() : false;
+}
+$('sb-ileri').onclick = () => { if (!adimla('ileri')) slaytGoster(si + 1, 1); }; $('sb-geri').onclick = () => { if (!adimla('geri')) slaytGoster(si - 1, -1); };
 $('sb-tam').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
 document.addEventListener('keydown', e => {
   if (!document.body.classList.contains('sunum')) return;
   const t = e.target.tagName; if (t === 'INPUT' || t === 'SELECT' || t === 'TEXTAREA') return;
-  if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); slaytGoster(si + 1, 1); }
-  else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); slaytGoster(si - 1, -1); }
+  if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); if (!adimla('ileri')) slaytGoster(si + 1, 1); }
+  else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); if (!adimla('geri')) slaytGoster(si - 1, -1); }
   else if (e.key === 'Home') slaytGoster(0, -1);
   else if (e.key === 'End') slaytGoster(SLAYT.length - 1, 1);
   else if (e.key === 'Escape' && !document.fullscreenElement) sunumKapat();

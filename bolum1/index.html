@@ -186,6 +186,83 @@
   body.sunum .hero p[style] { font-size: .7em !important; margin-top: 1.5em !important; }
   body.sunum .gizli-p { display: none !important; }
   .parca-no { margin-left: auto; font-size: .7em; color: #a8c8d8; font-weight: 600; }
+  /* ADIM ADIM TEST KALIBI (14: t testi, 15: Durbin-Watson, 17: öngörü ölçütleri)
+     Pano renkleri: mavi #378ADD, turuncu #EF9F27, mor #7F77DD, lacivert #1E2D5E; formülde aynı renkler. */
+  .ak-kutu { border: 1.5px solid var(--border); border-radius: 10px; padding: .9rem 1rem; margin-top: 1.2rem; background: #fff; }
+  .ak-bas { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+  .ak-pano { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin: .3rem 0 .7rem; }
+  .ak-hucre { border: 2px dashed #cfd8e3; border-radius: 10px; padding: .35rem .5rem; text-align: center; background: #fafbfc; transition: all .4s; min-width: 0; }
+  .ak-hucre span { display: block; font-size: 12px; color: var(--gray); }
+  .ak-hucre b { display: block; font-size: 20px; color: #b8c2cf; font-family: "SF Mono", Menlo, monospace; overflow-wrap: anywhere; }
+  .ak-hucre i { display: block; font-size: 11px; color: #b8c2cf; font-style: normal; }
+  .ak-hucre.genis { grid-column: span 2; } .ak-hucre.genis b { font-size: 15px; }
+  .ak-hucre.dolu { border-style: solid; background: #fff; }
+  .ak-hucre.dolu i { visibility: hidden; }
+  .ak-hucre.mavi.dolu { border-color: #378ADD; } .ak-hucre.mavi.dolu b, .ak-mavi { color: #378ADD; }
+  .ak-hucre.turuncu.dolu { border-color: #EF9F27; } .ak-hucre.turuncu.dolu b, .ak-turuncu { color: #d4860f; }
+  .ak-hucre.mor.dolu { border-color: #7F77DD; } .ak-hucre.mor.dolu b, .ak-mor { color: #7F77DD; }
+  .ak-hucre.lacivert.dolu { border-color: #1E2D5E; } .ak-hucre.lacivert.dolu b, .ak-lacivert { color: #1E2D5E; }
+  .ak-hucre.teal.dolu { border-color: #028090; } .ak-hucre.teal.dolu b, .ak-teal { color: #028090; }
+  .ak-hucre.gri.dolu { border-color: #64748B; } .ak-hucre.gri.dolu b, .ak-gri { color: #475569; }
+  .ak-mavi, .ak-turuncu, .ak-mor, .ak-lacivert, .ak-teal, .ak-gri { font-weight: 700; }
+  .ak-hucre.yanip { animation: akYan 1.2s ease; }
+  @keyframes akYan { 0% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(239,159,39,.35); } 100% { transform: none; box-shadow: none; } }
+  .ak-adimlar { display: flex; gap: .3rem; flex-wrap: wrap; margin-bottom: .5rem; }
+  .ak-adimlar button { font-size: 12.5px; padding: 4px 10px; border-radius: 16px; }
+  .ak-adimlar button.gecti { background: #E6F7F0; border-color: #1D9E75; color: #0d5c43; }
+  .ak-adimlar button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .ak-icerik { font-size: 13.5px; line-height: 1.65; color: #333; }
+  .ak-icerik h5 { margin: .2rem 0 .4rem; font-size: 15px; color: var(--navy); }
+  .ak-yaz { background: #F3F7FB; border-radius: 8px; padding: .5rem .8rem; margin-top: .5rem; }
+  .ak-f { font-family: "Cambria Math", Cambria, "Times New Roman", serif; font-size: 18px; text-align: center; line-height: 2.1; color: var(--navy); margin: .3rem 0; }
+  .ak-f .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; }
+  .ak-f .frac > span:first-child { border-bottom: 1.5px solid currentColor; padding: 0 .4em .1em; }
+  .ak-f .frac > span { line-height: 1.5; }
+  .ak-alis { background: #F7F5FF; border: 1px solid #d9d4f7; border-radius: 8px; padding: .5rem .8rem; margin-top: .5rem; }
+  .ak-alis label { margin-right: .8rem; white-space: nowrap; }
+  .ak-alis input { width: 4.2em; font-size: inherit; padding: 2px 6px; border: 1px solid #b9b2ee; border-radius: 6px; }
+  .ak-alis button { margin: .3rem .3rem 0 0; }
+  .ak-kat { display: inline-block; background: #fff; border: 1px solid #1D9E75; border-radius: 12px; padding: 0 .5em; margin: 0 .15em; }
+  .ak-karar { border-radius: 8px; padding: .45rem .8rem; margin-top: .5rem; font-weight: 600; }
+  .ak-karar.kabul { background: #E6F7F0; color: #0d5c43; border-left: 4px solid #1D9E75; }
+  .ak-karar.ara { background: #FDF3E7; color: #7a4a00; border-left: 4px solid #EF9F27; }
+  .ak-fler { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 0 1.5em; }
+  .ak-karar.red { background: #FDECEC; color: #8a1f1e; border-left: 4px solid #E24B4A; }
+  .ak-grafik { position: relative; height: clamp(220px, 30vh, 300px); margin-top: .5rem; }
+  .ak-gez { display: flex; justify-content: space-between; margin-top: .6rem; }
+  .ak-tab { overflow-x: auto; margin-top: .4rem; }
+  .ak-tab table { font-size: 12px; } .ak-tab th, .ak-tab td { padding: 3px 7px; white-space: nowrap; }
+  .ak-tab td.vurgu { background: #FFF3DC !important; font-weight: 700; outline: 2px solid #EF9F27; }
+  .ak-bolge { display: flex; height: 46px; border-radius: 8px; overflow: hidden; font-size: 11.5px; }
+  .ak-bolge > div { display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; line-height: 1.2; padding: 0 2px; }
+  .ak-bolge-dis { position: relative; margin: 1.9em 0 2.3em; }
+  .ak-imle { position: absolute; top: -1.6em; bottom: -.3em; width: 0; border-left: 3px solid #EF9F27; }
+  .ak-imle b { position: absolute; top: -.15em; left: 4px; color: #d4860f; white-space: nowrap; font-size: 1em; line-height: 1.2; }
+  .ak-imle.sol b { left: auto; right: 4px; }
+  .ak-olcek { position: absolute; left: 0; right: 0; bottom: -1.9rem; height: 1.5rem; font-size: 11.5px; color: #475569; }
+  .ak-kisa, .ak-bolge-not { display: none; } .ak-bolge-not { font-size: 11.5px; color: #475569; margin: -1.2em 0 .6em; }
+  .ak-olcek span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+  @media (max-width: 700px) { .ak-pano { grid-template-columns: repeat(2, 1fr) !important; } .ak-hucre b { font-size: 14px; } .ak-hucre.genis b { font-size: 13px; } .ak-hucre.genis { grid-column: 1 / -1; } .ak-bolge { font-size: 11px; } .ak-olcek { font-size: 9.5px; } .ak-uzun { display: none; } .ak-kisa { display: inline; } .ak-bolge-not { display: block; } }
+  /* sunumda: adımlar ok tuşu/kumandayla gezilir, düğmeler gizli; ölçüler --u'ya bağlı */
+  body.sunum .ak-kutu { font-size: .95em; padding: .5em .8em; margin-top: .3em; border: none; }
+  body.sunum .ak-bas { font-size: 1.05em; margin-bottom: .25em; }
+  body.sunum .ak-gez { display: none; }
+  body.sunum .ak-pano { gap: .35em; margin: .15em 0 .35em; }
+  body.sunum .ak-hucre { padding: .12em .35em; }
+  body.sunum .ak-hucre span { font-size: .72em; } body.sunum .ak-hucre b { font-size: 1.1em; } body.sunum .ak-hucre.genis b { font-size: .85em; } body.sunum .ak-hucre i { display: none; }
+  body.sunum .ak-adimlar { margin-bottom: .3em; gap: .25em; }
+  body.sunum .ak-adimlar button { font-size: .72em; padding: .15em .7em; }
+  body.sunum .ak-icerik { font-size: 1em; line-height: 1.45; }
+  body.sunum .ak-icerik h5 { font-size: 1.05em; margin: .1em 0 .25em; }
+  body.sunum .ak-yaz { padding: .3em .6em; margin-top: .3em; }
+  body.sunum .ak-f { font-size: 1.15em; line-height: 1.9; margin: .15em 0; }
+  body.sunum .ak-alis { padding: .3em .6em; margin-top: .3em; }
+  body.sunum .ak-alis button { font-size: .8em; }
+  body.sunum .ak-karar { padding: .3em .6em; margin-top: .3em; }
+  body.sunum .ak-grafik { height: 36vh; margin-top: .3em; }
+  body.sunum .ak-tab table { font-size: .78em; }
+  body.sunum .ak-bolge { height: 2.2em; font-size: .7em; } body.sunum .ak-bolge-dis { margin: 1.8em 0 1.9em; }
+  body.sunum .ak-olcek { font-size: .75em; }
   @media (max-width: 860px) { #sunum-ac, .hero .sunum-btn { display: none; } }
   @media print { #sunum-ac, #sunum-bar { display: none !important; } }
 </style>
@@ -509,6 +586,7 @@
       <div><div class="cap">%95 güven aralıkları</div><table id="tb14b"></table><div class="cap" style="margin-top:.8rem">Katsayıların kovaryans matrisi</div><table id="tb14c"></table></div>
     </div>
     <div class="info-box" id="ib14"></div>
+    <div class="ak-kutu" id="ak-t" data-adimli></div>
   </div>
 </div>
 
@@ -525,6 +603,7 @@
     <div class="table-scroll" style="margin-top:1rem"><table id="tb15"></table></div>
     <div class="stat-grid" id="sg15"></div>
     <div class="info-box"><strong>MSE mi MAD mı?</strong> MSE kare aldığı için büyük hataları daha çok cezalandırır; birimi verinin biriminin karesidir. MAD aykırı gözlemlere daha az duyarlıdır ve verinin birimindedir. RMSE = √MSE de verinin birimine döner. Dikkat: burada MSE n'ye bölünür; regresyondaki s² ise serbestlik derecesine (n - 2) bölünür.</div>
+    <div class="ak-kutu" id="ak-dw" data-adimli></div>
   </div>
 </div>
 
@@ -552,11 +631,12 @@
     <div class="controls">
       <label>Tahmin dönemi sonu</label><input type="range" id="e17" min="1994" max="1999" step="1" value="1997"><span class="val" id="e17v"></span>
     </div>
-    <div class="formula">Öngörü sapması = Σ (y<sub>t</sub> - F<sub>t</sub>) / n</div>
+    <div class="formula">Öngörü sapması = Σ (y<sub>t</sub> - F<sub>t</sub>) / m,  m = örneklem dışı gözlem sayısı</div>
     <div class="chart-wrap"><canvas id="c17"></canvas></div>
     <div class="table-scroll" style="margin-top:1rem"><table id="tb17"></table></div>
     <div class="stat-grid" id="sg17"></div>
     <div class="info-box" id="ib17"></div>
+    <div class="ak-kutu" id="ak-og" data-adimli></div>
   </div>
 </div>
 
@@ -855,7 +935,7 @@ F(1, ${R.df})              ${pad(R.F.toFixed(4),12)}   P-value(F)           ${pa
 Log-likelihood       ${pad(R.ll.toFixed(4),12)}   Akaike criterion     ${pad(R.aic.toFixed(4),10)}
 Schwarz criterion    ${pad(R.bic.toFixed(4),12)}   Hannan-Quinn         ${pad(R.hq.toFixed(4),10)}
 rho                  ${pad(R.rho.toFixed(6),12)}   Durbin-Watson        ${pad(R.dw.toFixed(6),10)}`;
-  $("ib13").innerHTML = `<strong>Yorum:</strong> β̂<sub>1</sub> = ${fmt(R.b,1)}: satışlar yılda ortalama yaklaşık ${fmt(R.b,0)} TL ${R.b >= 0 ? "artıyor" : "azalıyor"}. R² = ${fmt(R.r2,3)}: satışlardaki değişimin %${fmt(R.r2*100,1)}'i zaman eğilimiyle açıklanıyor. Durbin-Watson = ${fmt(R.dw,3)}${R.n === 10 ? " (n = 10, k = 1 için %5 kritik değerler d<sub>L</sub> = 0,879, d<sub>U</sub> = 1,320; " + (R.dw > 1.32 && R.dw < 2.68 ? "d<sub>U</sub> ile 4 - d<sub>U</sub> = 2,680 arasında olduğundan otokorelasyon yok kararı verilir" : "belirsizlik ya da otokorelasyon bölgesine düşüyor") + ")" : ""}.` +
+  $("ib13").innerHTML = `<strong>Yorum:</strong> β̂<sub>1</sub> = ${fmt(R.b,1)}: satışlar yılda ortalama yaklaşık ${fmt(R.b,0)} TL ${R.b >= 0 ? "artıyor" : "azalıyor"}. R² = ${fmt(R.r2,3)}: satışlardaki değişimin %${fmt(R.r2*100,1)}'i zaman eğilimiyle açıklanıyor. Durbin-Watson = ${fmt(R.dw,3)}${R.n === 10 ? " (n = 10, k′ = 1 için %5 kritik değerler d<sub>L</sub> = 0,879, d<sub>U</sub> = 1,320; " + (R.dw > 1.32 && R.dw < 2.68 ? "d<sub>U</sub> ile 4 - d<sub>U</sub> = 2,680 arasında olduğundan otokorelasyon yok kararı verilir" : "belirsizlik ya da otokorelasyon bölgesine düşüyor") + ")" : ""}.` +
     " <em>Uyarı:</em> Trend regresyonunda yüksek R² ve anlamlı t yanıltıcı olabilir; artıklar otokorelasyonluysa standart hatalar geçersizdir, seri birim kök içeriyorsa sahte (spurious) regresyon sorunu çıkar.";
 }
 function build14(R){
@@ -916,8 +996,295 @@ function build17(){
   stats("sg17", [["β̂₁ (eğitim)", fmt(R.b,1)], ["Örneklem dışı MSE", fmt(mse,0), TEAL], ["Örneklem içi MSE", fmt(mseIn,0)], ["Örneklem dışı MAD", fmt(mad,0)], ["Öngörü sapması", fmt(bias,2), bias < 0 ? C1 : C3]]);
   $("ib17").innerHTML = `Model ${YEARS[0]}-${end} (n = ${k}) ile tahmin edildi, ${end+1}-${YEARS[YEARS.length-1]} (${m} gözlem) öngörüldü. Öngörü sapması <strong>${fmt(bias,2)} TL</strong>: ${bias < 0 ? "negatif, yani öngörüler ortalamada gerçekleşen değerin <strong>üstünde</strong> kalmış" : "pozitif, yani öngörüler ortalamada gerçekleşen değerin <strong>altında</strong> kalmış"}. Sapmayı MAD (${fmt(mad,0)}) ile karşılaştırın: sapma MAD'e göre küçükse hatalar birbirini götürüyor, sistematik bir sapma yok. ` +
     (mse < mseIn ? "Örneklem dışı MSE örneklem içinden küçük çıktı; normalde tersi beklenir. Örneklem dışında az gözlem olduğunu ve örneklem içi MSE'yi 1995'teki büyük artığın şişirdiğini hatırlayın." : "Örneklem dışı MSE örneklem içinden büyük: beklenen durum, model görmediği veride daha kötü performans gösterir.");
+  ogGuncelle();
 }
-function buildAll13(){ const R = ols(tIdx(), sales); build13(R); build14(R); build15(R); build16(R); build17(); }
+function buildAll13(){ const R = ols(tIdx(), sales); build13(R); build14(R); build15(R); build16(R); build17(); akGuncelle(R); }
+
+// ---------- adım adım test blokları (14: β₁ için t testi, 15: Durbin-Watson, 17: örneklem dışı ölçütler) ----------
+// Kalıp (Ekonometri II, RESET): üstte renkli pano adım geldikçe dolar, her seferinde tek adım görünür; formülden önce
+// soru ve "şans eseri mi?" denemesi (tarayıcıda 400 tekrar); serbestlik derecesi gibi sayılar öğrenciye buldurulur.
+// Sunum modunda ok tuşu/kumanda önce adımları gezer (ADIMLI + adimla), adım değişince slayt sığdırılır (sigdir).
+// Bloklar dondurma verisinin canlı hesabını (ols) kullanır: tablo ya da 17. bölümdeki kaydırıcı değişince güncellenir.
+const ADIMLI = [];
+const sunumda = () => document.body.classList.contains('sunum');
+const fs = (v, d = 2) => fmt(v, d);  // sayfanın biçimi: tr-TR, binlik nokta, eksi '-'
+function pYaz(p) { if (p >= 0.001) return fmt(p, 4); const [m, e] = p.toExponential(2).split('e'); return m.replace('.', ',') + ' × 10<sup>' + String(+e) + '</sup>'; }
+const yaklasik = v => { const e = Math.pow(10, Math.floor(Math.log10(v)) - 1); return fmt(Math.round(v / e) * e, 0); };
+const kesir = (ust, alt) => `<span class="frac"><span>${ust}</span><span>${alt}</span></span>`;
+function akKur(o) {
+  const k = $(o.id); o.k = k; o.a = 1; o.acik = false;
+  k.innerHTML = `<div class="ak-bas">${o.baslik}</div>${o.ek || ''}
+    <div class="ak-pano" style="grid-template-columns:repeat(${o.sutun},1fr)">${o.pano.map(p => `<div class="ak-hucre ${p.renk}${p.genis ? ' genis' : ''}" data-k="${p.k}"><span>${p.ad}</span><b>?</b><i>${p.adim}. adım</i></div>`).join('')}</div>
+    <div class="ak-adimlar"></div><div class="ak-icerik"></div>
+    <div class="ak-grafik"><canvas id="${o.id}-c"></canvas></div>
+    <div class="ak-gez"><button class="ak-geri">‹ Önceki adım</button><button class="ak-ileri">Sonraki adım ›</button></div>`;
+  k.querySelector('.ak-geri').onclick = () => akGit(o, o.a - 1);
+  k.querySelector('.ak-ileri').onclick = () => akGit(o, o.a + 1);
+  ADIMLI.push({ el: k, ileri: () => o.a < o.adlar.length ? (akGit(o, o.a + 1), true) : false, geri: () => o.a > 1 ? (akGit(o, o.a - 1), true) : false });
+}
+function akGit(o, a) { o.a = Math.max(1, Math.min(o.adlar.length, a)); if (o.alis && o.a > o.alis.adim) o.acik = true; akCiz(o); }
+function akPano(o) {
+  o.pano.forEach(p => { const h = o.k.querySelector(`[data-k="${p.k}"]`), b = h.querySelector('b');
+    const dolu = o.a >= p.adim && (!p.alis || o.acik || o.a > p.adim), once = h.classList.contains('dolu');
+    h.classList.toggle('dolu', dolu); b.innerHTML = dolu ? p.v(o.S) : '?';
+    if (dolu && !once) { h.classList.remove('yanip'); void h.offsetWidth; h.classList.add('yanip'); } });
+}
+function akCiz(o) {
+  const a = o.a, k = o.k;
+  if (o.hazirla) o.hazirla(a, o);
+  k.querySelector('.ak-icerik').innerHTML = o.icerik[a - 1](o.S, o);
+  const g = o.grafikAdim.includes(a), cid = o.id + '-c';
+  k.querySelector('.ak-grafik').style.display = g ? '' : 'none';
+  if (g) o.ciz(a, o.S, cid, o); else { const c = Chart.getChart(cid); if (c) c.destroy(); }
+  k.querySelector('.ak-adimlar').innerHTML = o.adlar.map((ad, i) => `<button data-a="${i + 1}" class="${i + 1 === a ? 'active' : i + 1 < a ? 'gecti' : ''}">${i + 1}. ${ad}</button>`).join('');
+  k.querySelectorAll('.ak-adimlar button').forEach(b => b.onclick = () => akGit(o, +b.dataset.a));
+  k.querySelector('.ak-geri').disabled = a === 1; k.querySelector('.ak-ileri').disabled = a === o.adlar.length;
+  if (o.alis && a === o.alis.adim) akAlisBagla(o);
+  akPano(o);
+  if (sunumda()) slaytSigdir();
+}
+const akAlisHTML = alanlar => `<div class="ak-alis">${alanlar.map(([id, et]) => `<label>${et} = <input id="${id}" type="number" step="1"></label>`).join('')}<button class="ak-kontrol">Kontrol et</button><button class="ak-goster">Cevabı göster</button><div class="ak-fb"></div></div>`;
+// Alıştırma: öğrenci yazar, "Kontrol et" sık hataları tanır; "Cevabı göster" ya da sonraki adım panoyu doldurur.
+function akAlisBagla(o) {
+  const A = o.alis, k = o.k, fb = k.querySelector('.ak-fb'), kutu = () => A.alanlar.map(f => $(f));
+  const yaz = h => { fb.innerHTML = `<div class="ak-karar red">${h}</div>`; if (sunumda()) slaytSigdir(); };
+  const dogru = () => { o.acik = true; const c = A.cevap(o.S); kutu().forEach((x, i) => x.value = c[i]);
+    fb.innerHTML = `<div class="ak-karar kabul">${A.dogru(o.S)}</div>`; if (A.sonra) A.sonra(o.S); akPano(o); if (sunumda()) slaytSigdir(); };
+  if (o.acik) dogru();
+  k.querySelector('.ak-goster').onclick = dogru;
+  k.querySelector('.ak-kontrol').onclick = () => { const v = kutu().map(x => x.value.trim().replace(',', '.'));
+    if (v.some(x => x === '' || !isFinite(+x))) return yaz(v.length > 1 ? 'Bütün kutuları sayıyla doldurun.' : 'Kutuya bir sayı yazın.');
+    const h = A.kontrol(v.map(Number), o.S); h ? yaz(h) : dogru(); };
+  kutu().forEach(x => x.onkeydown = e => { if (e.key === 'Enter') k.querySelector('.ak-kontrol').click(); });
+}
+// Histogram (400 deneme) + bizim değer turuncu çizgi
+function akHist(id, vals, biz, o) { // doğrusal x ekseni: tikler yuvarlak değerlerde, bölme dışına düşen değerler uç bölmeye
+  const { lo, hi } = o, nb = 30, w = (hi - lo) / nb, h = Array(nb).fill(0);
+  vals.forEach(v => { h[Math.min(nb - 1, Math.max(0, Math.floor((v - lo) / w)))]++; });
+  chart(id, { type: 'bar', data: { datasets: [{ label: o.etiket, data: h.map((y, j) => ({ x: lo + (j + .5) * w, y })), backgroundColor: GRAYC, barPercentage: 1, categoryPercentage: .92 }] },
+    options: baseOpts({ animation: false, interaction: { mode: 'nearest', intersect: true }, scales: { x: { type: 'linear', min: lo, max: hi, offset: false, grid: { display: false }, ticks: { maxTicksLimit: 9, maxRotation: 0 }, title: { display: true, text: o.xad } }, y: { grid: gridOpt, title: { display: true, text: 'deneme sayısı' } } } }),
+    plugins: [cizgiler([[biz, C2, o.bizYaz, false]])] });
+}
+function cizgiler(liste) { // [[x, renk, yazı, kesikli]] doğrusal x ekseninde dikey çizgiler
+  return { id: 'akDikey', afterDraw: c => { const X = c.scales.x, Y = c.scales.y, g = c.ctx;
+    liste.forEach(([v, renk, yaz, kes], q) => { const px = X.getPixelForValue(Math.max(X.min, Math.min(X.max, v)));
+      g.save(); g.strokeStyle = renk; g.lineWidth = 3; g.setLineDash(kes ? [6, 4] : []); g.beginPath(); g.moveTo(px, Y.top); g.lineTo(px, Y.bottom); g.stroke();
+      if (yaz) { g.fillStyle = renk === C2 ? '#d4860f' : renk; g.font = `bold ${Chart.defaults.font.size + 2}px sans-serif`; g.textAlign = px > X.right - 140 ? 'right' : 'left'; g.fillText(' ' + yaz + ' ', px, Y.top + 14 + q * 18); }
+      g.restore(); }); } };
+}
+const tYog = (x, df) => Math.exp(lgamma((df + 1) / 2) - lgamma(df / 2) - .5 * Math.log(df * Math.PI) - (df + 1) / 2 * Math.log(1 + x * x / df));
+
+// ===== A. 14. bölüm: β₁ için t testi =====
+function tSans(S) { // H₀ doğruysa: trendsiz (β₁ = 0), aynı hata varyansıyla 400 seri; her birinde β̂₁, kendi se'si ve t = β̂₁ / se
+  const t = tIdx(), n = t.length, tm = mean(t), sxx = sum(t.map(v => (v - tm) ** 2)), z = normals(400 * n, 1991), b = [], tt = [];
+  for (let j = 0; j < 400; j++) { const y = z.slice(j * n, j * n + n).map(v => S.s * v), ym = mean(y);
+    let sxy = 0; for (let i = 0; i < n; i++) sxy += (t[i] - tm) * y[i];
+    const bj = sxy / sxx, aj = ym - bj * tm, ssr = sum(y.map((v, i) => (v - aj - bj * t[i]) ** 2)), sej = Math.sqrt(ssr / (n - 2) / sxx);
+    b.push(bj); tt.push(bj / sej); }
+  const say = tt.filter(v => Math.abs(v) >= Math.abs(S.t)).length;
+  return { b, t: tt, sd: sd(b), say, oran: say / 400, ici2: tt.filter(v => Math.abs(v) <= 2).length / 400 };
+}
+const TT = { id: 'ak-t', sutun: 4, baslik: 'β₁ için t testi, adım adım: eğim gerçekten sıfırdan farklı mı?',
+  adlar: ['Model ve β̂<sub>1</sub>', 'Şüphe', 'Serbestlik derecesi', 't oranı', 'Şans eseri mi?', 'Karar'],
+  pano: [
+    { k: 'b', ad: 'β̂<sub>1</sub> (eğim)', renk: 'mavi', adim: 1, v: S => fs(S.b, 2) },
+    { k: 'sd', ad: 'sd = n - k', renk: 'mor', adim: 3, alis: true, v: S => `${S.n} - 2 = ${S.df}` },
+    { k: 'se', ad: 'se(β̂<sub>1</sub>)', renk: 'lacivert', adim: 4, v: S => fmt(S.se, 2) },
+    { k: 't', ad: 't = β̂<sub>1</sub> / se', renk: 'turuncu', adim: 4, v: S => fs(S.t, 3) } ],
+  grafikAdim: [2, 5, 6],
+  hazirla: (a, o) => { if (a >= 5 && !o.sans) o.sans = tSans(o.S); },
+  icerik: [
+    S => `<h5>1. adım: Modeli tahmin et, eğimi panoya yaz</h5>
+      <div class="ak-f">Ŷ<sub>t</sub> = ${fs(S.a, 2)} + <span class="ak-mavi">${fs(S.b, 2)}</span> t</div>
+      <div class="ak-yaz">Eğim <span class="ak-mavi">β̂<sub>1</sub> = ${fs(S.b, 2)}</span> → panoya: bu ${S.n} yılda satışlar yılda ortalama ${fmt(Math.abs(S.b), 0)} TL ${S.b >= 0 ? 'artmış' : 'azalmış'}. Ama bu sayı yalnız ${S.n} gözlemden hesaplandı; başka ${S.n} yıl gözleseydik başka bir eğim bulurduk.</div>`,
+    S => `<h5>2. adım: Şüphe: eğim gerçekten sıfırdan farklı mı?</h5>
+      <div class="ak-yaz">Satışlar her yıl dalgalanıyor (1995'teki düşüşe bakın). Satışlarda gerçekte hiçbir eğilim olmasaydı (gri kesikli çizgi, β₁ = 0), yalnız bu dalgalanmalar yüzünden ${fmt(Math.abs(S.b), 0)} TL'lik bir eğim görebilir miydik? Sınanan hipotez: <b>H₀: β₁ = 0</b> (eğilim yok), <b>H₁: β₁ ≠ 0</b>.</div>`,
+    S => `<h5>3. adım: Serbestlik derecesi</h5>
+      <div class="ak-yaz">Test istatistiğinin dağılımı serbestlik derecesine (sd) bağlıdır: n gözlemden, tahmin edilen her katsayı için bir tane düşülür. n = ${S.n}. <b>Önce siz bulun:</b></div>
+      ${akAlisHTML([['ak-t-sd', 'sd']])}`,
+    S => `<h5>4. adım: Uzaklığı kendi belirsizliğiyle ölç: t oranı</h5>
+      <div class="ak-yaz">Eğimin sıfırdan uzaklığını TL ile değil, kestirimin kendi belirsizliğiyle ölçeriz. Bu belirsizlik <span class="ak-lacivert">standart hatadır (se)</span>: aynı süreç tekrar gözlenseydi β̂<sub>1</sub>'in ne kadar oynayacağının tek veriden kestirimi (5. adımda deneyle göreceğiz). Soru: β̂<sub>1</sub> sıfırdan kaç standart hata uzakta?</div>
+      <div class="ak-f">t = ${kesir('<span class="ak-mavi">β̂<sub>1</sub></span> - 0', '<span class="ak-lacivert">se(β̂<sub>1</sub>)</span>')} = ${kesir(`<span class="ak-mavi">${fs(S.b, 2)}</span>`, `<span class="ak-lacivert">${fmt(S.se, 2)}</span>`)} = <span class="ak-turuncu">${fs(S.t, 3)}</span></div>
+      <div class="ak-yaz">se ve t → panoya. Bizim eğim sıfırdan ${fmt(Math.abs(S.t), 1)} standart hata uzakta. Bu çok mu? Trend yokken t'nin hangi değerleri aldığına bakalım.</div>`,
+    (S, o) => { const Z = o.sans, p = S.p;
+      const yorum = Z.say === 0 ? `Hiçbirinde çıkmadı. Bu "imkânsız" demek değil: 6. adımdaki p = ${pYaz(p)} yaklaşık ${yaklasik(1 / p)} denemede bir demek; 400 denemede görmeyi beklemeyiz. Eğim şansla açıklanamayacak kadar büyük.`
+        : `Bu oran, 6. adımdaki p = ${pYaz(p)} değerinin deneme karşılığıdır (400 denemede beklenen yaklaşık ${fmt(400 * p, 1)}; 400 denemede oran p'nin çevresinde birkaç puan oynar). ${p < .05 ? 'p %5\'ten küçük: şansla açıklamak zor.' : 'p %5\'ten büyük: şansla açıklanabilir.'}`;
+      return `<h5>5. adım: Bu t şans eseri olabilir mi? H₀ doğruysa ne olur?</h5>
+      <div class="ak-yaz">Deneme: eğilimi olmayan (β₁ = 0) ama aynı büyüklükte dalgalanan (s = ${fmt(S.s, 0)}) 400 seri ürettik. Her birine aynı trend modelini kurup β̂<sub>1</sub>'i, kendi standart hatasını ve t = β̂<sub>1</sub> / se oranını hesapladık (gri çubuklar). Denemelerdeki β̂<sub>1</sub>'lerin standart sapması ${fmt(Z.sd, 0)}: <span class="ak-lacivert">se = ${fmt(S.se, 2)}</span> tam bu yayılmayı kestiriyor. Trend yokken t'lerin %${fmt(100 * Z.ici2, 0)} kadarı -2 ile 2 arasında.</div>
+      <div class="ak-yaz">Bizim t (turuncu) ${fs(S.t, 3)}: mutlak değerce bu kadar büyük t, 400 denemenin <b>${Z.say}</b> tanesinde (%${fmt(100 * Z.oran, 1)}) çıktı. ${yorum}</div>`; },
+    S => { const red = Math.abs(S.t) > S.tc;
+      return `<h5>6. adım: Karar: t, t(${S.df}) dağılımının neresinde?</h5>
+      <div class="ak-yaz">İki yönlü test, %5: her kuyrukta %2,5 (kırmızı). t tablosunda <span class="ak-mor">sd = ${S.df}</span> satırı, 0,025 sütunu: <b>t kritik = ${fmt(S.tc, 3)}</b> (kesikli çizgiler).</div>
+      <div class="ak-karar ${red ? 'red' : 'kabul'}">${red ? `|t| = ${fmt(Math.abs(S.t), 3)} > ${fmt(S.tc, 3)}: kırmızı bölgede. H₀ reddedilir; eğim %5 düzeyinde anlamlı (p = ${pYaz(S.p)}).` : `|t| = ${fmt(Math.abs(S.t), 3)} < ${fmt(S.tc, 3)}: kırmızı bölgede değil. H₀ reddedilemez (p = ${pYaz(S.p)}).`}</div>
+      <div class="ak-yaz">Tek açıklayıcılı modelde F = t²: çıktıdaki F = ${fmt(S.F, 2)} ≈ ${fs(S.t, 3)}² aynı hipotezi sınar, p değeri aynıdır.</div>`; } ],
+  alis: { adim: 3, alanlar: ['ak-t-sd'], cevap: S => [S.df],
+    kontrol: ([v], S) => v === S.df ? null
+      : v === S.n ? `sd = ${v}: bu gözlem sayısı (n). Tahmin edilen her katsayı bir serbestlik derecesi götürür: sd = n - k.`
+      : v === S.n - 1 ? `sd = ${v} = n - 1: tek bir ortalama tahmin edildiğinde (örnek varyansında) kullanılır. Burada iki katsayı (sabit ve eğim) tahmin edildi.`
+      : v === S.n - 3 ? `sd = ${v} = n - k - 1: k'yı sabit dahil 2 alıp bir de 1 çıkardınız. n - k - 1 kalıbında k sabit hariç açıklayıcı sayısıdır (burada 1); k sabit dahilse sd = n - k.`
+      : v === 1 ? `sd = 1: bu F testinin pay serbestlik derecesi (kısıt sayısı). t testinin sd'si artıklarınkidir: n - k.`
+      : v === 2 ? `2 tahmin edilen katsayı sayısı (k). sd = n - k.`
+      : `sd = ${v} değil: modeldeki katsayıları sabit dahil sayın, n = ${S.n}'dan çıkarın.`,
+    dogru: S => `Doğru. Modeldeki katsayılar: <span class="ak-kat">1. Sabit</span> <span class="ak-kat">2. t</span> → k = 2; sd = n - k = ${S.n} - 2 = ${S.df}.` },
+  ciz: (a, S, id, o) => {
+    if (a === 2) chart(id, { type: 'line', data: { labels: YEARS, datasets: [
+      { label: 'Satışlar', data: sales, borderColor: C1, backgroundColor: C1, borderWidth: 0, pointRadius: 4, showLine: false },
+      { label: `Tahmin edilen trend (eğim ${fmt(S.b, 0)})`, data: S.fit, borderColor: C4, borderWidth: 2.5, pointRadius: 0 },
+      { label: `β₁ = 0 olsaydı (ortalama ${fmt(S.ym, 0)})`, data: YEARS.map(() => S.ym), borderColor: GRAYC, borderDash: [6, 4], borderWidth: 2, pointRadius: 0 } ] }, options: baseOpts() });
+    if (a === 5) { const Z = o.sans, srt = Z.t.map(Math.abs).sort((x, y) => x - y), L = Math.ceil(Math.max(Math.abs(S.t), srt[395], S.tc) * 1.08);
+      akHist(id, Z.t, S.t, { lo: -L, hi: L, xad: 't = β̂₁ / se', etiket: 'Trend yokken (β₁ = 0) 400 denemenin t oranları', bizYaz: 'bizim t = ' + fs(S.t, 3) }); }
+    if (a === 6) { const L = Math.max(Math.abs(S.t), S.tc) * 1.15, xs = Array.from({ length: 241 }, (_, i) => -L + 2 * L * i / 240), pts = xs.map(x => ({ x, y: tYog(x, S.df) }));
+      chart(id, { type: 'line', data: { datasets: [
+        { label: `t(${S.df}) yoğunluğu (H₀ doğruysa)`, data: pts, borderColor: NAVY, borderWidth: 2, pointRadius: 0 },
+        { label: 'Kritik bölge (%5, iki yönlü)', data: pts.map(p => ({ x: p.x, y: p.x <= -S.tc ? p.y : null })), borderColor: C1, backgroundColor: C1 + '66', pointRadius: 0, fill: 'origin' },
+        { label: '', data: pts.map(p => ({ x: p.x, y: p.x >= S.tc ? p.y : null })), borderColor: C1, backgroundColor: C1 + '66', pointRadius: 0, fill: 'origin' } ] },
+        options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { labels: { boxWidth: 14, filter: it => it.text !== '' } } },
+          scales: { x: { type: 'linear', min: -L, max: L, grid: { display: false }, title: { display: true, text: 't' } }, y: { grid: gridOpt, title: { display: true, text: 'yoğunluk' } } } },
+        plugins: [cizgiler([[-S.tc, C1, '', true], [S.tc, C1, '±' + fmt(S.tc, 3), true], [S.t, C2, 't = ' + fs(S.t, 3), false]])] }); }
+  } };
+function tHesap(R) { const t = R.b / R.sb; return { n: R.n, a: R.a, b: R.b, se: R.sb, df: R.df, s: R.s, t, p: pT(Math.abs(t), R.df), tc: tCrit(R.df), F: R.F, fit: R.fit, ym: R.ym }; }
+
+// ===== B. 15. bölüm: Durbin-Watson =====
+// Savin-White %5 tablosundan (Python'da kesin sınır dağılımlarıyla doğrulandı): [d_L, d_U], k' = 1, 2, 3
+const DW_TAB = { 9: [[.824, 1.320], [.629, 1.699], [.455, 2.128]], 10: [[.879, 1.320], [.697, 1.641], [.525, 2.016]], 11: [[.927, 1.324], [.758, 1.604], [.595, 1.928]] };
+let DW_DENEME = null;
+function dwSans() { // H₀: otokorelasyon yok. Bağımsız hatalarla 400 seri, aynı trend modeli, DW. (DW'nin dağılımı veriye değil yalnız t'ye bağlı.)
+  if (DW_DENEME) return DW_DENEME; const t = tIdx(), n = t.length, z = normals(400 * n, 4242), d = [];
+  for (let j = 0; j < 400; j++) d.push(ols(t, z.slice(j * n, j * n + n)).dw);
+  const s = [...d].sort((a, b) => a - b); return DW_DENEME = { d, ort: mean(d), alt: s[9], ust: s[389] };
+}
+const dwBolge = (d, L, U) => d < L ? 0 : d < U ? 1 : d <= 4 - U ? 2 : d <= 4 - L ? 3 : 4;
+const ozgunVeri = () => sales.every((v, i) => v === D.sales.vals[i]);
+const DWB = { id: 'ak-dw', sutun: 4, baslik: 'Durbin-Watson testi, adım adım: artıklar birbirine bağlı mı?',
+  adlar: ['Artıklar ve farklar', 'Fikir', 'DW', 'Tablo: d<sub>L</sub>, d<sub>U</sub>', 'Şans eseri mi?', 'Karar'],
+  pano: [
+    { k: 'd2', ad: 'Σ(eₜ - eₜ₋₁)²', renk: 'mavi', adim: 1, v: S => fmt(S.d2, 0) },
+    { k: 'e2', ad: 'Σeₜ²', renk: 'lacivert', adim: 1, v: S => fmt(S.e2, 0) },
+    { k: 'dw', ad: 'DW', renk: 'turuncu', adim: 3, v: S => fmt(S.dw, 3) },
+    { k: 'dd', ad: 'd<sub>L</sub> ; d<sub>U</sub> (%5)', renk: 'mor', adim: 4, alis: true, v: S => `${fmt(S.dL, 3)} ; ${fmt(S.dU, 3)}` } ],
+  grafikAdim: [2, 5],
+  hazirla: (a, o) => { if (a >= 5) o.sans = dwSans(); },
+  icerik: [
+    S => { const m = v => fs(v / 1e6, 1);
+      return `<h5>1. adım: Artıklar ve ardışık farkları</h5>
+      <div class="ak-yaz">15. bölümdeki artıklar eₜ ve bir önceki yılın artığı eₜ₋₁. İlk yılın öncesi olmadığı için ${S.n - 1} fark var. İki kareler toplamı → panoya.</div>
+      <div class="ak-tab"><table><tr><th>Yıl</th>${YEARS.map(y => `<th>${y}</th>`).join('')}<th>Toplam</th></tr>
+        <tr><td>eₜ</td>${S.e.map(v => `<td>${fs(v, 0)}</td>`).join('')}<td></td></tr>
+        <tr><td>eₜ₋₁</td><td></td>${S.e.slice(0, -1).map(v => `<td>${fs(v, 0)}</td>`).join('')}<td></td></tr>
+        <tr><td>eₜ - eₜ₋₁</td><td></td>${S.d.map(v => `<td>${fs(v, 0)}</td>`).join('')}<td></td></tr>
+        <tr><td class="ak-mavi">(eₜ - eₜ₋₁)², milyon</td><td></td>${S.d.map(v => `<td>${m(v * v)}</td>`).join('')}<td class="ak-mavi">${m(S.d2)}</td></tr>
+        <tr><td class="ak-lacivert">eₜ², milyon</td>${S.e.map(v => `<td>${m(v * v)}</td>`).join('')}<td class="ak-lacivert">${m(S.e2)}</td></tr></table></div>`; },
+    S => { const neg = S.rho < 0;
+      return `<h5>2. adım: Fikir: ardışık artıklar birbirine benziyor mu?</h5>
+      <div class="ak-yaz">Ardışık artıklar birbirine benziyorsa (pozitif otokorelasyon) farkları küçük olur; işaretleri sürekli değişiyorsa (negatif otokorelasyon) farkları artıkların kendisinden büyük olur. Bu yüzden <span class="ak-mavi">farkların kareleri</span> <span class="ak-lacivert">artıkların karelerine</span> oranlanır. Yaklaşık olarak <b>DW ≈ 2(1 - ρ̂)</b>: ρ̂ = 1 ise 0, ρ̂ = 0 ise 2, ρ̂ = -1 ise 4.</div>
+      <div class="ak-yaz">Burada ${neg ? 'artıklar sık işaret değiştiriyor (mor çubuklar çoğu yıl artıktan uzun)' : 'ardışık artıklar birbirine benziyor (mor çubuklar çoğu yıl artıktan kısa)'}, ρ̂ = ${fs(S.rho, 3)}: DW'nin 2'nin ${neg ? 'üstünde' : 'altında'} çıkmasını bekleriz, yaklaşık 2(1 - (${fs(S.rho, 3)})) = ${fmt(2 * (1 - S.rho), 2)}.</div>`; },
+    S => `<h5>3. adım: DW istatistiği</h5>
+      <div class="ak-f">DW = ${kesir('<span class="ak-mavi">Σ<sub>t=2</sub><sup>n</sup> (eₜ - eₜ₋₁)²</span>', '<span class="ak-lacivert">Σ<sub>t=1</sub><sup>n</sup> eₜ²</span>')} = ${kesir(`<span class="ak-mavi">${fmt(S.d2, 0)}</span>`, `<span class="ak-lacivert">${fmt(S.e2, 0)}</span>`)} = <span class="ak-turuncu">${fmt(S.dw, 3)}</span></div>
+      <div class="ak-yaz">DW → panoya. Pay ${S.n - 1} farktan, payda ${S.n} artıktan oluşur. Sonuç 2. adımdaki yaklaşık değere (${fmt(2 * (1 - S.rho), 2)}) yakın; aradaki fark uç terimlerden (ilk ve son artık) gelir ve n küçükken belirgindir. Çıktıdaki Durbin-Watson = ${fmt(S.dw, 6)} ile aynı.</div>`,
+    S => `<h5>4. adım: Kritik değerler tablodan: d<sub>L</sub> ve d<sub>U</sub></h5>
+      <div class="ak-yaz">DW'nin kesin dağılımı açıklayıcı değişkenlerin değerlerine bağlıdır; tablo bu yüzden iki sınır verir: alt sınır d<sub>L</sub>, üst sınır d<sub>U</sub>. Tabloya iki sayıyla girilir. <b>Önce siz bulun:</b></div>
+      ${akAlisHTML([['ak-dw-n', 'n (satır)'], ['ak-dw-k', "k′ (sütun)"]])}
+      <div class="ak-tab"><table id="ak-dw-tab"><tr><th>n</th>${[1, 2, 3].map(k => `<th>k′ = ${k}: d<sub>L</sub></th><th>d<sub>U</sub></th>`).join('')}</tr>
+        ${[9, 10, 11].map(n => `<tr><td>${n}</td>${DW_TAB[n].map((x, j) => `<td data-h="${n}-${j + 1}">${fmt(x[0], 3)}</td><td data-h="${n}-${j + 1}">${fmt(x[1], 3)}</td>`).join('')}</tr>`).join('')}</table></div>
+      <div class="cap" style="margin-top:.3rem">Durbin-Watson tablosundan kesit, %5 anlamlılık (Savin ve White).</div>`,
+    (S, o) => { const Z = o.sans, buyuk = S.dw >= 2, say = Z.d.filter(v => buyuk ? v >= S.dw : v <= S.dw).length, oran = say / 400;
+      return `<h5>5. adım: Bu DW şans eseri olabilir mi? (H₀: otokorelasyon yok)</h5>
+      <div class="ak-yaz">Deneme: birbirinden bağımsız (beyaz gürültü) hatalarla 400 seri ürettik, her birine aynı trend modelini kurup DW hesapladık (gri çubuklar). Otokorelasyon yokken DW'lerin %95'i ${fmt(Z.alt, 2)} ile ${fmt(Z.ust, 2)} arasında, ortalama ${fmt(Z.ort, 2)} (n küçük ve model trendli olduğu için tam 2 değil).</div>
+      <div class="ak-yaz">Bizim DW (turuncu) ${fmt(S.dw, 3)}: bu kadar ${buyuk ? 'büyük' : 'küçük'} DW, 400 denemenin <b>${say}</b> tanesinde (%${fmt(100 * oran, 1)}) çıktı. ${oran >= .10 ? 'Otokorelasyon yokken de sık görülen bir değer: şansla rahatça açıklanabilir.' : oran >= .02 ? 'Sınırda bir sıklık; 400 denemede oran birkaç puan oynar. Karar 6. adımda tabloyla verilir.' : 'Otokorelasyon yokken nadir görülen bir değer. Karar 6. adımda tabloyla verilir.'}${ozgunVeri() ? ' (Python: 200.000 denemede %23,8; kesin dağılımla %23,7.)' : ''}</div>`; },
+    (S, o) => { const L = S.dL, U = S.dU, b = dwBolge(S.dw, L, U), Z = o.sans || dwSans(), buyuk = S.dw >= 2, oran = Z.d.filter(v => buyuk ? v >= S.dw : v <= S.dw).length / 400;
+      const sinir = [0, L, U, 4 - U, 4 - L, 4], ad = ['pozitif otokorelasyon', 'kararsız', 'otokorelasyon yok', 'kararsız', 'negatif otokorelasyon'], renk = [C1, GRAYC, C3, GRAYC, C1], kisa = ['poz.', '?', 'yok', '?', 'neg.'];
+      const yakin = b === 2 ? Math.min(S.dw - U, 4 - U - S.dw) : 1, x = Math.max(0, Math.min(4, S.dw)) / 4 * 100;
+      const kar = [`DW = ${fmt(S.dw, 3)} < d<sub>L</sub> = ${fmt(L, 3)}: pozitif otokorelasyon bölgesi. H₀ reddedilir.`,
+        `d<sub>L</sub> = ${fmt(L, 3)} ≤ DW = ${fmt(S.dw, 3)} < d<sub>U</sub> = ${fmt(U, 3)}: kararsız bölge; test karar veremiyor.`,
+        `d<sub>U</sub> = ${fmt(U, 3)} &lt; DW = ${fmt(S.dw, 3)} &lt; 4 - d<sub>U</sub> = ${fmt(4 - U, 3)}: otokorelasyon yok bölgesi, H₀ reddedilemez.${yakin < .05 ? ` Ama ${S.dw > 2 ? '4 - d<sub>U</sub>' : 'd<sub>U</sub>'} sınırına çok yakın (fark ${fmt(yakin, 3)}).` : ''}`,
+        `4 - d<sub>U</sub> = ${fmt(4 - U, 3)} &lt; DW = ${fmt(S.dw, 3)} ≤ 4 - d<sub>L</sub> = ${fmt(4 - L, 3)}: kararsız bölge (negatif taraf); test karar veremiyor.`,
+        `DW = ${fmt(S.dw, 3)} > 4 - d<sub>L</sub> = ${fmt(4 - L, 3)}: negatif otokorelasyon bölgesi. H₀ reddedilir.`][b];
+      return `<h5>6. adım: Karar: DW hangi bölgede?</h5>
+      <div class="ak-bolge-dis"><div class="ak-bolge">${ad.map((t, i) => `<div style="width:${(sinir[i + 1] - sinir[i]) / 4 * 100}%;background:${renk[i]}"><span class="ak-uzun">${t}</span><span class="ak-kisa">${kisa[i]}</span></div>`).join('')}</div>
+        <div class="ak-imle${x > 75 ? ' sol' : ''}" style="left:${x}%"><b>DW = ${fmt(S.dw, 3)}</b></div>
+        <div class="ak-olcek">${sinir.map((v, i) => `<span style="left:${v / 4 * 100}%">${i === 0 || i === 5 ? fmt(v, 0) : fmt(v, 3)}</span>`).join('')}<span style="left:50%">2</span></div></div>
+      <div class="ak-bolge-not">poz.: pozitif otokorelasyon, ?: kararsız, yok: otokorelasyon yok, neg.: negatif otokorelasyon</div>
+      <div class="ak-karar ${b === 2 ? 'kabul' : b === 1 || b === 3 ? 'ara' : 'red'}">${kar}</div>
+      <div class="ak-yaz">Tablo pozitif otokorelasyon için verilir; negatif taraf için 4 - d<sub>U</sub> ve 4 - d<sub>L</sub> kullanılır. ${b === 2 && S.rho < 0 ? `ρ̂ = ${fs(S.rho, 2)} negatif bir eğilim düşündürse de n = ${S.n} ile test bunu ayırt edemiyor; 5. adımdaki deneme de bu DW'nin otokorelasyon yokken %${fmt(100 * oran, 0)} sıklıkla çıktığını gösterdi. 13. bölümdeki yorumla aynı sonuç.` : `5. adımdaki denemede bu kadar ${buyuk ? 'büyük' : 'küçük'} DW %${fmt(100 * oran, 1)} sıklıkla çıktı.`}</div>`; } ],
+  alis: { adim: 4, alanlar: ['ak-dw-n', 'ak-dw-k'], cevap: S => [S.n, 1],
+    kontrol: ([n, k], S) => { const h = [];
+      if (n !== S.n) h.push(n === S.n - 1 ? `n = ${n}: farkların sayısı ${S.n - 1}, ama tabloya gözlem sayısıyla girilir.` : n === S.n - 2 ? `n = ${n} = n - 2, serbestlik derecesi. DW tablosuna doğrudan gözlem sayısıyla girilir.` : `n = ${n} değil: tabloya gözlem (yıl) sayısıyla girilir.`);
+      if (k !== 1) h.push(k === 2 ? `k′ = 2: sabit terimi de saydınız. DW tablosunda k′, sabit <b>hariç</b> açıklayıcı değişken sayısıdır.` : k === 0 ? `k′ = 0 değil: zaman değişkeni t modeldeki açıklayıcı değişkendir.` : `k′ = ${k} değil: modelde sabit dışında kaç açıklayıcı değişken var?`);
+      return h.length ? h.join('<br>') : null; },
+    dogru: S => `Doğru. n = ${S.n} satırı, k′ = 1 sütunu: d<sub>L</sub> = ${fmt(S.dL, 3)}, d<sub>U</sub> = ${fmt(S.dU, 3)} (tabloda işaretli). Modeldeki katsayılar <span class="ak-kat">1. Sabit</span> <span class="ak-kat">2. t</span>; sabit sayılmaz → k′ = 1.`,
+    sonra: S => document.querySelectorAll(`#ak-dw-tab td[data-h="${S.n}-1"]`).forEach(td => td.classList.add('vurgu')) },
+  ciz: (a, S, id, o) => {
+    if (a === 2) chart(id, { type: 'bar', data: { labels: YEARS, datasets: [
+      { label: 'Artık eₜ', data: S.e, backgroundColor: TEAL },
+      { label: 'Fark eₜ - eₜ₋₁', data: [null, ...S.d], backgroundColor: C5 } ] }, options: baseOpts() });
+    if (a === 5) { const Z = o.sans; akHist(id, Z.d, S.dw, { lo: 0, hi: 4, fx: v => fmt(v, 2), xad: 'DW', etiket: 'Otokorelasyon yokken 400 denemenin DW değerleri', bizYaz: 'bizim DW = ' + fmt(S.dw, 3) }); }
+  } };
+function dwHesap(R) { const d = R.e.slice(1).map((v, i) => v - R.e[i]), T = DW_TAB[R.n] ? DW_TAB[R.n][0] : [NaN, NaN];
+  return { n: R.n, e: R.e, d, d2: sum(d.map(v => v * v)), e2: R.ssr, dw: R.dw, rho: R.rho, dL: T[0], dU: T[1] }; }
+
+// ===== C. 17. bölüm: örneklem dışı öngörü ölçütleri (kaydırıcı e17 ile aynı bölme) =====
+const OG = { id: 'ak-og', sutun: 5, baslik: 'Örneklem dışı öngörü ölçütleri, adım adım hesap',
+  // Yukarıdaki e17 kaydırıcısının kopyası (sunumda aynı slaytta olsun diye); ikisi çift yönlü eşlenir.
+  ek: `<div class="controls ak-kayd"><label>Tahmin dönemi sonu</label><input type="range" id="e17b" min="1994" max="1999" step="1" value="1997"><span class="val" id="e17bv">1997</span></div>`,
+  adlar: ['Modeli ilk kısımla kur', 'Öngörüler ve hatalar', 'Hataları topla', 'Kare mi, mutlak değer mi?', 'Kaça bölüyoruz?', 'Ölçütler'],
+  pano: [
+    { k: 'e', ad: 'Hatalar eₜ', renk: 'gri', adim: 2, genis: true, v: S => S.rows.map(r => fs(r.e, 0)).join(' ; ') },
+    { k: 'se', ad: 'Σe', renk: 'mavi', adim: 3, v: S => fs(S.Se, 2) },
+    { k: 'sa', ad: 'Σ|e|', renk: 'teal', adim: 4, v: S => fmt(S.Sa, 2) },
+    { k: 's2', ad: 'Σe²', renk: 'mor', adim: 4, v: S => fmt(S.S2, 0) },
+    { k: 'm', ad: 'm (bölen)', renk: 'lacivert', adim: 5, alis: true, v: S => String(S.m) },
+    { k: 'mse', ad: 'MSE', renk: 'turuncu', adim: 6, v: S => fmt(S.mse, 0) },
+    { k: 'mad', ad: 'MAD', renk: 'turuncu', adim: 6, v: S => fmt(S.mad, 2) },
+    { k: 'bias', ad: 'Öngörü sapması', renk: 'turuncu', adim: 6, v: S => fs(S.bias, 2) } ],
+  grafikAdim: [3],
+  icerik: [
+    S => `<h5>1. adım: Modeli yalnız ilk kısımla tahmin et</h5>
+      <div class="ak-yaz">Kaydırıcıda tahmin dönemi sonu <b>${S.end}</b>: model ${YEARS[0]}-${S.end} (${S.k} gözlem) ile tahmin edilir, ${S.rows.map(r => r.yr).join(', ')} (${S.m} gözlem) modelden saklanır. Neden? Model gördüğü veriye zaten iyi uyar; asıl sınav görmediği veridir.</div>
+      <div class="ak-f">Ŷ<sub>t</sub> = ${fs(S.R.a, 2)} + ${fs(S.R.b, 2)} t   (t = 1, …, ${S.k})</div>
+      <div class="ak-yaz">Kaydırıcıyı değiştirin: bütün adımlar yeni bölmeyle yeniden hesaplanır.</div>`,
+    S => `<h5>2. adım: Saklanan yıllar için öngörü ve hata</h5>
+      <div class="ak-tab"><table><tr><th>Yıl</th><th>t</th><th>Gerçekleşen y</th><th>Öngörü F = β̂₀ + β̂<sub>1</sub> t</th><th>Hata e = y - F</th></tr>
+        ${S.rows.map(r => `<tr><td>${r.yr}</td><td>${r.t}</td><td>${fmt(r.y)}</td><td>${fs(S.R.a, 2)} + ${fs(S.R.b, 2)} × ${r.t} = ${fs(r.F, 2)}</td><td class="ak-gri">${fs(r.e, 2)}</td></tr>`).join('')}</table></div>
+      <div class="ak-yaz">Hatalar → panoya. Pozitif hata: öngörü gerçekleşenin altında kalmış; negatif hata: üstünde.</div>`,
+    S => { const pos = S.rows.some(r => r.e > 0), neg = S.rows.some(r => r.e < 0), buy = S.rows.reduce((a, r) => Math.abs(r.e) > Math.abs(a.e) ? r : a);
+      return `<h5>3. adım: Hatalar ortalamada ne kadar? Önce toplayalım</h5>
+      <div class="ak-yaz">İlk akla gelen hataları toplamak: <span class="ak-mavi">Σe = ${S.rows.map(r => r.e < 0 ? `(${fs(r.e, 2)})` : fs(r.e, 2)).join(' + ')} = ${fs(S.Se, 2)}</span> → panoya. ${pos && neg ? `Ama grafiğe bakın: ${buy.yr} yılındaki ${fmt(Math.abs(buy.e), 0)} TL'lik hata ters işaretli hatalarla büyük ölçüde götürüldü; toplam küçük çıktı ama öngörüler o kadar isabetli değil.` : 'Burada bütün hatalar aynı işaretli, götürme yok; ama işaretler karışık olsaydı hatalar birbirini götürürdü.'} Σe hataların <b>yönünü</b> (sistematik sapmayı) ölçer, büyüklüğünü değil.</div>`; },
+    S => { const buy = S.rows.reduce((a, r) => Math.abs(r.e) > Math.abs(a.e) ? r : a);
+      return `<h5>4. adım: İşaretten nasıl kurtuluruz? Mutlak değer ya da kare</h5>
+      <div class="ak-yaz">Soru: pozitif ve negatif hatalar birbirini götürmesin diye ne yapabiliriz? İki yol var: mutlak değerini ya da karesini almak.</div>
+      <div class="ak-tab"><table><tr><th>Yıl</th><th>e</th><th>|e|</th><th>e²</th></tr>${S.rows.map(r => `<tr><td>${r.yr}</td><td>${fs(r.e, 2)}</td><td>${fmt(Math.abs(r.e), 2)}</td><td>${fmt(r.e * r.e, 0)}</td></tr>`).join('')}
+        <tr class="total"><td>Toplam</td><td class="ak-mavi">${fs(S.Se, 2)}</td><td class="ak-teal">${fmt(S.Sa, 2)}</td><td class="ak-mor">${fmt(S.S2, 0)}</td></tr></table></div>
+      <div class="ak-yaz"><span class="ak-teal">Σ|e|</span> ve <span class="ak-mor">Σe²</span> → panoya. Kare büyük hatayı daha çok cezalandırır: en büyük hatanın (${buy.yr}) Σ|e| içindeki payı %${fmt(100 * Math.abs(buy.e) / S.Sa, 0)}, Σe² içindeki payı %${fmt(100 * buy.e * buy.e / S.S2, 0)}.</div>`; },
+    S => `<h5>5. adım: Toplamları ortalamaya çevir: kaça bölüyoruz?</h5>
+      <div class="ak-yaz">MSE, MAD ve öngörü sapması hataların <b>ortalamasıdır</b>: toplam ÷ bölen. <b>Önce siz bulun:</b> bölen kaç?</div>
+      ${akAlisHTML([['ak-og-m', 'bölen m']])}`,
+    S => { const M = `<span class="ak-lacivert">${S.m}</span>`, kucuk = Math.abs(S.bias) < .25 * S.mad;
+      return `<h5>6. adım: Üç ölçüt: aynı bölen, üç farklı toplam</h5>
+      <div class="ak-fler"><div class="ak-f">MSE = ${kesir('<span class="ak-mor">Σe²</span>', '<span class="ak-lacivert">m</span>')} = ${kesir(`<span class="ak-mor">${fmt(S.S2, 0)}</span>`, M)} = <span class="ak-turuncu">${fmt(S.mse, 0)}</span></div>
+      <div class="ak-f">MAD = ${kesir('<span class="ak-teal">Σ|e|</span>', '<span class="ak-lacivert">m</span>')} = ${kesir(`<span class="ak-teal">${fmt(S.Sa, 2)}</span>`, M)} = <span class="ak-turuncu">${fmt(S.mad, 2)}</span></div>
+      <div class="ak-f">Sapma = ${kesir('<span class="ak-mavi">Σe</span>', '<span class="ak-lacivert">m</span>')} = ${kesir(`<span class="ak-mavi">${fs(S.Se, 2)}</span>`, M)} = <span class="ak-turuncu">${fs(S.bias, 2)}</span></div></div>
+      <div class="ak-yaz">MSE'nin birimi TL²; kökü RMSE = ${fmt(Math.sqrt(S.mse), 0)} TL, MAD ile karşılaştırılabilir. Öngörü sapması ${S.bias < 0 ? 'negatif: öngörüler ortalamada gerçekleşenin <b>üstünde</b>' : 'pozitif: öngörüler ortalamada gerçekleşenin <b>altında</b>'}; ${kucuk ? 'MAD\'e göre küçük olduğu için sistematik bir sapma yok, hatalar birbirini büyük ölçüde götürüyor.' : 'MAD\'e göre büyük: hatalar çoğunlukla aynı yönde, sistematik bir sapma var.'}</div>`; } ],
+  alis: { adim: 5, alanlar: ['ak-og-m'], cevap: S => [S.m],
+    kontrol: ([v], S) => v === S.m ? null
+      : v === S.n ? `${v}: bütün gözlemler. Öngörü hatası yalnız modelden saklanan ${S.m} yıl için var; ölçütler bu hataların ortalamasıdır.`
+      : v === S.n - 2 ? `${v} = n - 2: regresyondaki s²'nin serbestlik derecesi. Burada katsayı tahmin etmiyoruz, hazır öngörü hatalarının düz ortalamasını alıyoruz.`
+      : v === S.k ? `${v}: tahmin dönemindeki gözlem sayısı. Ölçütler örneklem dışı hatalardan hesaplanıyor.`
+      : v === S.k - 2 ? `${v} = ${S.k} - 2: tahmin modelinin serbestlik derecesi. Örneklem dışı hatalarda serbestlik derecesi düşülmez.`
+      : v === S.m - 1 && S.m > 1 ? `${v} = m - 1: örnek varyansındaki gibi bir düşmeye gerek yok; MSE ve MAD düz ortalamadır.`
+      : `${v} değil: kaç tane öngörü hatası hesapladık? (2. adımdaki tablo)`,
+    dogru: S => `Doğru. m = örneklem dışı gözlem sayısı = ${S.m} (${S.rows.map(r => r.yr).join(', ')}). Bu hataları üretirken katsayı tahmin etmediğimiz için serbestlik derecesi düşülmez.` },
+  ciz: (a, S, id) => chart(id, { type: 'bar', data: { labels: S.rows.map(r => r.yr), datasets: [{ label: 'Öngörü hatası eₜ (mavi pozitif, kırmızı negatif)', data: S.rows.map(r => r.e), backgroundColor: S.rows.map(r => r.e >= 0 ? C4 : C1) }] },
+    options: baseOpts({ scales: { x: { grid: { display: false } }, y: { grid: gridOpt, title: { display: true, text: 'TL' } } } }) }) };
+function ogHesap() {
+  const end = +$('e17').value, k = YEARS.indexOf(end) + 1, t = tIdx(), R = ols(t.slice(0, k), sales.slice(0, k));
+  const rows = t.slice(k).map((tt, i) => { const F = R.a + R.b * tt, y = sales[k + i]; return { yr: YEARS[k + i], t: tt, y, F, e: y - F }; }), e = rows.map(r => r.e), m = e.length;
+  const Se = sum(e), Sa = sum(e.map(Math.abs)), S2 = sum(e.map(v => v * v));
+  return { end, k, n: YEARS.length, R, rows, m, Se, Sa, S2, mse: S2 / m, mad: Sa / m, bias: Se / m };
+}
+akKur(TT); akKur(DWB); akKur(OG);
+function akGuncelle(R) { TT.S = tHesap(R); TT.sans = null; akCiz(TT); DWB.S = dwHesap(R); akCiz(DWB); }
+function ogGuncelle() { $('e17b').value = $('e17').value; $('e17bv').textContent = $('e17').value; OG.S = ogHesap(); akCiz(OG); }
+$('e17b').addEventListener('input', () => { $('e17').value = $('e17b').value; build17(); });
 
 // sidebar etkin bölüm
 const links = [...document.querySelectorAll("#sidebar a")];
@@ -939,6 +1306,7 @@ const bitisik = el => el.tagName === 'H4' || el.classList.contains('cap') || el.
   (el.tagName === 'P' && el.nextElementSibling && el.nextElementSibling.classList.contains('controls'));
 let SLAYT = [], si = 0, sonGorunen = 0;
 function parcala() {
+  sigdirSifirla();
   SLAYT = [{ b: 0, parca: null, k: 1, n: 1 }];
   BOLUMLER.slice(1).forEach((sec, i) => {
     const body = sec.querySelector('.section-body'), kids = [...body.children];
@@ -952,9 +1320,10 @@ function parcala() {
     sec.classList.remove('slide-on');
     zorla.forEach(([e, d]) => e.style.display = d);
     const birim = []; let cur = null;
-    kids.forEach((c, j) => { if (!cur) cur = { el: [], h: 0 }; cur.el.push(c); cur.h += yuk[j]; if (!bitisik(c) || j === kids.length - 1) { birim.push(cur); cur = null; } });
+    // Adım adım blok (data-adimli) bölünmez ve kendi slaytında durur; adım değişince sigdir ile sığdırılır.
+    kids.forEach((c, j) => { if (!cur) cur = { el: [], h: 0, ayri: false }; cur.el.push(c); cur.h += yuk[j]; if (c.hasAttribute('data-adimli')) cur.ayri = true; if (!bitisik(c) || j === kids.length - 1) { birim.push(cur); cur = null; } });
     const dagit = L => { const out = []; let p = null;
-      birim.forEach(u => { if (p && p.h + u.h > L) { out.push(p); p = null; } if (!p) p = { el: [], h: 0 }; p.el.push(...u.el); p.h += u.h; });
+      birim.forEach(u => { if (p && (p.h + u.h > L || u.ayri || p.ayri)) { out.push(p); p = null; } if (!p) p = { el: [], h: 0, ayri: false }; p.el.push(...u.el); p.h += u.h; p.ayri = p.ayri || u.ayri; });
       if (p) out.push(p); return out; };
     // Slayt sayısını artırmadan içeriği dengeli dağıt: sonda küçük artık kalmasın.
     const n = dagit(bos).length; let lo = Math.max(...birim.map(u => u.h)), hi = Math.max(bos, lo);
@@ -972,11 +1341,29 @@ function slaytGoster(i, yon) {
     el.querySelector('.parca-no').textContent = S.n > 1 ? `(${S.k}/${S.n})` : '';
   }
   void el.offsetWidth; el.classList.add('slide-on', yon < 0 ? 'geri' : 'ileri'); el.scrollTop = 0;
+  sigdirSifirla(); slaytSigdir();
   $('sb-bilgi').textContent = `${si + 1} / ${SLAYT.length}  ·  ${KISIM[S.b] ? KISIM[S.b] + '  ·  ' : ''}${BASLIK[S.b]}`;
   $('sb-ilerleme').style.width = (100 * (si + 1) / SLAYT.length) + '%';
   $('sb-geri').disabled = si === 0; $('sb-ileri').disabled = si === SLAYT.length - 1;
   requestAnimationFrame(() => el.querySelectorAll('canvas').forEach(c => { const ch = Chart.getChart(c); if (ch) ch.resize(); }));
 }
+// Adım adım blok slayta sığmıyorsa bölümün gövdesi küçültülür (transform; genişlik 1/f açılır, sığan en büyük f ikili aramayla).
+// Yalnız görünen bir data-adimli bloğu olan slaytlarda çalışır; diğer slaytların davranışı değişmez.
+function sigdirSifirla() { document.querySelectorAll('.section-body').forEach(g => Object.assign(g.style, { transform: '', transformOrigin: '', width: '', marginBottom: '' })); BOLUMLER.forEach(x => { delete x.dataset.olcek; x.style.overflowX = ''; }); }
+function sigdir(el) {
+  const g = el.querySelector('.section-body'); if (!g) return;
+  Object.assign(g.style, { transform: '', transformOrigin: '', width: '', marginBottom: '' }); el.dataset.olcek = '1'; el.style.overflowX = '';
+  const alan = el.clientHeight - g.offsetTop - 4; if (g.offsetHeight <= alan) return;
+  const sigar = f => { g.style.width = (100 / f) + '%'; return g.offsetHeight * f <= alan; };
+  let lo = 0.55, hi = 1;
+  for (let k = 0; k < 10; k++) { const mid = (lo + hi) / 2; if (sigar(mid)) lo = mid; else hi = mid; }
+  const f = lo; g.style.width = (100 / f) + '%';
+  Object.assign(g.style, { transformOrigin: 'top left', transform: `scale(${f.toFixed(3)})`, marginBottom: -(g.offsetHeight * (1 - f)) + 'px' });
+  el.dataset.olcek = f.toFixed(3); el.style.overflowX = 'hidden';  // ölçeklenmiş gövdenin düzen genişliği yatay kaydırma çubuğu açmasın
+}
+function slaytSigdir() { const el = BOLUMLER[SLAYT[si].b]; if (el && [...el.querySelectorAll('[data-adimli]')].some(x => !x.closest('.gizli-p'))) sigdir(el); }
+// Görünen slaytta adım adım bir blok varsa ok tuşları, kumanda ve › ‹ düğmeleri önce adımları gezer, son adımdan sonra slayta geçer.
+function adimla(yon) { const el = BOLUMLER[SLAYT[si].b], a = ADIMLI.find(x => el.contains(x.el) && !x.el.closest('.gizli-p')); return a ? a[yon]() : false; }
 function grafikYazi(n) { Chart.defaults.font.size = n; Object.values(Chart.instances).forEach(c => c.update('none')); }
 function sunumAc() { document.body.classList.add('sunum'); grafikYazi(Math.max(13, Math.round(innerWidth * 0.0095))); if (!document.fullscreenElement && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {}); parcala(); slaytGoster(SLAYT.findIndex(x => x.b === sonGorunen), 1); }
 function sunumKapat() {
@@ -984,6 +1371,7 @@ function sunumKapat() {
   BOLUMLER.forEach(el => el.classList.remove('slide-on', 'ileri', 'geri'));
   document.querySelectorAll('.gizli-p').forEach(c => c.classList.remove('gizli-p'));
   document.querySelectorAll('.parca-no').forEach(x => x.textContent = '');
+  sigdirSifirla();
   if (document.fullscreenElement) document.exitFullscreen();
   grafikYazi(11); BOLUMLER[SLAYT[si].b].scrollIntoView(); Object.values(Chart.instances).forEach(c => c.resize());
 }
@@ -994,14 +1382,16 @@ window.addEventListener('resize', () => {
   boyutZaman = setTimeout(() => { grafikYazi(Math.max(13, Math.round(innerWidth * 0.0095))); const S = SLAYT[si]; document.querySelectorAll('.gizli-p').forEach(c => c.classList.remove('gizli-p')); parcala();
     const j = SLAYT.findIndex(x => x.b === S.b && S.parca && x.parca && x.parca.includes(S.parca[0])); slaytGoster(j >= 0 ? j : SLAYT.findIndex(x => x.b === S.b), 1); }, 250);
 });
+// Sunumda kaydırıcı bırakılınca odak kalkar: ok tuşları kaydırıcıyı değil adımları/slaytları gezsin (normal görünümde dokunulmaz).
+document.addEventListener('change', e => { if (document.body.classList.contains('sunum') && e.target.type === 'range') e.target.blur(); });
 $('sunum-ac').onclick = sunumAc; $('sb-cik').onclick = sunumKapat;
-$('sb-ileri').onclick = () => slaytGoster(si + 1, 1); $('sb-geri').onclick = () => slaytGoster(si - 1, -1);
+$('sb-ileri').onclick = () => { if (!adimla('ileri')) slaytGoster(si + 1, 1); }; $('sb-geri').onclick = () => { if (!adimla('geri')) slaytGoster(si - 1, -1); };
 $('sb-tam').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
 document.addEventListener('keydown', e => {
   if (!document.body.classList.contains('sunum')) return;
   const t = e.target.tagName; if (t === 'INPUT' || t === 'SELECT' || t === 'TEXTAREA') return;
-  if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); slaytGoster(si + 1, 1); }
-  else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); slaytGoster(si - 1, -1); }
+  if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); if (!adimla('ileri')) slaytGoster(si + 1, 1); }
+  else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); if (!adimla('geri')) slaytGoster(si - 1, -1); }
   else if (e.key === 'Home') slaytGoster(0, -1);
   else if (e.key === 'End') slaytGoster(SLAYT.length - 1, 1);
   else if (e.key === 'Escape' && !document.fullscreenElement) sunumKapat();

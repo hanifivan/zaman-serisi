@@ -1,13 +1,12 @@
-# Zaman Serisi Ekonometrisi I: 1. Bölüm, Giriş ve Trend
+# Zaman Serisi Ekonometrisi I
 
-**Hazırlayan: Doç. Dr. M. Hanifi VAN**, Van Yüzüncü Yıl Üniversitesi, İİBF Ekonometri Bölümü
+Doç. Dr. M. Hanifi VAN, Van Yüzüncü Yıl Üniversitesi, İİBF Ekonometri Bölümü.
 
-Ekonometrinin amaçları, veri tipleri, zaman serisinin unsurları (trend, mevsimsel, devri ve düzensiz hareketler), klasik ayrıştırma ve eğilim tabanlı öngörü konularında etkileşimli ders notu.
+Ders sayfası: https://hanifivan.github.io/zaman-serisi/
 
-Sayfa: https://hanifivan.github.io/zaman-serisi-giris/
+| Bölüm | Etkileşimli ders notu | Sunum |
+|---|---|---|
+| 1. Giriş ve eğilim tabanlı öngörü | [bolum1](https://hanifivan.github.io/zaman-serisi/bolum1/) | [PDF](bolum1/zaman_serisi_bolum1.pdf) |
+| 2. Otokorelasyon ve durağanlık | [bolum2](https://hanifivan.github.io/zaman-serisi/bolum2/) | [PDF](bolum2/zaman_serisi_bolum2.pdf) |
 
-- `index.html`: etkileşimli ders notu. Tek dosyadır; indirildiğinde internet olmadan da açılır. Bütün grafikler ve hesaplamalar (trend regresyonu, ANOVA, güven ve öngörü aralıkları, MSE, MAD, öngörü sapması, mevsimsel ayrıştırma) tarayıcıda canlı yapılır. Derste yansıtmak için "Sunum modu" (sol menüde ve kapakta): her bölüm tam ekran ve büyük yazıyla, gerekirse birkaç slayta bölünerek gösterilir. Geçiş oklar ya da PageUp/PageDown ile yapılır; F tam ekran, Esc çıkış.
-
-Veriler: Dünya Bankası WDI (Türkiye GSYH büyüme oranı ve doğrudan yabancı yatırım, 1973-2024) ve ders sunumundaki seriler (GSMH 1968-2005, çeyreklik GSYİH 1998-2008, imalat sanayi endeksi 1997-2008, dışa açılma oranları, dondurma satışları).
-
-© 2026 Doç. Dr. M. Hanifi VAN
+Ders notları tek dosya HTML'dir, internetsiz de açılır. Sunum modu (sağ üst) derste projektörle kullanım içindir.

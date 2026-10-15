@@ -674,7 +674,11 @@ const sd = a => { const m = mean(a); return Math.sqrt(sum(a.map(v => (v - m) ** 
 function acf1(a){ const m = mean(a); let n = 0, d = 0; for (let i = 0; i < a.length; i++){ d += (a[i]-m)**2; if (i) n += (a[i]-m)*(a[i-1]-m); } return n / d; }
 function mkRng(s){ let x = s >>> 0 || 1; return () => { x = (x * 1664525 + 1013904223) >>> 0; return x / 4294967296; }; }
 function normals(n, s){ const r = mkRng(s); const out = []; for (let i = 0; i < n; i++){ let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); out.push(Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)); } return out; }
-function chart(id, cfg){ const c = Chart.getChart(id); if (c) c.destroy(); return new Chart($(id), cfg); }
+// Tuval yazılımla çizilir (willReadFrequently): Chrome GPU belleği dolunca hızlandırılmış tuvallerin içeriğini silebiliyor,
+// grafik boş kalıyordu. İçerik yine de kaybolursa (contextrestored) grafik yeniden çizilir.
+function chart(id, cfg){ const cv = $(id), c = Chart.getChart(cv); if (c) c.destroy();
+  if (!cv.dataset.tuval) { cv.dataset.tuval = '1'; cv.getContext('2d', { willReadFrequently: true }); cv.addEventListener('contextrestored', () => { const g = Chart.getChart(cv); if (g) g.render(); }); }
+  return new Chart(cv, cfg); }
 function toggle(ids, on){ ids.forEach(i => $(i).classList.toggle("active", i === on)); }
 function stats(el, items){ $(el).innerHTML = items.map(([l, v, c]) => `<div class="stat-card"><div class="label">${l}</div><div class="value" ${c ? `style="color:${c}"` : ""}>${v}</div></div>`).join(""); }
 const gridOpt = { color: "#EEF2F6" };
@@ -1345,7 +1349,7 @@ function slaytGoster(i, yon) {
   $('sb-bilgi').textContent = `${si + 1} / ${SLAYT.length}  ·  ${KISIM[S.b] ? KISIM[S.b] + '  ·  ' : ''}${BASLIK[S.b]}`;
   $('sb-ilerleme').style.width = (100 * (si + 1) / SLAYT.length) + '%';
   $('sb-geri').disabled = si === 0; $('sb-ileri').disabled = si === SLAYT.length - 1;
-  requestAnimationFrame(() => el.querySelectorAll('canvas').forEach(c => { const ch = Chart.getChart(c); if (ch) ch.resize(); }));
+  requestAnimationFrame(() => el.querySelectorAll('canvas').forEach(c => { const ch = Chart.getChart(c); if (ch) { ch.resize(); ch.render(); } }));
 }
 // Adım adım blok slayta sığmıyorsa bölümün gövdesi küçültülür (transform; genişlik 1/f açılır, sığan en büyük f ikili aramayla).
 // Yalnız görünen bir data-adimli bloğu olan slaytlarda çalışır; diğer slaytların davranışı değişmez.

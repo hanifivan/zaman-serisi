@@ -313,6 +313,7 @@
   .rs-adimlar button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
   .rs-icerik h5 { margin: .2rem 0 .4rem; font-size: 15px; color: var(--navy); }
   .rs-gez { display: flex; justify-content: space-between; margin-top: .6rem; }
+  .hip { border-left: 4px solid var(--navy); background: #F3F7FB; border-radius: 6px; padding: .45rem .9rem; margin: .4rem 0; } .hip p { margin: .3rem 0; }
   .rs-yaz { background: #F3F7FB; border-radius: 8px; padding: .5rem .8rem; margin-top: .5rem; }
   .rs-f { font-size: 18px; text-align: center; line-height: 2.1; }
   .rs-sd-kutu { background: #F7F5FF; border: 1px solid #d9d4f7; border-radius: 8px; padding: .5rem .8rem; margin-top: .5rem; }
@@ -515,10 +516,10 @@
     <div class="rs-kutu" id="lb-kutu" data-adimli>
       <div class="controls" id="lb-m-btn"><label>Birlikte sınanan gecikme sayısı m =</label></div>
       <div class="rs-pano lb-pano">
-        <div class="rs-hucre c-lac" id="lb-p-n"><span>n (gözlem)</span><b>?</b><i>1. adım</i></div>
-        <div class="rs-hucre c-mavi" id="lb-p-r"><span>r<sub>1</sub> … r<sub>m</sub></span><b>?</b><i>1. adım</i></div>
-        <div class="rs-hucre c-tur" id="lb-p-q"><span>Q<sub>m</sub></span><b>?</b><i>3. adım</i></div>
-        <div class="rs-hucre c-mor" id="lb-p-sd"><span>sd</span><b>?</b><i>5. adım</i></div>
+        <div class="rs-hucre c-lac" id="lb-p-n"><span>n (gözlem)</span><b>?</b><i>2. adım</i></div>
+        <div class="rs-hucre c-mavi" id="lb-p-r"><span>r<sub>1</sub> … r<sub>m</sub></span><b>?</b><i>2. adım</i></div>
+        <div class="rs-hucre c-tur" id="lb-p-q"><span>Q<sub>m</sub></span><b>?</b><i>4. adım</i></div>
+        <div class="rs-hucre c-mor" id="lb-p-sd"><span>sd</span><b>?</b><i>6. adım</i></div>
       </div>
       <div class="rs-adimlar" id="lb-adimlar"></div>
       <div class="rs-icerik" id="lb-icerik"></div>
@@ -764,7 +765,7 @@ function histCfg(lab, sets, xlab, cizgi) {
 
 // Adım adım bloklar: sunum modunda ok tuşu/kumanda önce bunların adımlarını gezer (parca_sunum.js, adimla).
 const ADIMLI = [];
-function adimliKaydet(el, al, N, git) { ADIMLI.push({ el, ileri: () => al() < N ? (git(al() + 1), true) : false, geri: () => al() > 1 ? (git(al() - 1), true) : false }); }
+function adimliKaydet(el, al, N, git, ilk = 1) { ADIMLI.push({ el, ileri: () => al() < N ? (git(al() + 1), true) : false, geri: () => al() > ilk ? (git(al() - 1), true) : false }); }
 // Pano hücresi: değer gelince dolar; ilk dolduğunda ya da değer değişince kısa parlama.
 function panoDol(id, deger) {
   const h = $(id), b = h.querySelector('b'), dolu = deger !== null, once = h.classList.contains('dolu'), eski = b.innerHTML;
@@ -775,8 +776,8 @@ function panoDol(id, deger) {
 // Sunumda içerik uzunluğu değişince slaytı yeniden sığdır (BOLUMLER, SLAYT, sigdir sunum parçasında).
 function sunumSigdir(kap) { if (document.body.classList.contains('sunum')) { const el = BOLUMLER[SLAYT[si].b]; if (el.contains(kap)) sigdir(el); } }
 // Adım çubuğu ve Önceki/Sonraki düğmeleri
-function adimCubugu(id, adlar, A, git) {
-  $(id).innerHTML = adlar.map((a, k) => `<button data-a="${k + 1}" class="${k + 1 === A ? 'active' : k + 1 < A ? 'gecti' : ''}">${k + 1}. ${a}</button>`).join('');
+function adimCubugu(id, adlar, A, git, ilk = 1) {
+  $(id).innerHTML = adlar.map((a, k) => `<button data-a="${k + ilk}" class="${k + ilk === A ? 'active' : k + ilk < A ? 'gecti' : ''}">${k + 1}. ${a}</button>`).join('');
   $(id).querySelectorAll('button').forEach(b => b.onclick = () => git(+b.dataset.a));
 }
 // Yeni grafiklerde y ekseni tikleri ondalık virgülle
@@ -951,7 +952,7 @@ function lbTablo() {
 // Kurgu: seri ve r_k'ler → şüphe (korelogramda ilk çubuk; neden birlikte test) → Q kavram, formül, sayılar
 // → "şans eseri mi?" (n = 12 beyaz gürültü, 4000 deneme) → sd = m alıştırması → χ²(m) yoğunluğunda karar.
 // Q yuvarlanmamış r_k'lerle hesaplanır (SPSS gibi); m = 1: Q = 4,995, p = 0,025.
-let lbM = 1, lbA = 1, lbSans = null, lbAcik = false;
+let lbM = 1, lbA = 0, lbSans = null, lbAcik = false;
 const LB_ADIM = ['Seri ve r<sub>k</sub>', 'Şüphe: korelogram', 'Q istatistiği', 'Şans eseri mi?', 'Serbestlik derecesi', 'Karar'], LB_N = LB_ADIM.length;
 function lbHesap() {
   const m = lbM, Q = lbQ(R, 12, m), p = pChi(Q, m), kr = kritik(x => pChi(x, m));
@@ -971,28 +972,31 @@ function lbIcerik() {
   if (lbA >= 4 && !lbSans) lbSansHesap(L);
   const S = lbSans;
   const ic = {
-    1: () => `<h5>1. adım: Seri ve otokorelasyon katsayıları</h5>
+    0: () => `<h5>1. adım: Hipotezleri kur</h5>
+      <div class="hip"><p><b>H<sub>0</sub>:</b> ρ<sub>1</sub> = ${m > 1 ? '… = ρ<sub>' + m + '</sub> = ' : ''}0; ${m > 1 ? `ilk ${Ms} gecikmede` : 'birinci gecikmede'} otokorelasyon yok, seri tesadüfi (beyaz gürültü) gibi davranır.</p><p><b>H<sub>1</sub>:</b> ${m > 1 ? 'bu katsayılardan en az biri sıfırdan farklı' : 'ρ<sub>1</sub> ≠ 0'}; seri tesadüfi değil, ardışık gözlemler birbirine bağlı.</p></div>
+      <div class="rs-yaz">m (sınanan gecikme sayısı) yukarıdaki düğmelerle seçilir. Anlamlılık düzeyi %5. Sonraki adımlarda Q istatistiği hesaplanır; Q, χ² kritik değerini aşarsa H<sub>0</sub> reddedilir.</div>`,
+    1: () => `<h5>2. adım: Seri ve otokorelasyon katsayıları</h5>
       <div class="rs-yaz">Seri: ${Y.join(', ')}. Gözlem sayısı n = ${Ns} → panoya. r<sub>k</sub>'ler 4. bölümdeki gibi hesaplandı (SPSS üç basamak gösterir: ,572). Test ilk m = ${Ms} katsayıyı kullanır (mavi) → panoya.</div>
       <table class="lb-r"><tr><th>k</th>${R.map((_, i) => `<td class="${i < m ? 'sec' : ''}">${i + 1}</td>`).join('')}</tr><tr><th>r<sub>k</sub></th>${R.map((r, i) => `<td class="${i < m ? 'sec' : ''}">${v(r, 4)}</td>`).join('')}</tr></table>`,
-    2: () => `<h5>2. adım: Şüphe: korelogramda ilk çubuk</h5>
+    2: () => `<h5>3. adım: Şüphe: korelogramda ilk çubuk</h5>
       <div class="rs-yaz">r<sub>1</sub> = 0,572, ±1,96·s(r<sub>1</sub>) = ±0,502 sınırının hemen dışında. Ama her çubuğa ayrı %5 testi uygularsak, 20 çubuktan biri seri tesadüfi olsa bile dışarı taşar (8. bölüm). Bu yüzden soru: ilk m katsayı <b>birlikte</b> sıfır mı? Mavi çubuklar teste giren m = ${Ms} katsayı; m'yi değiştirip bakın.</div>`,
-    3: () => `<h5>3. adım: m katsayıyı tek sayıda topla: Q</h5>
+    3: () => `<h5>4. adım: m katsayıyı tek sayıda topla: Q</h5>
       <div class="rs-yaz">Her r<sub>k</sub> kendi standart hatasına bölünüp karesi alınır: işareti değil büyüklüğü önemli. 5. bölümdeki s(r<sub>k</sub>)² = (n − k) / (n(n + 2)) yerine konunca küçük örneklem düzeltmesi n(n + 2)/(n − k) kendiliğinden gelir. Seri tesadüfiyse r<sub>k</sub>'ler sıfıra yakın, Q küçüktür.</div>
       <div class="rs-f">Q<sub>m</sub> = <span class="c-lac-y">n</span>(<span class="c-lac-y">n</span> + 2) Σ<sub>k=1</sub><sup>m</sup> <span class="frac"><span><span class="c-mavi-y">r<sub>k</sub></span>²</span><span><span class="c-lac-y">n</span> − k</span></span>
         = ${Ns} · 14 · ( ${R.slice(0, Math.min(m, 2)).map((r, i) => `<span class="frac"><span><span class="c-mavi-y">${v(r, 4)}</span>²</span><span>${11 - i}</span></span>`).join(' + ')}${m > 2 ? ' + …' : ''} )</div>
       <div class="lb-terim">${L.terim.map((t, i) => `<span>k = ${i + 1}: ${v(t, 5)}</span>`).join('')}<span>Σ = ${v(L.terim.reduce((a, b) => a + b, 0), 5)}</span></div>
       <div class="rs-yaz">Q<sub>${m}</sub> = 168 × ${v(L.terim.reduce((a, b) => a + b, 0), 5)} = <b>${Qs}</b> → panoya.${m >= 7 ? ' (Q, SPSS gibi yuvarlanmamış r<sub>k</sub>\'lerle hesaplandı; dört basamakla elle hesap son basamakta farklı çıkabilir.)' : ''}</div>`,
-    4: () => `<h5>4. adım: Q = ${Qs} büyük mü? Şans eseri çıkabilir mi?</h5>
+    4: () => `<h5>5. adım: Q = ${Qs} büyük mü? Şans eseri çıkabilir mi?</h5>
       <div class="rs-yaz">Deneme: gerçekten tesadüfi (beyaz gürültü) 12 gözlemlik seriler üretip her birinde aynı Q<sub>${m}</sub>'yi hesapladık, 4000 kez (gri çubuklar). Tesadüfi serilerde Q ortalama <b>${v(S.ort, 2)}</b>; bizim Q (turuncu çizgi) <b>${v(L.Q)}</b>. Bu kadar büyük Q denemelerin <b>${yuzde(S.oran)}</b>'inde çıktı: ${S.oran < 0.05 ? 'şansla açıklanamayacak kadar büyük.' : 'şansla rahatça açıklanabilir.'}</div>`,
-    5: () => `<h5>5. adım: Q hangi dağılıma uyar? Serbestlik derecesi kaç?</h5>
+    5: () => `<h5>6. adım: Q hangi dağılıma uyar? Serbestlik derecesi kaç?</h5>
       <div class="rs-yaz">H<sub>0</sub> doğruysa Q'daki her terim yaklaşık bir standart normalin karesidir; bunların toplamı ki-kare (χ²) dağılımına uyar. Serbestlik derecesini <b>önce siz bulun:</b></div>
       <div class="rs-sd-kutu"><label>sd = <input id="lb-sd" type="number" min="0" step="1"></label>
         <button id="lb-kontrol">Kontrol et</button><button id="lb-goster">Cevabı göster</button><div id="lb-geri-bildirim"></div></div>`,
     6: () => { const ret = L.p < 0.05, sRet = S.oran < 0.05;
-      return `<h5>6. adım: Karar: Q, χ²(${Ms}) dağılımının neresinde?</h5>
+      return `<h5>7. adım: Karar: Q, χ²(${Ms}) dağılımının neresinde?</h5>
       <div class="rs-yaz">H<sub>0</sub> doğruysa Q, χ²(${m}) dağılımına uyar; değerlerin yalnız %5'i <b>χ² kritik = ${v(L.kr)}</b> değerini aşar (kırmızı bölge). χ² tablosunda <b>satır sd = ${m}, sütun α = 0,05</b>.</div>
       <div class="karar ${ret ? 'red' : 'kabul'}">${ret ? `Q = ${v(L.Q)} > ${v(L.kr)}: kırmızı bölgede. H<sub>0</sub> reddedilir, seri tesadüfi değil (p = ${v(L.p)}).` : `Q = ${v(L.Q)} < ${v(L.kr)}: kırmızı bölgede değil. H<sub>0</sub> reddedilemez (p = ${v(L.p)}).`}</div>
-      <div class="rs-yaz">${ret === sRet ? `4. adımdaki deneme oranı (${yuzde(S.oran)}) χ² yaklaşımındaki p ile aynı kararı veriyor.` : `Dikkat: deneme oranı ${yuzde(S.oran)}, χ² yaklaşımındaki p = ${v(L.p)}; ikisi %5'in farklı yanında. n = 12 küçük olduğu için Q'nun dağılımı χ²'ye tam uymaz, sınırdaki sonuçları temkinli okuyun.`}</div>`; } };
+      <div class="rs-yaz">${ret === sRet ? `5. adımdaki deneme oranı (${yuzde(S.oran)}) χ² yaklaşımındaki p ile aynı kararı veriyor.` : `Dikkat: deneme oranı ${yuzde(S.oran)}, χ² yaklaşımındaki p = ${v(L.p)}; ikisi %5'in farklı yanında. n = 12 küçük olduğu için Q'nun dağılımı χ²'ye tam uymaz, sınırdaki sonuçları temkinli okuyun.`}</div>`; } };
   $('lb-icerik').innerHTML = ic[lbA]();
   if (lbA === 5) lbSdBagla(L);
   $('lb-grafik').style.display = [2, 4, 6].includes(lbA) ? '' : 'none';
@@ -1020,12 +1024,12 @@ function lbIcerik() {
           { px: yer(c, L.Q), renk: C.orange, yan: sag ? 'sag' : 'sol', yazi: (dar ? 'Q ' : 'Q = ') + v(L.Q) }]); } }] }));
   }
   const sdGor = lbAcik || lbA >= 6;
-  panoDol('lb-p-n', '12');
+  panoDol('lb-p-n', lbA >= 1 ? '12' : null);
   const rp = $('lb-p-r').querySelector('b'); rp.classList.toggle('uzun', m > 2);
-  panoDol('lb-p-r', R.slice(0, m).map(r => v(r, 4)).join(' · '));
+  panoDol('lb-p-r', lbA >= 1 ? R.slice(0, m).map(r => v(r, 4)).join(' · ') : null);
   panoDol('lb-p-q', lbA >= 3 ? v(L.Q) : null); panoDol('lb-p-sd', sdGor ? String(m) : null);
-  adimCubugu('lb-adimlar', LB_ADIM, lbA, lbGit);
-  $('lb-geri').disabled = lbA === 1; $('lb-ileri').disabled = lbA === LB_N;
+  adimCubugu('lb-adimlar', ['Hipotezler', ...LB_ADIM], lbA, lbGit, 0);
+  $('lb-geri').disabled = lbA === 0; $('lb-ileri').disabled = lbA === LB_N;
   lbTablo();
   sunumSigdir($('lb-kutu'));
 }
@@ -1049,12 +1053,12 @@ function lbSdBagla(L) {
       : `${a} değil. Q'da kaç tane r<sub>k</sub>² terimi toplanıyor?`);
   };
 }
-function lbGit(a) { lbA = Math.max(1, Math.min(LB_N, a)); lbIcerik(); }
+function lbGit(a) { lbA = Math.max(0, Math.min(LB_N, a)); lbIcerik(); }
 $('lb-geri').onclick = () => lbGit(lbA - 1); $('lb-ileri').onclick = () => lbGit(lbA + 1);
 $('lb-m-btn').insertAdjacentHTML('beforeend', R.map((_, i) => `<button data-m="${i + 1}" class="${i ? '' : 'active'}">${i + 1}</button>`).join(''));
 // m değişince deneme ve alıştırma sıfırlanır; içinde bulunulan adım m'ye göre yeniden çizilir (her adımda görünür etkisi var).
 grupla([...document.querySelectorAll('#lb-m-btn button')], b => { lbM = +b.dataset.m; lbSans = null; lbAcik = false; lbIcerik(); });
-adimliKaydet($('lb-kutu'), () => lbA, LB_N, lbGit);
+adimliKaydet($('lb-kutu'), () => lbA, LB_N, lbGit, 0);
 lbIcerik();
 
 // ---------- simülasyon üreteçleri ----------

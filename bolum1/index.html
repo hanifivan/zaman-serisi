@@ -213,6 +213,7 @@
   .ak-adimlar button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
   .ak-icerik { font-size: 13.5px; line-height: 1.65; color: #333; }
   .ak-icerik h5 { margin: .2rem 0 .4rem; font-size: 15px; color: var(--navy); }
+  .hip { border-left: 4px solid var(--navy); background: #F3F7FB; border-radius: 6px; padding: .45rem .9rem; margin: .4rem 0; } .hip p { margin: .3rem 0; }
   .ak-yaz { background: #F3F7FB; border-radius: 8px; padding: .5rem .8rem; margin-top: .5rem; }
   .ak-f { font-family: "Cambria Math", Cambria, "Times New Roman", serif; font-size: 18px; text-align: center; line-height: 2.1; color: var(--navy); margin: .3rem 0; }
   .ak-f .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; }
@@ -1016,6 +1017,10 @@ function pYaz(p) { if (p >= 0.001) return fmt(p, 4); const [m, e] = p.toExponent
 const yaklasik = v => { const e = Math.pow(10, Math.floor(Math.log10(v)) - 1); return fmt(Math.round(v / e) * e, 0); };
 const kesir = (ust, alt) => `<span class="frac"><span>${ust}</span><span>${alt}</span></span>`;
 function akKur(o) {
+  // Hipotez adımı: testin birinci adımıdır. Eklenince bloğun öteki adımları birer kayar (pano, grafik, alıştırma, hazırlık ve çizim bir önceki numarayı görür).
+  if (o.hipotez && !o.hipKuruldu) { o.hipKuruldu = true; o.adlar = ['Hipotezler', ...o.adlar]; o.icerik = [o.hipotez, ...o.icerik];
+    o.pano.forEach(p => p.adim++); o.grafikAdim = o.grafikAdim.map(x => x + 1); if (o.alis) o.alis.adim++;
+    const h = o.hazirla, c = o.ciz; if (h) o.hazirla = (a, oo) => h(a - 1, oo); o.ciz = (a, ...r) => c(a - 1, ...r); }
   const k = $(o.id); o.k = k; o.a = 1; o.acik = false;
   k.innerHTML = `<div class="ak-bas">${o.baslik}</div>${o.ek || ''}
     <div class="ak-pano" style="grid-template-columns:repeat(${o.sutun},1fr)">${o.pano.map(p => `<div class="ak-hucre ${p.renk}${p.genis ? ' genis' : ''}" data-k="${p.k}"><span>${p.ad}</span><b>?</b><i>${p.adim}. adım</i></div>`).join('')}</div>
@@ -1095,29 +1100,32 @@ const TT = { id: 'ak-t', sutun: 4, baslik: 'β₁ için t testi, adım adım: e�
     { k: 'sd', ad: 'sd = n - k', renk: 'mor', adim: 3, alis: true, v: S => `${S.n} - 2 = ${S.df}` },
     { k: 'se', ad: 'se(β̂<sub>1</sub>)', renk: 'lacivert', adim: 4, v: S => fmt(S.se, 2) },
     { k: 't', ad: 't = β̂<sub>1</sub> / se', renk: 'turuncu', adim: 4, v: S => fs(S.t, 3) } ],
+  hipotez: S => `<h5>1. adım: Hipotezleri kur</h5>
+      <div class="hip"><p><b>H₀:</b> β<sub>1</sub> = 0; satışlarda doğrusal trend yok.</p><p><b>H₁:</b> β<sub>1</sub> ≠ 0; satışlarda doğrusal trend var.</p></div>
+      <div class="ak-yaz">Model: Y<sub>t</sub> = β<sub>0</sub> + β<sub>1</sub>t + u<sub>t</sub>. İki yönlü test, anlamlılık düzeyi %5. Sonraki adımlarda t = β̂<sub>1</sub> / se hesaplanır; |t|, t kritik değerini aşarsa H₀ reddedilir.</div>`,
   grafikAdim: [2, 5, 6],
   hazirla: (a, o) => { if (a >= 5 && !o.sans) o.sans = tSans(o.S); },
   icerik: [
-    S => `<h5>1. adım: Modeli tahmin et, eğimi panoya yaz</h5>
+    S => `<h5>2. adım: Modeli tahmin et, eğimi panoya yaz</h5>
       <div class="ak-f">Ŷ<sub>t</sub> = ${fs(S.a, 2)} + <span class="ak-mavi">${fs(S.b, 2)}</span> t</div>
       <div class="ak-yaz">Eğim <span class="ak-mavi">β̂<sub>1</sub> = ${fs(S.b, 2)}</span> → panoya: bu ${S.n} yılda satışlar yılda ortalama ${fmt(Math.abs(S.b), 0)} TL ${S.b >= 0 ? 'artmış' : 'azalmış'}. Ama bu sayı yalnız ${S.n} gözlemden hesaplandı; başka ${S.n} yıl gözleseydik başka bir eğim bulurduk.</div>`,
-    S => `<h5>2. adım: Şüphe: eğim gerçekten sıfırdan farklı mı?</h5>
+    S => `<h5>3. adım: Şüphe: eğim gerçekten sıfırdan farklı mı?</h5>
       <div class="ak-yaz">Satışlar her yıl dalgalanıyor (1995'teki düşüşe bakın). Satışlarda gerçekte hiçbir eğilim olmasaydı (gri kesikli çizgi, β₁ = 0), yalnız bu dalgalanmalar yüzünden ${fmt(Math.abs(S.b), 0)} TL'lik bir eğim görebilir miydik? Sınanan hipotez: <b>H₀: β₁ = 0</b> (eğilim yok), <b>H₁: β₁ ≠ 0</b>.</div>`,
-    S => `<h5>3. adım: Serbestlik derecesi</h5>
+    S => `<h5>4. adım: Serbestlik derecesi</h5>
       <div class="ak-yaz">Test istatistiğinin dağılımı serbestlik derecesine (sd) bağlıdır: n gözlemden, tahmin edilen her katsayı için bir tane düşülür. n = ${S.n}. <b>Önce siz bulun:</b></div>
       ${akAlisHTML([['ak-t-sd', 'sd']])}`,
-    S => `<h5>4. adım: Uzaklığı kendi belirsizliğiyle ölç: t oranı</h5>
-      <div class="ak-yaz">Eğimin sıfırdan uzaklığını TL ile değil, kestirimin kendi belirsizliğiyle ölçeriz. Bu belirsizlik <span class="ak-lacivert">standart hatadır (se)</span>: aynı süreç tekrar gözlenseydi β̂<sub>1</sub>'in ne kadar oynayacağının tek veriden kestirimi (5. adımda deneyle göreceğiz). Soru: β̂<sub>1</sub> sıfırdan kaç standart hata uzakta?</div>
+    S => `<h5>5. adım: Uzaklığı kendi belirsizliğiyle ölç: t oranı</h5>
+      <div class="ak-yaz">Eğimin sıfırdan uzaklığını TL ile değil, kestirimin kendi belirsizliğiyle ölçeriz. Bu belirsizlik <span class="ak-lacivert">standart hatadır (se)</span>: aynı süreç tekrar gözlenseydi β̂<sub>1</sub>'in ne kadar oynayacağının tek veriden kestirimi (6. adımda deneyle göreceğiz). Soru: β̂<sub>1</sub> sıfırdan kaç standart hata uzakta?</div>
       <div class="ak-f">t = ${kesir('<span class="ak-mavi">β̂<sub>1</sub></span> - 0', '<span class="ak-lacivert">se(β̂<sub>1</sub>)</span>')} = ${kesir(`<span class="ak-mavi">${fs(S.b, 2)}</span>`, `<span class="ak-lacivert">${fmt(S.se, 2)}</span>`)} = <span class="ak-turuncu">${fs(S.t, 3)}</span></div>
       <div class="ak-yaz">se ve t → panoya. Bizim eğim sıfırdan ${fmt(Math.abs(S.t), 1)} standart hata uzakta. Bu çok mu? Trend yokken t'nin hangi değerleri aldığına bakalım.</div>`,
     (S, o) => { const Z = o.sans, p = S.p;
-      const yorum = Z.say === 0 ? `Hiçbirinde çıkmadı. Bu "imkânsız" demek değil: 6. adımdaki p = ${pYaz(p)} yaklaşık ${yaklasik(1 / p)} denemede bir demek; 400 denemede görmeyi beklemeyiz. Eğim şansla açıklanamayacak kadar büyük.`
-        : `Bu oran, 6. adımdaki p = ${pYaz(p)} değerinin deneme karşılığıdır (400 denemede beklenen yaklaşık ${fmt(400 * p, 1)}; 400 denemede oran p'nin çevresinde birkaç puan oynar). ${p < .05 ? 'p %5\'ten küçük: şansla açıklamak zor.' : 'p %5\'ten büyük: şansla açıklanabilir.'}`;
-      return `<h5>5. adım: Bu t şans eseri olabilir mi? H₀ doğruysa ne olur?</h5>
+      const yorum = Z.say === 0 ? `Hiçbirinde çıkmadı. Bu "imkânsız" demek değil: 7. adımdaki p = ${pYaz(p)} yaklaşık ${yaklasik(1 / p)} denemede bir demek; 400 denemede görmeyi beklemeyiz. Eğim şansla açıklanamayacak kadar büyük.`
+        : `Bu oran, 7. adımdaki p = ${pYaz(p)} değerinin deneme karşılığıdır (400 denemede beklenen yaklaşık ${fmt(400 * p, 1)}; 400 denemede oran p'nin çevresinde birkaç puan oynar). ${p < .05 ? 'p %5\'ten küçük: şansla açıklamak zor.' : 'p %5\'ten büyük: şansla açıklanabilir.'}`;
+      return `<h5>6. adım: Bu t şans eseri olabilir mi? H₀ doğruysa ne olur?</h5>
       <div class="ak-yaz">Deneme: eğilimi olmayan (β₁ = 0) ama aynı büyüklükte dalgalanan (s = ${fmt(S.s, 0)}) 400 seri ürettik. Her birine aynı trend modelini kurup β̂<sub>1</sub>'i, kendi standart hatasını ve t = β̂<sub>1</sub> / se oranını hesapladık (gri çubuklar). Denemelerdeki β̂<sub>1</sub>'lerin standart sapması ${fmt(Z.sd, 0)}: <span class="ak-lacivert">se = ${fmt(S.se, 2)}</span> tam bu yayılmayı kestiriyor. Trend yokken t'lerin %${fmt(100 * Z.ici2, 0)} kadarı -2 ile 2 arasında.</div>
       <div class="ak-yaz">Bizim t (turuncu) ${fs(S.t, 3)}: mutlak değerce bu kadar büyük t, 400 denemenin <b>${Z.say}</b> tanesinde (%${fmt(100 * Z.oran, 1)}) çıktı. ${yorum}</div>`; },
     S => { const red = Math.abs(S.t) > S.tc;
-      return `<h5>6. adım: Karar: t, t(${S.df}) dağılımının neresinde?</h5>
+      return `<h5>7. adım: Karar: t, t(${S.df}) dağılımının neresinde?</h5>
       <div class="ak-yaz">İki yönlü test, %5: her kuyrukta %2,5 (kırmızı). t tablosunda <span class="ak-mor">sd = ${S.df}</span> satırı, 0,025 sütunu: <b>t kritik = ${fmt(S.tc, 3)}</b> (kesikli çizgiler).</div>
       <div class="ak-karar ${red ? 'red' : 'kabul'}">${red ? `|t| = ${fmt(Math.abs(S.t), 3)} > ${fmt(S.tc, 3)}: kırmızı bölgede. H₀ reddedilir; eğim %5 düzeyinde anlamlı (p = ${pYaz(S.p)}).` : `|t| = ${fmt(Math.abs(S.t), 3)} < ${fmt(S.tc, 3)}: kırmızı bölgede değil. H₀ reddedilemez (p = ${pYaz(S.p)}).`}</div>
       <div class="ak-yaz">Tek açıklayıcılı modelde F = t²: çıktıdaki F = ${fmt(S.F, 2)} ≈ ${fs(S.t, 3)}² aynı hipotezi sınar, p değeri aynıdır.</div>`; } ],
@@ -1166,11 +1174,14 @@ const DWB = { id: 'ak-dw', sutun: 4, baslik: 'Durbin-Watson testi, adım adım: 
     { k: 'e2', ad: 'Σeₜ²', renk: 'lacivert', adim: 1, v: S => fmt(S.e2, 0) },
     { k: 'dw', ad: 'DW', renk: 'turuncu', adim: 3, v: S => fmt(S.dw, 3) },
     { k: 'dd', ad: 'd<sub>L</sub> ; d<sub>U</sub> (%5)', renk: 'mor', adim: 4, alis: true, v: S => `${fmt(S.dL, 3)} ; ${fmt(S.dU, 3)}` } ],
+  hipotez: S => `<h5>1. adım: Hipotezleri kur</h5>
+      <div class="hip"><p><b>H₀:</b> ρ = 0; artıklar arasında birinci sıra otokorelasyon yok.</p><p><b>H₁:</b> ρ ≠ 0; ardışık artıklar birbirine bağlı (ρ &gt; 0 pozitif, ρ &lt; 0 negatif otokorelasyon).</p></div>
+      <div class="ak-yaz">Artıklar için e<sub>t</sub> = ρ e<sub>t-1</sub> + v<sub>t</sub> düşünülür. Anlamlılık düzeyi %5. Sonraki adımlarda DW hesaplanır ve tablodaki d<sub>L</sub>, d<sub>U</sub> sınırlarıyla karşılaştırılır.</div>`,
   grafikAdim: [2, 5],
   hazirla: (a, o) => { if (a >= 5) o.sans = dwSans(); },
   icerik: [
     S => { const m = v => fs(v / 1e6, 1);
-      return `<h5>1. adım: Artıklar ve ardışık farkları</h5>
+      return `<h5>2. adım: Artıklar ve ardışık farkları</h5>
       <div class="ak-yaz">15. bölümdeki artıklar eₜ ve bir önceki yılın artığı eₜ₋₁. İlk yılın öncesi olmadığı için ${S.n - 1} fark var. İki kareler toplamı → panoya.</div>
       <div class="ak-tab"><table><tr><th>Yıl</th>${YEARS.map(y => `<th>${y}</th>`).join('')}<th>Toplam</th></tr>
         <tr><td>eₜ</td>${S.e.map(v => `<td>${fs(v, 0)}</td>`).join('')}<td></td></tr>
@@ -1179,22 +1190,22 @@ const DWB = { id: 'ak-dw', sutun: 4, baslik: 'Durbin-Watson testi, adım adım: 
         <tr><td class="ak-mavi">(eₜ - eₜ₋₁)², milyon</td><td></td>${S.d.map(v => `<td>${m(v * v)}</td>`).join('')}<td class="ak-mavi">${m(S.d2)}</td></tr>
         <tr><td class="ak-lacivert">eₜ², milyon</td>${S.e.map(v => `<td>${m(v * v)}</td>`).join('')}<td class="ak-lacivert">${m(S.e2)}</td></tr></table></div>`; },
     S => { const neg = S.rho < 0;
-      return `<h5>2. adım: Fikir: ardışık artıklar birbirine benziyor mu?</h5>
+      return `<h5>3. adım: Fikir: ardışık artıklar birbirine benziyor mu?</h5>
       <div class="ak-yaz">Ardışık artıklar birbirine benziyorsa (pozitif otokorelasyon) farkları küçük olur; işaretleri sürekli değişiyorsa (negatif otokorelasyon) farkları artıkların kendisinden büyük olur. Bu yüzden <span class="ak-mavi">farkların kareleri</span> <span class="ak-lacivert">artıkların karelerine</span> oranlanır. Yaklaşık olarak <b>DW ≈ 2(1 - ρ̂)</b>: ρ̂ = 1 ise 0, ρ̂ = 0 ise 2, ρ̂ = -1 ise 4.</div>
       <div class="ak-yaz">Burada ${neg ? 'artıklar sık işaret değiştiriyor (mor çubuklar çoğu yıl artıktan uzun)' : 'ardışık artıklar birbirine benziyor (mor çubuklar çoğu yıl artıktan kısa)'}, ρ̂ = ${fs(S.rho, 3)}: DW'nin 2'nin ${neg ? 'üstünde' : 'altında'} çıkmasını bekleriz, yaklaşık 2(1 - (${fs(S.rho, 3)})) = ${fmt(2 * (1 - S.rho), 2)}.</div>`; },
-    S => `<h5>3. adım: DW istatistiği</h5>
+    S => `<h5>4. adım: DW istatistiği</h5>
       <div class="ak-f">DW = ${kesir('<span class="ak-mavi">Σ<sub>t=2</sub><sup>n</sup> (eₜ - eₜ₋₁)²</span>', '<span class="ak-lacivert">Σ<sub>t=1</sub><sup>n</sup> eₜ²</span>')} = ${kesir(`<span class="ak-mavi">${fmt(S.d2, 0)}</span>`, `<span class="ak-lacivert">${fmt(S.e2, 0)}</span>`)} = <span class="ak-turuncu">${fmt(S.dw, 3)}</span></div>
-      <div class="ak-yaz">DW → panoya. Pay ${S.n - 1} farktan, payda ${S.n} artıktan oluşur. Sonuç 2. adımdaki yaklaşık değere (${fmt(2 * (1 - S.rho), 2)}) yakın; aradaki fark uç terimlerden (ilk ve son artık) gelir ve n küçükken belirgindir. Çıktıdaki Durbin-Watson = ${fmt(S.dw, 6)} ile aynı.</div>`,
-    S => `<h5>4. adım: Kritik değerler tablodan: d<sub>L</sub> ve d<sub>U</sub></h5>
+      <div class="ak-yaz">DW → panoya. Pay ${S.n - 1} farktan, payda ${S.n} artıktan oluşur. Sonuç 3. adımdaki yaklaşık değere (${fmt(2 * (1 - S.rho), 2)}) yakın; aradaki fark uç terimlerden (ilk ve son artık) gelir ve n küçükken belirgindir. Çıktıdaki Durbin-Watson = ${fmt(S.dw, 6)} ile aynı.</div>`,
+    S => `<h5>5. adım: Kritik değerler tablodan: d<sub>L</sub> ve d<sub>U</sub></h5>
       <div class="ak-yaz">DW'nin kesin dağılımı açıklayıcı değişkenlerin değerlerine bağlıdır; tablo bu yüzden iki sınır verir: alt sınır d<sub>L</sub>, üst sınır d<sub>U</sub>. Tabloya iki sayıyla girilir. <b>Önce siz bulun:</b></div>
       ${akAlisHTML([['ak-dw-n', 'n (satır)'], ['ak-dw-k', "k′ (sütun)"]])}
       <div class="ak-tab"><table id="ak-dw-tab"><tr><th>n</th>${[1, 2, 3].map(k => `<th>k′ = ${k}: d<sub>L</sub></th><th>d<sub>U</sub></th>`).join('')}</tr>
         ${[9, 10, 11].map(n => `<tr><td>${n}</td>${DW_TAB[n].map((x, j) => `<td data-h="${n}-${j + 1}">${fmt(x[0], 3)}</td><td data-h="${n}-${j + 1}">${fmt(x[1], 3)}</td>`).join('')}</tr>`).join('')}</table></div>
       <div class="cap" style="margin-top:.3rem">Durbin-Watson tablosundan kesit, %5 anlamlılık (Savin ve White).</div>`,
     (S, o) => { const Z = o.sans, buyuk = S.dw >= 2, say = Z.d.filter(v => buyuk ? v >= S.dw : v <= S.dw).length, oran = say / 400;
-      return `<h5>5. adım: Bu DW şans eseri olabilir mi? (H₀: otokorelasyon yok)</h5>
+      return `<h5>6. adım: Bu DW şans eseri olabilir mi? (H₀: otokorelasyon yok)</h5>
       <div class="ak-yaz">Deneme: birbirinden bağımsız (beyaz gürültü) hatalarla 400 seri ürettik, her birine aynı trend modelini kurup DW hesapladık (gri çubuklar). Otokorelasyon yokken DW'lerin %95'i ${fmt(Z.alt, 2)} ile ${fmt(Z.ust, 2)} arasında, ortalama ${fmt(Z.ort, 2)} (n küçük ve model trendli olduğu için tam 2 değil).</div>
-      <div class="ak-yaz">Bizim DW (turuncu) ${fmt(S.dw, 3)}: bu kadar ${buyuk ? 'büyük' : 'küçük'} DW, 400 denemenin <b>${say}</b> tanesinde (%${fmt(100 * oran, 1)}) çıktı. ${oran >= .10 ? 'Otokorelasyon yokken de sık görülen bir değer: şansla rahatça açıklanabilir.' : oran >= .02 ? 'Sınırda bir sıklık; 400 denemede oran birkaç puan oynar. Karar 6. adımda tabloyla verilir.' : 'Otokorelasyon yokken nadir görülen bir değer. Karar 6. adımda tabloyla verilir.'}${ozgunVeri() ? ' (Python: 200.000 denemede %23,8; kesin dağılımla %23,7.)' : ''}</div>`; },
+      <div class="ak-yaz">Bizim DW (turuncu) ${fmt(S.dw, 3)}: bu kadar ${buyuk ? 'büyük' : 'küçük'} DW, 400 denemenin <b>${say}</b> tanesinde (%${fmt(100 * oran, 1)}) çıktı. ${oran >= .10 ? 'Otokorelasyon yokken de sık görülen bir değer: şansla rahatça açıklanabilir.' : oran >= .02 ? 'Sınırda bir sıklık; 400 denemede oran birkaç puan oynar. Karar 7. adımda tabloyla verilir.' : 'Otokorelasyon yokken nadir görülen bir değer. Karar 7. adımda tabloyla verilir.'}${ozgunVeri() ? ' (Python: 200.000 denemede %23,8; kesin dağılımla %23,7.)' : ''}</div>`; },
     (S, o) => { const L = S.dL, U = S.dU, b = dwBolge(S.dw, L, U), Z = o.sans || dwSans(), buyuk = S.dw >= 2, oran = Z.d.filter(v => buyuk ? v >= S.dw : v <= S.dw).length / 400;
       const sinir = [0, L, U, 4 - U, 4 - L, 4], ad = ['pozitif otokorelasyon', 'kararsız', 'otokorelasyon yok', 'kararsız', 'negatif otokorelasyon'], renk = [C1, GRAYC, C3, GRAYC, C1], kisa = ['poz.', '?', 'yok', '?', 'neg.'];
       const yakin = b === 2 ? Math.min(S.dw - U, 4 - U - S.dw) : 1, x = Math.max(0, Math.min(4, S.dw)) / 4 * 100;
@@ -1203,13 +1214,13 @@ const DWB = { id: 'ak-dw', sutun: 4, baslik: 'Durbin-Watson testi, adım adım: 
         `d<sub>U</sub> = ${fmt(U, 3)} &lt; DW = ${fmt(S.dw, 3)} &lt; 4 - d<sub>U</sub> = ${fmt(4 - U, 3)}: otokorelasyon yok bölgesi, H₀ reddedilemez.${yakin < .05 ? ` Ama ${S.dw > 2 ? '4 - d<sub>U</sub>' : 'd<sub>U</sub>'} sınırına çok yakın (fark ${fmt(yakin, 3)}).` : ''}`,
         `4 - d<sub>U</sub> = ${fmt(4 - U, 3)} &lt; DW = ${fmt(S.dw, 3)} ≤ 4 - d<sub>L</sub> = ${fmt(4 - L, 3)}: kararsız bölge (negatif taraf); test karar veremiyor.`,
         `DW = ${fmt(S.dw, 3)} > 4 - d<sub>L</sub> = ${fmt(4 - L, 3)}: negatif otokorelasyon bölgesi. H₀ reddedilir.`][b];
-      return `<h5>6. adım: Karar: DW hangi bölgede?</h5>
+      return `<h5>7. adım: Karar: DW hangi bölgede?</h5>
       <div class="ak-bolge-dis"><div class="ak-bolge">${ad.map((t, i) => `<div style="width:${(sinir[i + 1] - sinir[i]) / 4 * 100}%;background:${renk[i]}"><span class="ak-uzun">${t}</span><span class="ak-kisa">${kisa[i]}</span></div>`).join('')}</div>
         <div class="ak-imle${x > 75 ? ' sol' : ''}" style="left:${x}%"><b>DW = ${fmt(S.dw, 3)}</b></div>
         <div class="ak-olcek">${sinir.map((v, i) => `<span style="left:${v / 4 * 100}%">${i === 0 || i === 5 ? fmt(v, 0) : fmt(v, 3)}</span>`).join('')}<span style="left:50%">2</span></div></div>
       <div class="ak-bolge-not">poz.: pozitif otokorelasyon, ?: kararsız, yok: otokorelasyon yok, neg.: negatif otokorelasyon</div>
       <div class="ak-karar ${b === 2 ? 'kabul' : b === 1 || b === 3 ? 'ara' : 'red'}">${kar}</div>
-      <div class="ak-yaz">Tablo pozitif otokorelasyon için verilir; negatif taraf için 4 - d<sub>U</sub> ve 4 - d<sub>L</sub> kullanılır. ${b === 2 && S.rho < 0 ? `ρ̂ = ${fs(S.rho, 2)} negatif bir eğilim düşündürse de n = ${S.n} ile test bunu ayırt edemiyor; 5. adımdaki deneme de bu DW'nin otokorelasyon yokken %${fmt(100 * oran, 0)} sıklıkla çıktığını gösterdi. 13. bölümdeki yorumla aynı sonuç.` : `5. adımdaki denemede bu kadar ${buyuk ? 'büyük' : 'küçük'} DW %${fmt(100 * oran, 1)} sıklıkla çıktı.`}</div>`; } ],
+      <div class="ak-yaz">Tablo pozitif otokorelasyon için verilir; negatif taraf için 4 - d<sub>U</sub> ve 4 - d<sub>L</sub> kullanılır. ${b === 2 && S.rho < 0 ? `ρ̂ = ${fs(S.rho, 2)} negatif bir eğilim düşündürse de n = ${S.n} ile test bunu ayırt edemiyor; 6. adımdaki deneme de bu DW'nin otokorelasyon yokken %${fmt(100 * oran, 0)} sıklıkla çıktığını gösterdi. 13. bölümdeki yorumla aynı sonuç.` : `6. adımdaki denemede bu kadar ${buyuk ? 'büyük' : 'küçük'} DW %${fmt(100 * oran, 1)} sıklıkla çıktı.`}</div>`; } ],
   alis: { adim: 4, alanlar: ['ak-dw-n', 'ak-dw-k'], cevap: S => [S.n, 1],
     kontrol: ([n, k], S) => { const h = [];
       if (n !== S.n) h.push(n === S.n - 1 ? `n = ${n}: farkların sayısı ${S.n - 1}, ama tabloya gözlem sayısıyla girilir.` : n === S.n - 2 ? `n = ${n} = n - 2, serbestlik derecesi. DW tablosuna doğrudan gözlem sayısıyla girilir.` : `n = ${n} değil: tabloya gözlem (yıl) sayısıyla girilir.`);

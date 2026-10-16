@@ -263,6 +263,17 @@
   body.sunum #s11 .info-box { font-size: 22px; }
   body.sunum #s3 .chart-wrap, body.sunum #s9 .chart-wrap { height: 380px; }
   body.sunum #sunum-bar .bilgi { font-size: 16px; }
+  /* Dar telefon (320-430 px): ızgara sütunları, grafik kutuları ve kaydırıcılar içerikle genişlemesin. Bölüm kutusu taşanı gizlediği için
+     taşma sayfada kaydırma çubuğu açmıyor, içerik sağdan kesik görünüyordu. Uzun formül ve geniş tablo kendi kutusunda yana kayar. */
+  @media(max-width:700px) {
+    body:not(.sunum) .grid2, body:not(.sunum) .grid3, body:not(.sunum) .grid4 { grid-template-columns: minmax(0, 1fr); }
+    body:not(.sunum) .grid2 > *, body:not(.sunum) .grid3 > *, body:not(.sunum) .grid4 > *, body:not(.sunum) .section-body > *, body:not(.sunum) .card { min-width: 0; }
+    body:not(.sunum) .controls { flex-wrap: wrap; }
+    body:not(.sunum) .controls .kayd { white-space: normal; flex-wrap: wrap; max-width: 100%; }
+    body:not(.sunum) input[type=range] { width: auto; flex: 1 1 140px; min-width: 0; max-width: 100%; }
+    body:not(.sunum) .formula, body:not(.sunum) .eq { max-width: 100%; overflow-x: auto; }
+    body:not(.sunum) .section-body table:not(.table-scroll table) { display: block; max-width: 100%; overflow-x: auto; }
+  }
 </style>
 
 <style>
@@ -627,7 +638,7 @@
   <div class="section-header"><span class="num">13</span>Durağanlığın Tanımı</div>
   <div class="section-body">
     <p>X<sub>t</sub> rassal değişkeni, ortalaması ve varyansı zaman boyunca sabit, iki dönem arasındaki kovaryansı yalnız aradaki farka bağlı ise (zayıf) durağan bir stokastik süreçtir.</p>
-    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><mi>E</mi><mo stretchy="false">(</mo><msub><mi>X</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>μ</mi><mo>,</mo><mspace width="2em" /><mrow><mi>Var</mi></mrow><mo stretchy="false">(</mo><msub><mi>X</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msup><mi>σ</mi><mn>2</mn></msup><mo>,</mo><mspace width="2em" /><mrow><mi>Cov</mi></mrow><mo stretchy="false">(</mo><msub><mi>X</mi><mi>t</mi></msub><mo>,</mo><msub><mi>X</mi><mrow><mi>t</mi><mo>+</mo><mi>k</mi></mrow></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mi>γ</mi><mi>k</mi></msub><mspace width="1em" /><mo stretchy="false">(</mo><mtext>tüm </mtext><mi>t</mi><mtext> için</mtext><mo stretchy="false">)</mo></mrow></math></div>
+    <div class="formula" style="display:flex;flex-wrap:wrap;justify-content:center;column-gap:2em;row-gap:.3em"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><mi>E</mi><mo stretchy="false">(</mo><msub><mi>X</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>μ</mi><mo>,</mo></mrow></math> <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><mrow><mi>Var</mi></mrow><mo stretchy="false">(</mo><msub><mi>X</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msup><mi>σ</mi><mn>2</mn></msup><mo>,</mo></mrow></math> <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><mrow><mi>Cov</mi></mrow><mo stretchy="false">(</mo><msub><mi>X</mi><mi>t</mi></msub><mo>,</mo><msub><mi>X</mi><mrow><mi>t</mi><mo>+</mo><mi>k</mi></mrow></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mi>γ</mi><mi>k</mi></msub><mspace width="1em" /><mo stretchy="false">(</mo><mtext>tüm </mtext><mi>t</mi><mtext> için</mtext><mo stretchy="false">)</mo></mrow></math></div>
     <div class="grid2">
       <div class="card"><h4>Kovaryans durağanlığı</h4>Cov(X<sub>t</sub>, X<sub>t+k</sub>) zamana göre değişmez, yalnız k farkına (gecikmeye) bağlıdır. Dolayısıyla korelasyon da yalnız k'ye bağlıdır.</div>
       <div class="card"><h4>Örnek</h4>k = 4: Cov(X<sub>10</sub>, X<sub>14</sub>) = Cov(X<sub>13</sub>, X<sub>17</sub>) = Cov(X<sub>16</sub>, X<sub>20</sub>)<br>k = 6: Cov(X<sub>10</sub>, X<sub>16</sub>) = Cov(X<sub>13</sub>, X<sub>19</sub>) = Cov(X<sub>16</sub>, X<sub>22</sub>)</div>
@@ -701,7 +712,15 @@ Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", san
 Chart.defaults.font.size = 12;
 Chart.defaults.plugins.legend.labels.boxWidth = 12;
 const charts = {};
-function ciz(id, cfg) { if (charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); return charts[id]; }
+// Tuval yazılımla çizilir (willReadFrequently): gerçek Chrome'da GPU belleği dolunca hızlandırılmış tuvallerin içi silinebiliyor,
+// grafik sunumda boş kalıyordu (otomatik testlerde görünmez). İçerik yine kaybolursa (contextrestored) yeniden çizilir.
+function ciz(id, cfg) { const cv = $(id); if (charts[id]) charts[id].destroy();
+  if (!cv.dataset.tuval) { cv.dataset.tuval = '1'; cv.getContext('2d', { willReadFrequently: true }); cv.addEventListener('contextrestored', () => { if (charts[id]) charts[id].render(); }); }
+  charts[id] = new Chart(cv, cfg); return charts[id]; }
+// Dar telefonda uzun formül (.eq, .formula) kutuya sığana kadar küçülür (en az 11 px); sığmazsa kutu içinde yana kayar. Sunumda ve geniş ekranda dokunulmaz.
+function eqSigdir() { document.querySelectorAll('.eq, .formula').forEach(e => { e.style.fontSize = ''; if (document.body.classList.contains('sunum') || innerWidth > 700 || !e.offsetParent) return;
+  let f = parseFloat(getComputedStyle(e).fontSize); while (e.scrollWidth > e.clientWidth + 1 && f > 11) { f -= 0.5; e.style.fontSize = f + 'px'; } }); }
+addEventListener('load', eqSigdir); addEventListener('resize', eqSigdir);
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 let rnd = mulberry32(2026);
 function nrm() { let u = 0; while (u === 0) u = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * rnd()); }

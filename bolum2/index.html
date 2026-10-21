@@ -375,6 +375,44 @@
   /* sunumda 4. bölümün giriş paragrafı gizli: adımlar aynı şeyi anlatıyor */
   body.sunum #s4 .rk-giris { display: none; }
   body.sunum #lb-tab td, body.sunum #lb-tab th { padding: .12em .6em; }
+  /* 1: öngörü sapması adım adım (katsayılar, öngörü, sapma); yeşil #1D9E75 sonuç rengi */
+  /* Pano 7 hücre: normal görünümde 4 + 3 (sapma hücresi iki sütun), geniş ekranda ve sunumda tek satır; sayı hücre içinde bölünmesin */
+  .os-pano { grid-template-columns: repeat(4, 1fr); }
+  .os-pano .rs-hucre:last-child { grid-column: span 2; }
+  .os-pano .rs-hucre b { font-size: 18px; }
+  body.sunum .os-pano { grid-template-columns: .7fr 1.1fr 1.3fr 1fr 1.1fr 1.1fr 1.1fr; } body.sunum .os-pano .rs-hucre:last-child { grid-column: auto; }
+  .rs-hucre.c-yes.dolu { border-color: #1D9E75; } .rs-hucre.c-yes.dolu b, .c-yes-y { color: #1D9E75; } .c-yes-y { font-weight: 700; }
+  .lagtab th.c-yes { background: #1D9E75; } .lagtab th.c-teal { background: #028090; }
+  .lagtab tr.hl td.c-yes-y { color: #1D9E75; }
+  .lagtab tr.tah td { background: #F3FBF8; }
+  .lagtab tr.dis td { color: #9aa5b4; }
+  #os-son-btn span { font-size: 13px; color: var(--gray); }
+  /* Telefon: iki sütun; hücre iç genişliği (100vw − 112px) / 2 − 13,6px, SF Mono'da 10 karakter ≈ 6,7em: yazı buna göre küçülür (320 px'te 13 px) */
+  @media(max-width:700px) { .os-pano { grid-template-columns: repeat(2, 1fr); } .os-pano .rs-hucre { padding: .35rem .3rem; } .os-pano .rs-hucre b { font-size: clamp(12px, calc((100vw - 145px) / 13.4), 16px); } }
+  body.sunum .os-pano .rs-hucre b { font-size: 22px; }
+  body.sunum #os-son-btn span { font-size: 20px; }
+  body.sunum #s1 .lagtab { font-size: 17px; }
+  body.sunum #s1 .lagtab td, body.sunum #s1 .lagtab th { padding: .06em .5em; }
+  body.sunum #os-grafik { height: 190px; }
+  body.sunum #s1 .os-giris { display: none; }
+  /* Hücrede hesabın kendisi (öğrenci neyi nereden aldığını aynı yerde görsün): değer üstte, altında küçük gri hesap (1 ve 4. bölüm tabloları) */
+  .lagtab td small { display: block; font-size: 11px; color: #6f86a8; line-height: 1.15; white-space: nowrap; font-weight: 400; }
+  body.sunum .lagtab td small { font-size: 12px; }
+  /* Ortalama üst çizgisi: birleşik makron (ȳ, t̄) ince ve kısa kalıyor; çizgi CSS ile çekilir. MathML'de \overline kullanılır. */
+  .bar { position: relative; display: inline-block; line-height: 1; }
+  .bar::after { content: ''; position: absolute; left: .04em; right: .04em; top: .04em; border-top: .09em solid currentColor; }
+  .bar.y::after { top: .3em; }
+  .rs-hucre span.bar { display: inline-block; font-size: inherit; color: inherit; }   /* pano etiketi: .rs-hucre span blok kuralını ezer */
+  /* Sunumda yalnız uzun açıklama cümleleri gizlenir (ölçek 0,80 altına inmesin); normal sayfa değişmez */
+  body.sunum .sg { display: none; }
+  body.sunum #s1 .rs-f { line-height: 1.55; }
+  /* Formüller büyütüldü (hoca isteği 2026-10-21) */
+  .formula { font-size: 18px; }
+  .rs-f { font-size: 20px; }
+  body.sunum .rs-f { font-size: 27px; }
+  /* 1: tablo hesap satırlarıyla genişledi; normal görünümde anlatım ve grafik üstte, tablo altta tam genişlikte; sunumda yan yana */
+  body:not(.sunum) #s1 .rk-yan { grid-template-columns: minmax(0, 1fr); }
+  body:not(.sunum) #s1 .rk-yan > div:last-child { order: -1; }
 </style>
 </head>
 <body>
@@ -443,17 +481,27 @@
     <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><mtext>Öngörü sapması</mtext><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mstyle displaystyle="true" scriptlevel="0"><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mo stretchy="false">(</mo><msub><mi>y</mi><mi>t</mi></msub><mo>−</mo><msub><mi>F</mi><mi>t</mi></msub><mo stretchy="false">)</mo></mrow></mstyle><mstyle displaystyle="true" scriptlevel="0"><mrow><mi>n</mi></mrow></mstyle></mfrac></mstyle></mrow></math></div>
     <div class="grid2">
       <div class="card"><h4>İşaretin anlamı</h4>Sapma <strong>pozitif</strong> ise öngörüler ortalamada gerçekleşen değerin <strong>altında</strong>, <strong>negatif</strong> ise <strong>üstünde</strong> kalmıştır.</div>
-      <div class="info-box">1. bölümdeki dondurma satışı modeli (1991-1997 ile tahmin edildi): <span class="eq">F<sub>t</sub> = 277 142,86 + 14 642,86 t</span>. 1998-2000 yılları örneklem dışıdır (t = 8, 9, 10).</div>
+      <div class="info-box">Örnek, 1. bölümdeki dondurma satışlarıdır (<a href="../bolum1/#s13">1. bölüm, 13</a>): 10 yıllık seri ikiye bölünür, model ilk yıllarla tahmin edilir, kalan yıllar öngörüyle karşılaştırılır. Katsayılar, öngörüler ve sapma aşağıda adım adım elde edilir.</div>
     </div>
-    <table style="margin-top:1rem">
-      <tr><th>Yıl</th><th>Satış y<sub>t</sub></th><th>Öngörü F<sub>t</sub></th><th>Öngörü hatası y<sub>t</sub> − F<sub>t</sub></th></tr>
-      <tr><td>1998</td><td>400 000</td><td>394 285,71</td><td>5 714,29</td></tr>
-      <tr><td>1999</td><td>395 000</td><td>408 928,57</td><td>−13 928,57</td></tr>
-      <tr><td>2000</td><td>430 000</td><td>423 571,43</td><td>6 428,57</td></tr>
-      <tr class="hl"><td colspan="3">Öngörü sapması</td><td>−595,24</td></tr>
-    </table>
-    <div class="note">Değerler katsayıların yuvarlanmamış hâliyle hesaplandı; sunumdaki −595,17 ara değerlerin yuvarlanmasından gelir.</div>
-    <div class="warn-box">Sapma negatif: model satışları ortalamada yaklaşık 595 TL <strong>fazla</strong> öngörmüştür. Ancak hatalar 5 714, −13 929 ve 6 429 TL; pozitif ve negatif hatalar birbirini götürdüğü için sapma küçük çıkar. Sapma tek başına başarı ölçütü değildir, MSE ve MAD ile birlikte okunur (<a href="../bolum1/#s17">1. bölüm, 17</a>).</div>
+    <div class="rs-kutu yeni-slayt" id="os-kutu" data-adimli>
+      <p class="os-giris">Önce tahmin dönemi seçilir; katsayılar yalnız o yıllardan hesaplanır, kalan yıllar öngörünün sınandığı örneklem dışı dönemdir. Sunumdaki hesap 1991-1997 dönemidir; dönemi değiştirip katsayıların ve sapmanın nasıl değiştiğini izleyin.</p>
+      <div class="controls" id="os-son-btn"><span>Tahmin dönemi:</span><button data-son="1995">1991-1995</button><button data-son="1996">1991-1996</button><button data-son="1997" class="active">1991-1997</button><button data-son="1998">1991-1998</button></div>
+      <div class="rs-pano os-pano">
+        <div class="rs-hucre c-teal" id="os-p-t"><span><span class="bar">t</span></span><b>?</b><i>2. adım</i></div>
+        <div class="rs-hucre c-teal" id="os-p-y"><span><span class="bar y">y</span></span><b>?</b><i>2. adım</i></div>
+        <div class="rs-hucre c-tur" id="os-p-pay"><span>pay: Σ(t − <span class="bar">t</span>)(y<sub>t</sub> − <span class="bar y">y</span>)</span><b>?</b><i>3. adım</i></div>
+        <div class="rs-hucre c-mavi" id="os-p-payda"><span>payda: Σ(t − <span class="bar">t</span>)²</span><b>?</b><i>3. adım</i></div>
+        <div class="rs-hucre c-mor" id="os-p-b1"><span>β̂<sub>1</sub></span><b>?</b><i>4. adım</i></div>
+        <div class="rs-hucre c-lac" id="os-p-b0"><span>β̂<sub>0</sub></span><b>?</b><i>5. adım</i></div>
+        <div class="rs-hucre c-yes" id="os-p-sapma"><span>öngörü sapması</span><b>?</b><i>7. adım</i></div>
+      </div>
+      <div class="rs-adimlar" id="os-adimlar"></div>
+      <div class="rk-yan">
+        <div class="tscroll" style="max-height:none"><table class="lagtab" id="os-tab"></table></div>
+        <div><div class="rs-icerik" id="os-icerik"></div><div class="chart-wrap-sm rs-grafik" id="os-grafik"><canvas id="c-os"></canvas></div></div>
+      </div>
+      <div class="rs-gez"><button id="os-geri">‹ Önceki adım</button><button id="os-ileri">Sonraki adım ›</button></div>
+    </div>
   </div>
 </section>
 
@@ -461,7 +509,7 @@
   <div class="section-header"><span class="num">2</span>Otokorelasyon Nedir?</div>
   <div class="section-body">
     <p><strong>Otokorelasyon</strong>, bir değişkenin kendi geçmiş değerleriyle, yani bir ya da daha fazla dönem gecikmeli değerleriyle arasındaki ilişkidir. Yatay kesitte gözlemlerin sırası önemsizdir; zaman serisinde ise bugünkü değer çoğu zaman dünkü değere benzer.</p>
-    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>r</mi><mi>k</mi></msub><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mstyle displaystyle="true" scriptlevel="0"><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>t</mi><mo>=</mo><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mo stretchy="false">(</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><mover><mrow><mi>Y</mi></mrow><mo stretchy="true">¯</mo></mover><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mi>k</mi></mrow></msub><mo>−</mo><mover><mrow><mi>Y</mi></mrow><mo stretchy="true">¯</mo></mover><mo stretchy="false">)</mo></mrow></mstyle><mstyle displaystyle="true" scriptlevel="0"><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mo stretchy="false">(</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><mover><mrow><mi>Y</mi></mrow><mo stretchy="true">¯</mo></mover><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mstyle></mfrac></mstyle></mrow></math></div>
+    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>r</mi><mi>k</mi></msub><mo>=</mo><mstyle displaystyle="true" scriptlevel="0"><mfrac><mstyle displaystyle="true" scriptlevel="0"><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>t</mi><mo>=</mo><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mo stretchy="false">(</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><mover><mrow><mi>Y</mi></mrow><mo accent="true">―</mo></mover><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mi>k</mi></mrow></msub><mo>−</mo><mover><mrow><mi>Y</mi></mrow><mo accent="true">―</mo></mover><mo stretchy="false">)</mo></mrow></mstyle><mstyle displaystyle="true" scriptlevel="0"><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></munderover><mo stretchy="false">(</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><mover><mrow><mi>Y</mi></mrow><mo accent="true">―</mo></mover><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mstyle></mfrac></mstyle></mrow></math></div>
     <div class="grid3">
       <div class="card"><h4>k</h4>Gecikme sayısı. r<sub>1</sub> ardışık iki dönem, r<sub>12</sub> aylık veride bir yıl arayla ilişkiyi ölçer.</div>
       <div class="card"><h4>Pay</h4>Yalnız n − k çift çarpılır: gecikme büyüdükçe toplamdaki terim sayısı azalır.</div>
@@ -674,19 +722,23 @@
       <p>Bir modelin öngörü sapması +1 200 TL çıktı. Öngörüler gerçekleşen değerlerin altında mı, üstünde mi?</p>
       <details class="cevap"><summary>Cevap</summary><div>Sapma Σ(y<sub>t</sub> − F<sub>t</sub>)/n pozitif, yani gerçekleşen değerler öngörülerden ortalamada büyük: öngörüler <strong>altında</strong> kalmış, model satışları az öngörmüş.</div></details>
     </div></details>
-    <details class="kd"><summary>3. Ljung-Box kararı</summary><div class="kd-body">
+    <details class="kd"><summary>3. Katsayıyı elle bulun</summary><div class="kd-body">
+      <p>Dondurma modeli 1991-1996 ile tahmin edilseydi (n = 6, <span class="bar">t</span> = 3,5, <span class="bar y">y</span> = 326 666,67; Σ(t − <span class="bar">t</span>)(y<sub>t</sub> − <span class="bar y">y</span>) = 220 000) β̂<sub>1</sub> ve β̂<sub>0</sub> ne olurdu?</p>
+      <details class="cevap"><summary>Cevap</summary><div>Payda Σ(t − <span class="bar">t</span>)² = 6,25 + 2,25 + 0,25 + 0,25 + 2,25 + 6,25 = 17,5. β̂<sub>1</sub> = 220 000 / 17,5 = 12 571,43; β̂<sub>0</sub> = 326 666,67 − 12 571,43 × 3,5 = 282 666,67. 1. bölümde "1991-1996" düğmesiyle kontrol edin; sapma bu kez pozitif çıkar (14 226,19), model dört yılın hepsinde az öngörür.</div></details>
+    </div></details>
+    <details class="kd"><summary>4. Ljung-Box kararı</summary><div class="kd-body">
       <p>Ders verisinde m = 4 için Q = 8,825, p = 0,066. %5 düzeyinde karar nedir? m = 2 için p = 0,014 iken neden farklı sonuç çıkıyor?</p>
       <details class="cevap"><summary>Cevap</summary><div>m = 4'te p &gt; 0,05, H<sub>0</sub> reddedilemez. Q'ya eklenen r<sub>3</sub> = 0,111 ve r<sub>4</sub> = 0,016 çok küçük olduğundan Q neredeyse artmıyor, ama serbestlik derecesi 2'den 4'e çıkıyor ve kritik değer büyüyor. Bu yüzden m'nin seçimi sonucu etkiler; küçük n ile yorum dikkat ister.</div></details>
     </div></details>
-    <details class="kd"><summary>4. Korelogramı tanıyın</summary><div class="kd-body">
+    <details class="kd"><summary>5. Korelogramı tanıyın</summary><div class="kd-body">
       <p>Bir serinin korelogramında r<sub>1</sub> = 0,95, r<sub>2</sub> = 0,91, r<sub>3</sub> = 0,87, … ve 20. gecikmede hâlâ 0,40. Seri hakkında ne söylersiniz?</p>
       <details class="cevap"><summary>Cevap</summary><div>Katsayılar büyük ve çok yavaş azalıyor: seride trend var, seri durağan değil. Birinci farkı alınıp korelogram yeniden çizilmeli (9 ve 11. bölümler).</div></details>
     </div></details>
-    <details class="kd"><summary>5. Çeyreklik veri</summary><div class="kd-body">
+    <details class="kd"><summary>6. Çeyreklik veri</summary><div class="kd-body">
       <p>Çeyreklik bir seride yalnız r<sub>4</sub> ve r<sub>8</sub> sınırların dışında. Bu neyi gösterir?</p>
       <details class="cevap"><summary>Cevap</summary><div>Mevsimsel hareketi: bir yıl (4 çeyrek) ve iki yıl arayla gözlemler birbirine benziyor (10. bölüm).</div></details>
     </div></details>
-    <details class="kd"><summary>6. Kovaryans durağanlığı</summary><div class="kd-body">
+    <details class="kd"><summary>7. Kovaryans durağanlığı</summary><div class="kd-body">
       <p>X<sub>t</sub> durağan ise Cov(X<sub>5</sub>, X<sub>8</sub>) ile Cov(X<sub>20</sub>, X<sub>23</sub>) arasında nasıl bir ilişki vardır? Cov(X<sub>5</sub>, X<sub>9</sub>) de bunlara eşit olmak zorunda mıdır?</p>
       <details class="cevap"><summary>Cevap</summary><div>İlk ikisi eşittir, ikisi de γ<sub>3</sub>'tür (fark 3). Cov(X<sub>5</sub>, X<sub>9</sub>) = γ<sub>4</sub>'tür; γ<sub>3</sub>'e eşit olmak zorunda değildir. Durağanlık, kovaryansın t'ye değil yalnız k'ye bağlı olmasıdır.</div></details>
     </div></details>
@@ -696,7 +748,7 @@
 <footer class="alt">
   Doç. Dr. M. Hanifi VAN · Van Yüzüncü Yıl Üniversitesi, İİBF Ekonometri Bölümü<br>
   Önceki bölüm: <a href="../bolum1/">1. Bölüm, Zaman Serisine Giriş</a> · <a href="../">Ders ana sayfası</a><br>
-  4-6. bölümlerdeki sonuçlar ders sunumundaki 12 aylık seriden hesaplanır ve SPSS çıktısıyla aynıdır. 8, 10, 11 ve 14. bölümlerdeki seriler simülasyondur; her çekişte yeni bir rastgele örnek üretilir.
+  1. bölümdeki hesaplar ders sunumundaki dondurma satışlarından (1991-2000) yapılır. 4-6. bölümlerdeki sonuçlar ders sunumundaki 12 aylık seriden hesaplanır ve SPSS çıktısıyla aynıdır. 8, 10, 11 ve 14. bölümlerdeki seriler simülasyondur; her çekişte yeni bir rastgele örnek üretilir.
 </footer>
 </main>
 
@@ -861,6 +913,132 @@ function korCfg(r, n, baslik = 'r_k') {
 const seriCfg = (y, xl = 't', yl = 'Y') => ({ type: 'line', data: { labels: y.map((_, i) => i + 1), datasets: [{ data: y, borderColor: C.navy, borderWidth: 1.5, pointRadius: y.length > 40 ? 0 : 2.5, tension: 0 }] }, options: eksen(xl, yl) });
 const disari = (r, n) => r.map((a, i) => Math.abs(a) > 1.96 * seK(n, i + 1) ? i + 1 : 0).filter(Boolean);
 
+// ---------- 1: öngörü sapması adım adım ----------
+// Kurgu: veri ve tahmin dönemi → ortalamalar → sapmalar ve çarpımlar (paydayı öğrenci bulur) → β̂1 = pay / payda
+// → β̂0 = <span class="bar y">y</span> − β̂1 <span class="bar">t</span> (doğru grafikte) → örneklem dışı öngörü → hata ve sapma. 1991-1997 sunumdaki hesaptır:
+// β̂0 = 277 142,86, β̂1 = 14 642,86, sapma −595,24 (sunumda ara yuvarlamayla −595,17). Dönem değişince her adım yeniden hesaplanır.
+const OS_YIL = [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000];
+const OS_Y = [300000, 295000, 330000, 345000, 320000, 370000, 390000, 400000, 395000, 430000];
+let osSon = 1997, osA = 1, osAcik = false;
+const OS_ADIM = ['Veri ve dönem', 'Ortalamalar', 'Sapma ve çarpımlar', 'β̂<sub>1</sub>', 'β̂<sub>0</sub>', 'Öngörü', 'Sapma'], OS_N = OS_ADIM.length;
+// Binlik ayracı bölünmez boşluk (sayı satır sonunda ikiye ayrılmasın), ondalık virgül (sunumdaki yazım: 394 285,71); tam sayıysa ondalık yazılmaz.
+const tl = (x, d = 2) => { const [a, b] = Math.abs(x).toFixed(d).split('.'); return (x < -1e-9 ? '−' : '') + a.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + (b ? ',' + b : ''); };
+const tla = x => tl(x, Math.abs(x - Math.round(x)) < 1e-4 ? 0 : 2);
+const topla = a => a.reduce((s, x) => s + x, 0);
+function osHesap() {
+  const n = osSon - 1990, t = OS_Y.slice(0, n).map((_, i) => i + 1), y = OS_Y.slice(0, n);
+  const tb = ort(t), yb = ort(y), dt = t.map(a => a - tb), dy = y.map(a => a - yb);
+  const pay = topla(dt.map((a, i) => a * dy[i])), payda = topla(dt.map(a => a * a)), b1 = pay / payda, b0 = yb - b1 * tb;
+  const td = OS_Y.slice(n).map((_, i) => n + 1 + i), F = td.map(a => b0 + b1 * a), yd = OS_Y.slice(n), e = yd.map((a, i) => a - F[i]);
+  return { n, t, y, tb, yb, dt, dy, pay, payda, b1, b0, td, F, yd, e, sapma: ort(e), m: td.length };
+}
+// Tablo 1-5. adımda tahmin dönemi hesabını (sütunlar adımla açılır), 6-7. adımda yalnız örneklem dışı yılları gösterir.
+function osTablo(H) {
+  const A = osA, yeni = s => s === A ? ' yeni-sut' : '';
+  let h;
+  if (A <= 5) {
+    const sap = A >= 3;
+    h = `<tr><th>Yıl</th><th>t</th><th>y<sub>t</sub></th>` + (sap ? `<th>t − <span class="bar">t</span></th><th>y<sub>t</sub> − <span class="bar y">y</span></th><th class="c-tur">(t − <span class="bar">t</span>)(y<sub>t</sub> − <span class="bar y">y</span>)</th><th class="c-mavi">(t − <span class="bar">t</span>)²</th>` : '') + '</tr>';
+    OS_YIL.forEach((yil, i) => { const ic = i < H.n;
+      h += `<tr class="${ic ? 'tah' : 'dis'}"><td>${yil}</td><td>${i + 1}</td><td>${tl(OS_Y[i], 0)}</td>`
+        + (sap ? (ic ? `<td class="${yeni(3)}">${tla(H.dt[i])}<small>${i + 1} − ${tla(H.tb)}</small></td><td class="${yeni(3)}">${tla(H.dy[i])}<small>${tl(OS_Y[i], 0)} − ${tla(H.yb)}</small></td><td class="${yeni(3)}">${tla(H.dt[i] * H.dy[i])}<small>(${tla(H.dt[i])})(${tla(H.dy[i])})</small></td><td class="${yeni(3)}">${tla(H.dt[i] ** 2)}<small>(${tla(H.dt[i])})²</small></td>` : '<td class="bos">·</td>'.repeat(4)) : '') + '</tr>'; });
+    h += `<tr class="hl"><td>Toplam</td><td>${topla(H.t)}</td><td>${tl(topla(H.y), 0)}</td>` + (sap ? `<td>0</td><td>0</td><td class="c-tur-y">${tla(H.pay)}</td><td class="c-mavi-y">${tla(H.payda)}</td>` : '') + '</tr>';
+  } else {
+    h = `<tr><th>Yıl</th><th>t</th><th>y<sub>t</sub></th><th>Öngörü F<sub>t</sub></th>` + (A >= 7 ? '<th class="c-yes">y<sub>t</sub> − F<sub>t</sub></th>' : '') + '</tr>';
+    H.td.forEach((t, i) => { h += `<tr><td>${OS_YIL[H.n + i]}</td><td>${t}</td><td>${tl(H.yd[i], 0)}</td><td class="${yeni(6)}">${tla(H.F[i])}<small>${tla(H.b0)} + ${tla(H.b1)} × ${t}</small></td>` + (A >= 7 ? `<td class="${yeni(7)}">${tla(H.e[i])}<small>${tl(H.yd[i], 0)} − ${tla(H.F[i])}</small></td>` : '') + '</tr>'; });
+    if (A >= 7) h += `<tr class="hl"><td colspan="4">Toplam</td><td class="c-yes-y">${tla(topla(H.e))}</td></tr><tr class="hl"><td colspan="4">Sapma (÷ ${H.m})</td><td class="c-yes-y">${tla(H.sapma)}</td></tr>`;
+  }
+  $('os-tab').innerHTML = h;
+}
+// Grafik 5. adımdan itibaren: tahmin dönemi noktaları (lacivert), EKK doğrusu (yeşil), 6. adımda kesikli uzantı ve içi boş öngörü noktaları,
+// gerçekleşen örneklem dışı değerler (turuncu); 7. adımda hatalar kırmızı dikey çizgi.
+function osGrafik(H) {
+  const n = H.n, A = osA, lab = OS_YIL, dogru = i => H.b0 + H.b1 * (i + 1);
+  const cfg = { type: 'line', data: { labels: lab, datasets: [
+    { label: 'Tahmin dönemi', data: lab.map((_, i) => i < n ? OS_Y[i] : null), borderColor: C.navy, backgroundColor: C.navy, showLine: false, pointRadius: 5 },
+    { label: 'EKK doğrusu', data: lab.map((_, i) => i < n ? dogru(i) : null), borderColor: C.green, borderWidth: 2.5, pointRadius: 0, tension: 0 },
+    { label: 'Öngörü', data: lab.map((_, i) => A >= 6 && i >= n - 1 ? dogru(i) : null), borderColor: C.green, borderDash: [6, 4], borderWidth: 2, tension: 0,
+      pointRadius: lab.map((_, i) => i >= n ? 5 : 0), pointBackgroundColor: '#fff', pointBorderColor: C.green, pointBorderWidth: 2 },
+    { label: 'Gerçekleşen (örneklem dışı)', data: lab.map((_, i) => A >= 6 && i >= n ? OS_Y[i] : null), borderColor: C.orange, backgroundColor: C.orange, showLine: false, pointRadius: 5 }] },
+    options: eksen('Yıl', 'Satış (TL)') };
+  cfg.options.animation = false; cfg.options.spanGaps = false;
+  if (A >= 7) cfg.plugins = [{ id: 'oshata', afterDatasetsDraw: c => { const g = c.ctx, xs = c.scales.x, ys = c.scales.y; g.save(); g.strokeStyle = C.red; g.lineWidth = 2.5;
+    H.td.forEach((t, i) => { const px = xs.getPixelForValue(t - 1); g.beginPath(); g.moveTo(px, ys.getPixelForValue(H.F[i])); g.lineTo(px, ys.getPixelForValue(H.yd[i])); g.stroke(); }); g.restore(); } }];
+  ciz('c-os', virgulY(cfg));
+}
+function osIcerik() {
+  const H = osHesap(), n = H.n, m = H.m, ilk = OS_YIL[n], son = OS_YIL[9];
+  const TB = `<span class="c-teal-y">${tla(H.tb)}</span>`, YB = `<span class="c-teal-y">${tla(H.yb)}</span>`, PAY = `<span class="c-tur-y">${tla(H.pay)}</span>`, PAYDA = `<span class="c-mavi-y">${tla(H.payda)}</span>`;
+  const B1 = `<span class="c-mor-y">${tla(H.b1)}</span>`, B0 = `<span class="c-lac-y">${tla(H.b0)}</span>`, SE = tla(topla(H.e)), karisik = H.e.some(a => a > 0) && H.e.some(a => a < 0);
+  osTablo(H);
+  const ic = {
+    1: () => `<h5>1. adım: Veri ve tahmin dönemi</h5>
+      <div class="rs-yaz">ABC şirketinin 10 yıllık dondurma satışları (TL). Model doğrusal trend: <b>y<sub>t</sub> = β<sub>0</sub> + β<sub>1</sub> t + u<sub>t</sub></b>, t zaman sayacı (1991 = 1). Katsayılar yalnız <b>tahmin dönemindeki</b> ${n} yıldan (yeşil satırlar, t = 1 … ${n}) hesaplanır; ${ilk}-${son} (gri, t = ${H.td.join(', ')}) modele hiç girmez, öngörünün gerçekle sınandığı <b>örneklem dışı</b> dönemdir.</div>
+      <div class="rs-yaz"><b>Neden ikiye bölüyoruz?</b> Model bütün yıllarla tahmin edilseydi öngörüyü sınayacak bağımsız gözlem kalmazdı; modelin kendi uydurulduğu veriyle sınanması başarıyı olduğundan iyi gösterir.</div>`,
+    2: () => `<h5>2. adım: Ortalamalar</h5>
+      <div class="rs-f"><span class="bar">t</span> = <span class="frac"><span>Σt</span><span>n</span></span> = <span class="frac"><span>${topla(H.t)}</span><span>${n}</span></span> = <b class="c-teal-y">${tla(H.tb)}</b> &nbsp;&nbsp;&nbsp; <span class="bar y">y</span> = <span class="frac"><span>Σy<sub>t</sub></span><span>n</span></span> = <span class="frac"><span>${tl(topla(H.y), 0)}</span><span>${n}</span></span> = <b class="c-teal-y">${tla(H.yb)}</b></div>
+      <div class="rs-yaz">İkisi de panoya. Toplamlar tablonun son satırında; yalnız tahmin dönemi toplanır (n = ${n}). EKK doğrusu her zaman (<span class="bar">t</span>, <span class="bar y">y</span>) noktasından geçer; sabit terim 5. adımda bu özellikten çıkacak.</div>`,
+    3: () => `<h5>3. adım: Sapmalar, çarpımlar ve kareler</h5>
+      <div class="rs-yaz">Her yıl için t − <span class="bar">t</span> ve y<sub>t</sub> − <span class="bar y">y</span> yazılır (ikisinin de toplamı 0). Aynı satırdaki iki sapmanın çarpımları toplanınca <b>pay</b> çıkar: Σ(t − <span class="bar">t</span>)(y<sub>t</sub> − <span class="bar y">y</span>) = ${PAY} → panoya. t ile y aynı yönde sapınca çarpım pozitiftir; pay pozitifse trend yukarı doğrudur.</div>
+      <div class="rs-yaz">Payda t sapmalarının kareleri toplamıdır. <b>Önce siz bulun:</b></div>
+      <div class="rs-sd-kutu"><label>Σ(t − <span class="bar">t</span>)² = <input id="os-payda" type="text" inputmode="decimal"></label>
+        <button id="os-kontrol">Kontrol et</button><button id="os-goster">Cevabı göster</button><div id="os-geri-bildirim"></div></div>`,
+    4: () => `<h5>4. adım: β̂<sub>1</sub> = pay / payda</h5>
+      <div class="rs-f">β̂<sub>1</sub> = <span class="frac"><span class="c-tur-y">Σ(t − <span class="bar">t</span>)(y<sub>t</sub> − <span class="bar y">y</span>)</span><span class="c-mavi-y">Σ(t − <span class="bar">t</span>)²</span></span> = <span class="frac"><span>${PAY}</span><span>${PAYDA}</span></span> = <b class="c-mor-y">${tla(H.b1)}</b></div>
+      <div class="rs-yaz">Satışlar tahmin döneminde yılda ortalama <b>${tl(H.b1, 0)} TL</b> artmış → panoya. <b>Neden bu oran?</b> EKK, Σe<sub>t</sub>² = Σ(y<sub>t</sub> − β<sub>0</sub> − β<sub>1</sub>t)² toplamını en küçük yapan katsayıları seçer; β<sub>1</sub>'e göre türev sıfıra eşitlenince bu oran çıkar: t ile y'nin birlikte değişimi, t'nin kendi değişimine bölünür. Kısayol: Σ(t − <span class="bar">t</span>) = 0 olduğundan pay Σ(t − <span class="bar">t</span>) y<sub>t</sub> ile de bulunur.</div>`,
+    5: () => `<h5>5. adım: β̂<sub>0</sub> = <span class="bar y">y</span> − β̂<sub>1</sub> <span class="bar">t</span></h5>
+      <div class="rs-f">β̂<sub>0</sub> = ${YB} − ${B1} × ${TB} = <b class="c-lac-y">${tla(H.b0)}</b></div>
+      <div class="rs-yaz">Doğru (<span class="bar">t</span>, <span class="bar y">y</span>) noktasından geçtiği için <span class="bar y">y</span> = β̂<sub>0</sub> + β̂<sub>1</sub> <span class="bar">t</span>; sabit terim buradan çekilir → panoya. Tahmin edilen model: <b>F<sub>t</sub> = ${tla(H.b0)} + ${tla(H.b1)} t</b>. Grafikte yeşil doğru tahmin dönemi noktalarının arasından geçer; β̂<sub>0</sub> doğrunun t = 0'daki (1990) düzeyidir.</div>`,
+    6: () => `<h5>6. adım: Örneklem dışı öngörü</h5>
+      <div class="rs-yaz">Doğru tahmin döneminin ötesine uzatılır (kesikli): t = ${H.td.join(', ')} yerine konur.</div>
+      <div class="rs-f">${H.td.map((t, i) => `F<sub>${t}</sub> = ${B0} + ${B1} × ${t} = <b>${tla(H.F[i])}</b>`).join('<br>')}</div>
+      <div class="rs-yaz">İçi boş noktalar öngörü, turuncu noktalar ${ilk}-${son} yıllarında gerçekleşen satış.<span class="sg"> Tablo artık yalnız örneklem dışı yılları gösterir; tahmin dönemi hesabı bitti.</span></div>`,
+    7: () => `<h5>7. adım: Öngörü hatası ve sapma</h5>
+      <div class="rs-yaz">Her yıl için hata y<sub>t</sub> − F<sub>t</sub> (grafikte kırmızı çizgiler): ${H.e.map(a => tla(a)).join(', ')}. Toplam ${SE}; örneklem dışı yıl sayısı ${m}.</div>
+      <div class="rs-f">Öngörü sapması = <span class="frac"><span>Σ(y<sub>t</sub> − F<sub>t</sub>)</span><span>n</span></span> = <span class="frac"><span>${SE}</span><span>${m}</span></span> = <b class="c-yes-y">${tla(H.sapma)}</b></div>
+      <div class="rs-yaz"><b>${H.sapma < 0 ? `Sapma negatif: model satışları ortalamada yaklaşık ${tl(Math.abs(H.sapma), 0)} TL fazla öngörmüş, öngörüler gerçekleşenin üstünde.` : `Sapma pozitif: model satışları ortalamada yaklaşık ${tl(H.sapma, 0)} TL az öngörmüş, öngörüler gerçekleşenin altında.`}</b> ${karisik ? 'Pozitif ve negatif hatalar birbirini götürdüğü için sapma, hataların büyüklüğünden küçük çıkar.' : 'Bütün hatalar aynı işaretli: model her yıl aynı yöne şaşmış, sapma hataların büyüklüğüne yakın.'}<span class="sg"> Sapma tek başına başarı ölçütü değildir; MSE ve MAD ile birlikte okunur (<a href="../bolum1/#s17">1. bölüm, 17</a>).${osSon === 1997 ? ' Sunumdaki −595,17 ara değerlerin yuvarlanmasından gelir.' : ' Dönemi 1991-1997 yapınca sunumdaki hesap görünür.'}</span></div>` };
+  $('os-icerik').innerHTML = ic[osA]();
+  if (osA === 3) osPaydaBagla(H);
+  $('os-grafik').style.display = osA >= 5 ? '' : 'none';
+  if (osA >= 5) osGrafik(H);
+  const paydaGor = osAcik || osA >= 4;
+  panoDol('os-p-t', osA >= 2 ? tla(H.tb) : null); panoDol('os-p-y', osA >= 2 ? tla(H.yb) : null);
+  panoDol('os-p-pay', osA >= 3 ? tla(H.pay) : null); panoDol('os-p-payda', osA >= 3 && paydaGor ? tla(H.payda) : null);
+  panoDol('os-p-b1', osA >= 4 ? tla(H.b1) : null); panoDol('os-p-b0', osA >= 5 ? tla(H.b0) : null); panoDol('os-p-sapma', osA >= 7 ? tla(H.sapma) : null);
+  adimCubugu('os-adimlar', OS_ADIM, osA, osGit);
+  $('os-geri').disabled = osA === 1; $('os-ileri').disabled = osA === OS_N;
+  sunumSigdir($('os-kutu'));
+}
+// 3. adım alıştırması: paydayı (Σ(t − <span class="bar">t</span>)²) öğrenci bulur; sık hatalar tanınır (sapma toplamı 0, ham Σt², n, <span class="bar">t</span>, pay, mutlak değer, n − 1).
+function osPaydaBagla(H) {
+  const n = H.n, es = (x, y) => Math.abs(x - y) < 0.011;
+  const dogru = () => { osAcik = true; panoDol('os-p-payda', tla(H.payda));
+    $('os-geri-bildirim').innerHTML = `<div class="karar kabul">Doğru: ${H.dt.map(a => tla(a * a)).join(' + ')} = ${tla(H.payda)} → panoya.</div>`; sunumSigdir($('os-kutu')); };
+  const yaz = h => { osAcik = false; panoDol('os-p-payda', osA >= 4 ? tla(H.payda) : null); $('os-geri-bildirim').innerHTML = `<div class="karar red">${h}</div>`; sunumSigdir($('os-kutu')); };
+  if (osAcik) { $('os-payda').value = tla(H.payda); dogru(); }
+  $('os-goster').onclick = () => { $('os-payda').value = tla(H.payda); dogru(); };
+  $('os-kontrol').onclick = () => {
+    const g = $('os-payda').value.trim(), a = parseFloat(g.replace(/\s/g, '').replace(',', '.'));
+    if (g === '' || isNaN(a)) return yaz('Kutuya bir sayı yazın (ondalık için virgül).');
+    if (es(a, H.payda)) return dogru();
+    const st2 = topla(H.t.map(x => x * x)), mut = topla(H.dt.map(Math.abs));
+    yaz(es(a, 0) ? 'Sapmaların toplamı sıfırdır, ama sorulan karelerinin toplamı: kare alınca her terim pozitif olur.'
+      : es(a, st2) ? `${tla(st2)} = Σt², ham t'lerin kareleri. Formül ortalamadan sapma ister: önce t − <span class="bar">t</span>, sonra kare.`
+      : es(a, n) ? `${n} gözlem sayısı (n). Sorulan, t − <span class="bar">t</span> sütunundaki sayıların kareleri toplamı.`
+      : es(a, H.tb) ? `${tla(H.tb)} ortalama (<span class="bar">t</span>). Sapmaların karelerini toplayın.`
+      : es(a, H.pay) ? `${tla(H.pay)} pay, çarpımların toplamı. Payda yalnız t sapmalarının karelerinden oluşur.`
+      : es(a, mut) ? `${tla(mut)}: mutlak değerler toplandı. Kareler toplanacak, mutlak değerler değil.`
+      : es(a, n - 1) ? `${n - 1} = n − 1, serbestlik derecesi. Sorulan kareler toplamı.`
+      : `${g} değil. t − <span class="bar">t</span> sütunundaki her sayının karesini alıp toplayın; ${n} terim var.`);
+  };
+}
+function osGit(a) { osA = Math.max(1, Math.min(OS_N, a)); osIcerik(); }
+$('os-geri').onclick = () => osGit(osA - 1); $('os-ileri').onclick = () => osGit(osA + 1);
+// Dönem değişince alıştırma sıfırlanır; her adımda görünür etkisi var, adım korunur.
+grupla([...document.querySelectorAll('#os-son-btn button')], b => { osSon = +b.dataset.son; osAcik = false; osIcerik(); });
+adimliKaydet($('os-kutu'), () => osA, OS_N, osGit);
+osIcerik();
+
 // ---------- 3: gecikmeli değer ----------
 function gecikme(k) {
   let h = `<tr><th>Ay</th>${Array.from({ length: k + 1 }, (_, j) => `<th>Y<sub>t${j ? '−' + j : ''}</sub></th>`).join('')}</tr>`;
@@ -885,10 +1063,11 @@ function rkTablo(H) {
   const A = rkA, k = H.k, kare = A >= 2, kay = A >= 3, car = A >= 4, yeni = s => s === A ? ' yeni-sut' : '';
   let h = `<tr><th>Ay</th><th>Y<sub>t</sub></th><th>Y<sub>t</sub> − Ȳ</th>` + (kay ? `<th>Y<sub>t−${k}</sub></th><th>Y<sub>t−${k}</sub> − Ȳ</th>` : '') + (car ? '<th class="c-tur">Çarpım</th>' : '') + (kare ? '<th class="c-mavi">(Y<sub>t</sub> − Ȳ)<sup>2</sup></th>' : '') + '</tr>';
   AY.forEach((a, t) => { const ok = t - k >= 0;
-    h += `<tr><td>${a}</td><td>${Y[t]}</td><td class="${yeni(1)}">${v(H.d[t], 0)}</td>`
-      + (kay ? (ok ? `<td class="${yeni(3)}">${Y[t - k]}</td><td class="${yeni(3)}">${v(H.d[t - k], 0)}</td>` : `<td class="bos${yeni(3)}">·</td><td class="bos${yeni(3)}">·</td>`) : '')
-      + (car ? (ok ? `<td class="${yeni(4)}">${v(H.d[t] * H.d[t - k], 0)}</td>` : `<td class="bos${yeni(4)}">·</td>`) : '')
-      + (kare ? `<td class="${yeni(2)}">${H.d[t] ** 2}</td>` : '') + '</tr>'; });
+    // Her hesaplanan hücrede altta hesabın kendisi: 123 − 142, (−12)(−19), (−19)²
+    h += `<tr><td>${a}</td><td>${Y[t]}</td><td class="${yeni(1)}">${v(H.d[t], 0)}<small>${Y[t]} − 142</small></td>`
+      + (kay ? (ok ? `<td class="${yeni(3)}">${Y[t - k]}</td><td class="${yeni(3)}">${v(H.d[t - k], 0)}<small>${Y[t - k]} − 142</small></td>` : `<td class="bos${yeni(3)}">·</td><td class="bos${yeni(3)}">·</td>`) : '')
+      + (car ? (ok ? `<td class="${yeni(4)}">${v(H.d[t] * H.d[t - k], 0)}<small>(${v(H.d[t], 0)})(${v(H.d[t - k], 0)})</small></td>` : `<td class="bos${yeni(4)}">·</td>`) : '')
+      + (kare ? `<td class="${yeni(2)}">${H.d[t] ** 2}<small>(${v(H.d[t], 0)})²</small></td>` : '') + '</tr>'; });
   h += `<tr class="hl"><td>Toplam</td><td>1704</td><td>0</td>` + (kay ? '<td></td><td></td>' : '') + (car ? `<td class="c-tur-y">${v(H.pay, 0)}</td>` : '') + (kare ? `<td class="c-mavi-y">${H.payda}</td>` : '') + '</tr>';
   $('h-tab').innerHTML = h;
 }

@@ -8,5 +8,6 @@ Ders sayfası: https://hanifivan.github.io/zaman-serisi/
 |---|---|---|
 | 1. Giriş ve eğilim tabanlı öngörü | [bolum1](https://hanifivan.github.io/zaman-serisi/bolum1/) | [PDF](bolum1/zaman_serisi_bolum1.pdf) |
 | 2. Otokorelasyon ve durağanlık | [bolum2](https://hanifivan.github.io/zaman-serisi/bolum2/) | [PDF](bolum2/zaman_serisi_bolum2.pdf) |
+| 3. Basit öngörü yöntemleri | [bolum3](https://hanifivan.github.io/zaman-serisi/bolum3/) | [PDF](bolum3/zaman_serisi_bolum3.pdf) |
 
 Ders notları tek dosya HTML'dir, internetsiz de açılır. Sunum modu (sağ üst) derste projektörle kullanım içindir.

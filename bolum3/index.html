@@ -421,6 +421,15 @@
   .rk-yan.genis > div:last-child { order: -1; }
   .serit { font-size: 15px; }
   #ud-tab td.c-A { color: #c06f00; font-weight: 700; }
+  #ua-tab td.c-A { color: #c06f00; font-weight: 700; }
+  #ua-tab tr.sec td { background: #E6F7F0; font-weight: 700; }
+  #ua-tab tr[data-t] { cursor: pointer; }
+  body.sunum #ua-kap { max-height: 300px !important; }
+  .formula.ua-canli { background: #FFF8E6; border-color: #EF9F27; margin-top: -.45rem; }
+  .ua-canli .ua-et { display: inline-block; margin-right: 1.2em; font-size: .82em; font-weight: 600; color: #c06f00; }
+  .ua-canli .ua-i { color: #c06f00; }
+  .ua-ok { border: 1.5px solid #EF9F27; background: #fff; color: #c06f00; border-radius: 5px; padding: 0 .5em; margin: 0 .3em; cursor: pointer; font: inherit; line-height: 1.5; }
+  .ua-ok:hover { background: #EF9F27; color: #fff; } .ua-ok:disabled { opacity: .35; cursor: default; }
   #ud-tab tr:hover td { background: #F3FBF8; }
   #ud-tab td.secili { background: #E6F7F0 !important; box-shadow: inset 0 0 0 2px #1D9E75; }
   .ud-yan .holt-f { font-size: 18px; line-height: 1.7; }
@@ -439,13 +448,14 @@
   .nv-son tr.nv-25 td { border-top: 2px solid #EF9F27; }
   .nv-son td small { display: block; font-size: 11px; line-height: 1.1; color: #6f86a8; font-style: normal; font-weight: 600; }
   .nv-hesap { font-size: 17px; line-height: 1.7; }
+  @media (max-width: 600px) { .nv-hesap { font-size: 15px; overflow-x: auto; } .nv-hesap .nv-dk .frac { font-size: .88em; } }
   .nv-hesap > div + div { margin-top: .35rem; padding-top: .35rem; border-top: 1px dashed #cfd8e3; }
   .nv-hesap small { font-size: 14px; color: var(--gray); }
   body.sunum .nv-hesap { font-size: 20px; line-height: 1.5; } body.sunum .nv-hesap small { font-size: 16px; }
   body.sunum #nv-kap { max-height: 400px !important; }
   .nv-son td, .nv-son th { min-width: 4.6em; padding: .3em .5em; }
   .nv-son th small, .nv-son td small { display: block; font-size: 11px; font-weight: 600; line-height: 1.1; }
-  .nv-son td small { color: #2468b4; font-style: italic; font-weight: 700; } .nv-son td.k-tur-h small, .nv-son td.k-mavi-h small, .nv-son td.k-mor-h small, .nv-son td.k-teal-h small { color: inherit; }
+  .nv-son td small { color: #2468b4; font-style: italic; font-weight: 700; } .nv-son td.k-tur-h small, .nv-son td.k-mavi-h small, .nv-son td.k-mor-h small, .nv-son td.k-teal-h small, .nv-son td.k-yesil-h small { color: inherit; }
   .nv-son th:first-child { text-align: left; white-space: nowrap; }
   .nv-son td.nv-gercek { color: #1E2D5E; font-weight: 700; background: #F3F7FB; }
   .nv-son td.nv-hedef { background: #FFF7E8 !important; color: #d4860f; font-weight: 800; font-size: 1.2em; }
@@ -455,6 +465,20 @@
   td.k-mavi-h { background: #DCEBFA !important; color: #2468b4; font-weight: 700; outline: 2px solid #378ADD; outline-offset: -2px; }
   td.k-mor-h { background: #E9E7FB !important; color: #5b52c9; font-weight: 700; outline: 2px solid #7F77DD; outline-offset: -2px; }
   td.k-teal-h { background: #D9F0F2 !important; color: #017080; font-weight: 700; outline: 2px solid #028090; outline-offset: -2px; }
+  .k-yesil { color: #2e7d32; font-weight: 700; } td.k-yesil-h { background: #E3F2E1 !important; color: #2e7d32; font-weight: 700; outline: 2px solid #43a047; outline-offset: -2px; }
+  body.sunum .nv-hesap .nv-dk { line-height: 1.55; margin: .15rem 0; } body.sunum .nv-hesap > div + div { margin-top: .2rem; padding-top: .2rem; }
+  .nv-kilavuz { background: #F3F7FB; border-left: 4px solid #028090; border-radius: 6px; padding: .55rem .9rem .55rem .9rem; margin: .4rem 0 .8rem; font-size: 15px; line-height: 1.55; }
+  .nv-kilavuz b { color: var(--navy); } .nv-kilavuz ol { margin: .25rem 0 0; padding-left: 1.3rem; }
+  body:not(.sunum) #s4:not(.nv-acik) .nv-cvp { display: none !important; }
+  body:not(.sunum) #s4.nv-acik .nv-soru, body.sunum #s4 .nv-soru { display: none !important; }
+  .nv-soru { color: #8a99b0; font-weight: 700; }
+  .nv-kendin { font-size: 16px; line-height: 1.6; color: var(--navy); }
+  .nv-goster-btn { margin-top: .6rem; background: #028090; color: #fff; border: 0; border-radius: 6px; padding: .45rem 1rem; font-size: 15px; font-weight: 700; cursor: pointer; }
+  .nv-goster-btn:hover { background: #016a77; }
+  .nv-br { display: block; } body.sunum .nv-br { display: inline; } body.sunum .nv-br::after { content: ' '; }
+  .nv-fgenel { margin-left: .8em; white-space: nowrap; } .nv-fgenel .frac { font-size: .85em; line-height: 1.2; }
+  .nv-hesap .nv-dk { line-height: 1.95; white-space: nowrap; } .nv-hesap .nv-dk .frac { font-size: .92em; line-height: 1.3; }
+  .nv-hesap .nv-bas { display: block; font-size: 15px; color: var(--gray); }
   .nv-alt { margin-top: .6rem; display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
   .nv-alt .rs-yaz { font-size: 17px; line-height: 1.75; }
   .nv-alt .rs-yaz > div + div { margin-top: .35rem; padding-top: .35rem; border-top: 1px dashed #cfd8e3; }
@@ -495,6 +519,11 @@
   .gb-alt { text-align: center; font-size: 12.5px; margin: 1.5rem auto 0; max-width: 1600px; color: var(--gray); }
   .gb-alt a { color: var(--teal); }
   .ch-pano { grid-template-columns: repeat(5, 1fr); }
+  body.sunum .rk-yan.genis #ho-kap { max-height: 290px !important; }
+  .nv-liste { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem 1.4rem; font-weight: 400; }
+  .nv-liste > span { padding: .1rem .5rem; border-radius: 6px; white-space: nowrap; } .nv-liste b { font-size: 14px; color: var(--teal); margin-right: .3rem; }
+  .nv-liste > span.aktif { background: #FFF2D6; outline: 2px solid #EF9F27; } body.sunum .nv-liste { font-size: 30px; } body.sunum .nv-liste > span:not(.aktif) { display: none; } body.sunum .nv-liste > span.aktif { background: none; outline: none; } body.sunum .nv-liste b { font-size: 16px; }
+  #bo-tab td.bo-sin { background: #F3F7FB; color: #6f86a8; } #bo-tab td.bo-sin small { display: block; font-size: 11px; color: #6f86a8; }
   @media(max-width:700px) { .ch-pano { grid-template-columns: repeat(2, 1fr); } .ch-pano .rs-hucre:last-child { grid-column: span 2; } }
 </style>
 </head>
@@ -589,8 +618,8 @@
 <section class="section" id="s3">
   <div class="section-header"><span class="num">3</span>Naive Öngörü</div>
   <div class="section-body">
-    <p>En basit öngörü: serinin son değeri geleceğin en iyi öngörüsüdür. Rassal yürüyüşte (Y<sub>t</sub> = Y<sub>t−1</sub> + u<sub>t</sub>) gerçekten en iyi öngörü budur; bütün yöntemler için kıyas noktasıdır.</p>
     <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>Y</mi><mi>t</mi></msub></mrow></math></div>
+    <p>En basit öngörü: serinin son değeri geleceğin en iyi öngörüsüdür. Rassal yürüyüşte (Y<sub>t</sub> = Y<sub>t−1</sub> + u<sub>t</sub>) gerçekten en iyi öngörü budur; bütün yöntemler için kıyas noktasıdır.</p>
     <div class="info-box">Testere verisinde 2002-2007 (24 çeyrek) öngörü için, 2008 (4 çeyrek) sınama için ayrılır. <span class="eq">Ŷ<sub>25</sub> = Y<sub>24</sub> = 650</span>, <span class="eq">e<sub>25</sub> = 850 − 650 = 200</span>; <span class="eq">Ŷ<sub>26</sub> = Y<sub>25</sub> = 850</span>, <span class="eq">e<sub>26</sub> = 600 − 850 = −250</span>.</div>
     <div class="chart-wrap kwn"><canvas id="c-naive"></canvas></div>
     <div class="warn-box">Naive öngörü seriyi <strong>bir dönem geriden</strong> izler: tepe noktalarında büyük hata verir ve rassal dalgalanmanın tamamı öngörüye geçer. Seride eğilim ve mevsimsellik varsa hata sistematikleşir.</div>
@@ -600,7 +629,22 @@
 <section class="section" id="s4">
   <div class="section-header"><span class="num">4</span>Düzeltilmiş Naive Modeller</div>
   <div class="section-body">
+    <div class="formula nv-liste" id="nv-liste">
+      <span data-i="0"><b>1. Naive</b> <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>Y</mi><mi>t</mi></msub></mrow></math></span>
+      <span data-i="1"><b>2. Eğilim</b> <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><mo stretchy="false">(</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow></math></span>
+      <span data-i="2"><b>3. Oran</b> <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>Y</mi><mi>t</mi></msub><mfrac><mrow><msub><mi>Y</mi><mi>t</mi></msub></mrow><mrow><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow></mfrac></mrow></math></span>
+      <span data-i="3"><b>4. Mevsimsel</b> <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>3</mn></mrow></msub></mrow></math></span>
+      <span data-i="4"><b>5. Mevsimsel + eğilim</b> <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>3</mn></mrow></msub><mo>+</mo><mfrac><mrow><mo stretchy="false">(</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo>+</mo><mo>…</mo><mo>+</mo><mo stretchy="false">(</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>3</mn></mrow></msub><mo>−</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>4</mn></mrow></msub><mo stretchy="false">)</mo></mrow><mrow><mn>4</mn></mrow></mfrac></mrow></math></span>
+    </div>
     <p>Tek soru: <strong>2008-1'de kaç testere satılır?</strong><span class="sg"> Her model bu soruya geçmişten farklı bir değer alarak cevap verir. Modeli seçin; kullandığı çeyrekler tabloda yanar.</span></p>
+    <div class="nv-kilavuz sg"><b>Nasıl çalışmalı?</b>
+      <ol>
+        <li>Bir model seçin; formülü en üstteki listede turuncu çerçeveyle işaretlenir.</li>
+        <li>Tabloda renkli yanan değerleri formülde yerine koyup Ŷ<sub>25</sub>'i kâğıtta kendiniz hesaplayın.</li>
+        <li><b>Hesabı göster</b> ile sonucunuzu karşılaştırın, sonra sıradaki modele geçin.</li>
+        <li>Beş modeli bitirince özet tabloya bakın: hangi model 2008-1'de gerçekleşen 850'ye en yakın, neden?</li>
+      </ol>
+    </div>
     <div class="controls model-btn" id="nv-btn">
       <button data-i="0" class="active">1. Naive</button><button data-i="1">2. Eğilim</button><button data-i="2">3. Oran</button><button data-i="3">4. Mevsimsel</button><button data-i="4">5. Mevsimsel + eğilim</button>
     </div>
@@ -613,45 +657,61 @@
         <div class="tscroll" style="max-height:none;margin-top:.6rem"><table class="lagtab nv-ozet" id="nv-ozet"></table></div>
       </div>
     </div>
-    <div class="info-box sg" id="nv-yorum"></div>
+    <div class="info-box sg nv-cvp" id="nv-yorum"></div>
   </div>
 </section>
 
 <!-- ================= Kısım 3 ================= -->
 <div class="part-title">Kısım 3 · Ortalamalar</div>
 <section class="section" id="s5">
-  <div class="section-header"><span class="num">5</span>Basit Ortalama</div>
+  <div class="section-header"><span class="num">5</span>Basit Ortalama Adım Adım</div>
   <div class="section-body">
-    <p>Bütün geçmiş gözlemlere eşit ağırlık verilir. Seri sabit bir düzey etrafında dalgalanıyorsa uygundur. Yakıt verisinde ilk 28 hafta (Y<sub>1</sub>, …, Y<sub>28</sub>, turuncu) öngörü, 29 ve 30. haftalar (gri) sınama içindir.</p>
-    <div class="grid2">
-      <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>t</mi></mrow></mfrac><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>t</mi></mrow></munderover><msub><mi>Y</mi><mi>i</mi></msub></mrow></math></div>
-      <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>t</mi><mspace width="0.167em" /><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow></math></div>
+    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>t</mi></mrow></mfrac><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>t</mi></mrow></munderover><msub><mi>Y</mi><mi>i</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>S</mi><mi>t</mi></msub></mrow><mrow><mi>t</mi></mrow></mfrac><mo>,</mo><mspace width="2em" /><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>t</mi><mspace width="0.167em" /><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow></math></div>
+    <div class="rs-kutu" id="bo-kutu" data-adimli>
+      <p class="sg">Bütün geçmiş gözlemlere eşit ağırlık verilir. Seri sabit bir düzey etrafında dalgalanıyorsa uygundur. Yakıt verisi, 30 hafta.</p>
+      <div class="rs-pano ch-pano">
+        <div class="rs-hucre c-mavi" id="bo-p-s"><span>S<sub>28</sub></span><b>?</b><i>2. adım</i></div>
+        <div class="rs-hucre c-tur" id="bo-p-f29"><span>Ŷ<sub>29</sub></span><b>?</b><i>3. adım</i></div>
+        <div class="rs-hucre c-mor" id="bo-p-e29"><span>e<sub>29</sub></span><b>?</b><i>4. adım</i></div>
+        <div class="rs-hucre c-teal" id="bo-p-f30"><span>Ŷ<sub>30</sub></span><b>?</b><i>5. adım</i></div>
+        <div class="rs-hucre c-yes" id="bo-p-f31"><span>Ŷ<sub>31</sub></span><b>?</b><i>6. adım</i></div>
+      </div>
+      <div class="rs-adimlar" id="bo-adimlar"></div>
+      <div class="ipucu">Bir değerin üzerine gelin (telefonda dokunun): onu oluşturan değerler sarı ile seçili görünür.</div>
+      <div class="rk-yan">
+        <div class="tscroll" style="max-height:470px" id="bo-kap"><table class="lagtab" id="bo-tab"></table></div>
+        <div><div class="rs-icerik" id="bo-icerik"></div></div>
+      </div>
+      <div class="rs-gez"><button id="bo-geri">‹ Önceki adım</button><button id="bo-ileri">Sonraki adım ›</button></div>
     </div>
-    <div class="note sg">İkinci formül güncelleme formülüdür: eski ortalama ve yeni gözlem yeter, bütün toplamı yeniden almak gerekmez.</div>
-    <div class="ipucu">Tablodaki öngörü ya da hatanın üzerine gelin: onu oluşturan değerler şeritte sarı ile seçili görünür.</div>
-    <div class="tscroll" style="max-height:none"><table class="lagtab serit" id="bo-serit"></table></div>
-    <div class="tscroll" style="max-height:none"><table class="lagtab" id="bo-tab"></table></div>
     <div class="chart-wrap-sm kwn"><canvas id="c-bo"></canvas></div>
     <div class="warn-box">Basit ortalama düz bir çizgi öngörür: 31. hafta için de 282. Seride eğilim varsa sürekli geride kalır.</div>
   </div>
 </section>
 
 <section class="section" id="s6">
-  <div class="section-header"><span class="num">6</span>Hareketli Ortalama</div>
+  <div class="section-header"><span class="num">6</span>Hareketli Ortalama Adım Adım</div>
   <div class="section-body">
-    <p>Yalnız son k gözlemin ortalaması alınır; her yeni gözlemde en eskisi çıkar. k küçükse öngörü değişime hızlı tepki verir, büyükse düzgünleşir. Sunumdaki hesap k = 5'tir. Şeritte Ŷ<sub>29</sub> için kullanılan haftalar turuncu, öngörülen hafta yeşil.</p>
-    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mrow><mi>k</mi></mrow></mfrac></mrow></math></div>
-    <div class="controls"><span class="kayd"><label>k = <b id="ho-k-l">5</b></label><input type="range" id="ho-k" min="1" max="10" step="1" value="5"></span></div>
-    <div class="ipucu">Hesaptaki kalın sonucun üzerine gelin: onu oluşturan haftalar şeritte sarı ile seçili görünür.</div>
-    <div class="tscroll" style="max-height:none"><table class="lagtab serit" id="ho-serit"></table></div>
-    <div class="rs-yaz" id="ho-hesap"></div>
-    <div class="chart-wrap-sm kwn"><canvas id="c-ho"></canvas></div>
-    <div class="stat-grid">
-      <div class="stat-card"><div class="label">Ŷ<sub>29</sub></div><div class="value" id="ho-y29">?</div></div>
-      <div class="stat-card"><div class="label">e<sub>29</sub></div><div class="value" id="ho-e29">?</div></div>
-      <div class="stat-card"><div class="label">MSE, hafta 11-28</div><div class="value" id="ho-mse">?</div></div>
-      <div class="stat-card"><div class="label">Ŷ<sub>31</sub></div><div class="value" id="ho-y31">?</div></div>
+    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>M</mi><mi>t</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mrow><mi>k</mi></mrow></mfrac><mo>,</mo><mspace width="2em" /><msub><mi>M</mi><mi>t</mi></msub><mo>=</mo><msub><mi>M</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mfrac><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mi>k</mi></mrow></msub></mrow><mrow><mi>k</mi></mrow></mfrac></mrow></math></div>
+    <div class="rs-kutu" id="ho-kutu" data-adimli>
+      <p class="sg">Yalnız son k gözlemin ortalaması alınır; her yeni gözlemde en eskisi çıkar. Yakıt verisi; sunumdaki hesap k = 5.</p>
+      <div class="rs-pano ch-pano">
+        <div class="rs-hucre c-mavi" id="ho-p-m"><span>M<sub>28</sub></span><b>?</b><i>2. adım</i></div>
+        <div class="rs-hucre c-tur" id="ho-p-f29"><span>Ŷ<sub>29</sub></span><b>?</b><i>3. adım</i></div>
+        <div class="rs-hucre c-mor" id="ho-p-mse"><span>MSE, 11-28</span><b>?</b><i>4. adım</i></div>
+        <div class="rs-hucre c-teal" id="ho-p-f30"><span>Ŷ<sub>30</sub></span><b>?</b><i>5. adım</i></div>
+        <div class="rs-hucre c-yes" id="ho-p-f31"><span>Ŷ<sub>31</sub></span><b>?</b><i>6. adım</i></div>
+      </div>
+      <div class="controls"><span class="kayd"><label>k = <b id="ho-k-l">5</b></label><input type="range" id="ho-k" min="1" max="10" step="1" value="5"></span><span class="note sg" style="margin:0">k değişince bütün adımlar yeniden hesaplanır.</span></div>
+      <div class="rs-adimlar" id="ho-adimlar"></div>
+      <div class="ipucu">Bir değerin üzerine gelin (telefonda dokunun): onu oluşturan değerler sarı ile seçili görünür.</div>
+      <div class="rk-yan">
+        <div class="tscroll" style="max-height:470px" id="ho-kap"><table class="lagtab" id="ho-tab"></table></div>
+        <div><div class="rs-icerik" id="ho-icerik"></div></div>
+      </div>
+      <div class="rs-gez"><button id="ho-geri">‹ Önceki adım</button><button id="ho-ileri">Sonraki adım ›</button></div>
     </div>
+    <div class="chart-wrap-sm kwn"><canvas id="c-ho"></canvas></div>
     <div class="info-box">k = 1 naive öngörüdür; k = t basit ortalamadır. Hareketli ortalama bu ikisinin arasındadır. Hata ölçüleri her k için aynı haftalardan (11-28) hesaplanır.</div>
   </div>
 </section>
@@ -659,6 +719,7 @@
 <section class="section" id="s7">
   <div class="section-header"><span class="num">7</span>Çift Hareketli Ortalama Adım Adım</div>
   <div class="section-body">
+    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>M</mi><mi>t</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow><mrow><mn>3</mn></mrow></mfrac><mo>,</mo><mspace width="2em" /><msubsup><mi>M</mi><mi>t</mi><mi>′</mi></msubsup><mo>=</mo><mfrac><mrow><msub><mi>M</mi><mi>t</mi></msub><mo>+</mo><msub><mi>M</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>M</mi><mrow><mi>t</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow><mrow><mn>3</mn></mrow></mfrac><mspace width="2em" /><mo stretchy="false">(</mo><mi>k</mi><mo>=</mo><mn>3</mn><mo stretchy="false">)</mo></mrow></math><br><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>a</mi><mi>t</mi></msub><mo>=</mo><mn>2</mn><msub><mi>M</mi><mi>t</mi></msub><mo>−</mo><msubsup><mi>M</mi><mi>t</mi><mi>′</mi></msubsup><mo>,</mo><mspace width="2em" /><msub><mi>b</mi><mi>t</mi></msub><mo>=</mo><mfrac><mrow><mn>2</mn></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo stretchy="false">(</mo><msub><mi>M</mi><mi>t</mi></msub><mo>−</mo><msubsup><mi>M</mi><mi>t</mi><mi>′</mi></msubsup><mo stretchy="false">)</mo><mo>,</mo><mspace width="2em" /><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mi>p</mi></mrow></msub><mo>=</mo><msub><mi>a</mi><mi>t</mi></msub><mo>+</mo><msub><mi>b</mi><mi>t</mi></msub><mspace width="0.167em" /><mi>p</mi></mrow></math></div>
     <div class="rs-kutu" id="ch-kutu" data-adimli>
       <p class="sg">Eğilimli seride tek hareketli ortalama geride kalır. İkinci bir hareketli ortalama bu gecikmeyi ölçer, düzey ve eğim düzeltilir. Kira verisi, k = 3.</p>
       <div class="rs-pano ch-pano">
@@ -682,6 +743,7 @@
 <section class="section" id="s8">
   <div class="section-header"><span class="num">8</span>Tek mi, Çift mi?</div>
   <div class="section-body">
+    <div class="formula">Tek HO: <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>M</mi><mi>t</mi></msub></mrow></math> &nbsp;&nbsp;&nbsp; Çift HO: <math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>a</mi><mi>t</mi></msub><mo>+</mo><msub><mi>b</mi><mi>t</mi></msub></mrow></math></div>
     <p>Kira verisinde iki öngörüyü karşılaştırın: tek hareketli ortalama (Ŷ<sub>t+1</sub> = M<sub>t</sub>) ve çift hareketli ortalama (Ŷ<sub>t+1</sub> = a<sub>t</sub> + b<sub>t</sub>). İkisi de 6-15. haftalar için öngörü üretir.</p>
     <div class="chart-wrap kwn"><canvas id="c-ch"></canvas></div>
     <div class="stat-grid">
@@ -699,12 +761,18 @@
 <section class="section" id="s9">
   <div class="section-header"><span class="num">9</span>Üstel Ağırlıklar</div>
   <div class="section-body">
-    <p>Üstel düzeltme öngörüyü son gözlemin ışığında sürekli düzeltir. Yeni öngörü, yeni gözlem ile eski öngörünün ağırlıklı ortalamasıdır.</p>
     <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>α</mi><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mi>t</mi></msub><mo>=</mo><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mi>t</mi></msub><mo>+</mo><mi>α</mi><mspace width="0.167em" /><mo stretchy="false">(</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mi>t</mi></msub><mo stretchy="false">)</mo><mo>,</mo><mspace width="2em" /><mn>0</mn><mo>&lt;</mo><mi>α</mi><mo>&lt;</mo><mn>1</mn></mrow></math></div>
+    <div class="formula ua-canli" id="ua-f1"></div>
+    <p>Üstel düzeltme öngörüyü son gözlemin ışığında sürekli düzeltir. Yeni öngörü, yeni gözlem ile eski öngörünün ağırlıklı ortalamasıdır.</p>
     <div class="note sg">İkinci yazım hata düzeltme biçimidir: eski öngörüye son hatanın α katı eklenir.</div>
     <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>α</mi><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><mi>α</mi><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>α</mi><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>+</mo><mo>…</mo></mrow></math></div>
-    <div class="controls"><span class="kayd"><label>α = <b id="ua-l">0,3</b></label><input type="range" id="ua" min="0.05" max="0.95" step="0.05" value="0.3"></span></div>
-    <div class="chart-wrap-sm kwn"><canvas id="c-ua"></canvas></div>
+    <div class="formula ua-canli" id="ua-f2"></div>
+    <div class="controls"><span class="kayd"><label>α = <b id="ua-l">0,3</b></label><input type="range" id="ua" min="0.05" max="0.95" step="0.05" value="0.3"></span><span class="kayd"><label>t = <b id="uat-l">6</b></label><input type="range" id="uat" min="1" max="24" step="1" value="6"></span></div>
+    <div class="ipucu">t değerini formüldeki oklarla, çubukla ya da tabloda bir dönemin üzerine gelerek (telefonda dokunarak) değiştirin: yukarıdaki iki formül o dönemin indisleriyle yazılır, öngörü sağda testere sayılarıyla hesaplanır; ağırlık sütunu her gözlemin bu öngörüdeki payını gösterir.</div>
+    <div class="rk-yan ud-yan">
+      <div class="tscroll" style="max-height:330px" id="ua-kap"><table class="lagtab" id="ua-tab"></table></div>
+      <div class="rs-yaz holt-f" id="ua-hesap"></div>
+    </div>
     <div class="info-box" id="ua-not"></div>
   </div>
 </section>
@@ -712,8 +780,8 @@
 <section class="section" id="s10">
   <div class="section-header"><span class="num">10</span>α'yı Seçmek</div>
   <div class="section-body">
-    <p>Testere verisi, sunumdaki tablo (slayt 45). Başlangıç Ŷ<sub>1</sub> = Ŷ<sub>2</sub> = Y<sub>1</sub> = 500. <strong>Her satırın öngörüsü bir üst satırdan gelir:</strong> üst satırın gözlemi Y ve öngörüsü Ŷ. Sunumdaki iki değer α = 0,1 ve α = 0,6; düğmeyle ya da çubukla seçin.</p>
     <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi></mrow></msub><mo>=</mo><mi>α</mi><mspace width="0.167em" /><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mspace width="0.167em" /><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow></math></div>
+    <p>Testere verisi, sunumdaki tablo (slayt 45). Başlangıç Ŷ<sub>1</sub> = Ŷ<sub>2</sub> = Y<sub>1</sub> = 500. <strong>Her satırın öngörüsü bir üst satırdan gelir:</strong> üst satırın gözlemi Y ve öngörüsü Ŷ. Sunumdaki iki değer α = 0,1 ve α = 0,6; düğmeyle ya da çubukla seçin.</p>
     <div class="controls" id="ud-btn"><span class="kayd"><label>α = <b id="ud-l">0,1</b></label><input type="range" id="ud" min="0.01" max="0.99" step="0.01" value="0.1"></span><button data-a="0.1">0,1</button><button data-a="0.6">0,6</button></div>
     <div class="ipucu">Bir öngörünün üzerine gelin (telefonda dokunun): onu oluşturan iki değer üst satırda sarı ile seçili görünür, hesabı sağda büyük yazılır.</div>
     <div class="rk-yan ud-yan">
@@ -735,8 +803,8 @@
 <section class="section" id="s11">
   <div class="section-header"><span class="num">11</span>Holt Yöntemi Adım Adım</div>
   <div class="section-body">
-    <p>Basit üstel düzeltme yalnız düzeyi izler; eğilimli seride geride kalır. Holt (1957; 2004) yöntemi düzeyi (L) ve eğimi (T) ayrı sabitlerle düzeltir.</p>
     <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>L</mi><mi>t</mi></msub><mo>=</mo><mi>α</mi><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>L</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>T</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo>,</mo><mspace width="1em" /><msub><mi>T</mi><mi>t</mi></msub><mo>=</mo><mi>β</mi><mo stretchy="false">(</mo><msub><mi>L</mi><mi>t</mi></msub><mo>−</mo><msub><mi>L</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>β</mi><mo stretchy="false">)</mo><msub><mi>T</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>,</mo><mspace width="1em" /><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mi>p</mi></mrow></msub><mo>=</mo><msub><mi>L</mi><mi>t</mi></msub><mo>+</mo><mi>p</mi><mspace width="0.167em" /><msub><mi>T</mi><mi>t</mi></msub></mrow></math></div>
+    <p>Basit üstel düzeltme yalnız düzeyi izler; eğilimli seride geride kalır. Holt (1957; 2004) yöntemi düzeyi (L) ve eğimi (T) ayrı sabitlerle düzeltir.</p>
     <div class="controls"><span class="kayd"><label>Dönem t = <b id="hd-t-l">2</b></label><input type="range" id="hd-t" min="2" max="25" step="1" value="2"></span><span class="note" style="margin:0">α = 0,3; β = 0,1; L<sub>1</sub> = 500; T<sub>1</sub> = 0</span></div>
     <div class="ipucu">Tablodaki bir değerin üzerine gelin: onu oluşturan değerler sarı ile seçili görünür.</div>
     <div class="rk-yan">
@@ -749,6 +817,7 @@
 <section class="section" id="s12">
   <div class="section-header"><span class="num">12</span>Holt Laboratuvarı</div>
   <div class="section-body">
+    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>L</mi><mi>t</mi></msub><mo>=</mo><mi>α</mi><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>L</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>T</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo>,</mo><mspace width="1em" /><msub><mi>T</mi><mi>t</mi></msub><mo>=</mo><mi>β</mi><mo stretchy="false">(</mo><msub><mi>L</mi><mi>t</mi></msub><mo>−</mo><msub><mi>L</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>β</mi><mo stretchy="false">)</mo><msub><mi>T</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>,</mo><mspace width="1em" /><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mn>24</mn><mo>+</mo><mi>p</mi></mrow></msub><mo>=</mo><msub><mi>L</mi><mrow><mn>24</mn></mrow></msub><mo>+</mo><mi>p</mi><mspace width="0.167em" /><msub><mi>T</mi><mrow><mn>24</mn></mrow></msub></mrow></math></div>
     <p>α düzeyin, β eğimin ne hızla güncellendiğini belirler. Sabitleri değiştirin; 2008 öngörüleri 2007-4'teki düzey ve eğimden <span class="eq">Ŷ<sub>24+p</sub> = L<sub>24</sub> + p·T<sub>24</sub></span> ile yapılır (p = 1, …, 4).</p>
     <div class="controls">
       <span class="kayd"><label>α = <b id="hl-a-l">0,3</b></label><input type="range" id="hl-a" min="0.05" max="0.95" step="0.05" value="0.3"></span>
@@ -771,6 +840,7 @@
 <section class="section" id="s13">
   <div class="section-header"><span class="num">13</span>Yöntemleri Karşılaştırmak</div>
   <div class="section-body">
+    <div class="formula"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>e</mi><mi>t</mi></msub><mo>=</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mi>t</mi></msub><mo>,</mo><mspace width="2em" /><mtext>MSE</mtext><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>n</mi></mrow></mfrac><mo>∑</mo><msubsup><mi>e</mi><mi>t</mi><mn>2</mn></msubsup><mo>,</mo><mspace width="2em" /><mtext>MAD</mtext><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>n</mi></mrow></mfrac><mo>∑</mo><mo stretchy="false">|</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="false">|</mo></mrow></math></div>
     <p>Testere verisinde bütün yöntemler aynı ölçüyle: model dönemi t = 6-24 ve örneklem dışı 2008 (her çeyrekte bir adım ileri öngörü). Sütun başlığına basarak sıralayın.</p>
     <div class="tscroll" style="max-height:none"><table class="lagtab kars" id="kr-tab"></table></div>
     <div class="chart-wrap-sm kwn" id="kr-grafik"><canvas id="c-kr"></canvas></div>
@@ -818,6 +888,16 @@
 </section>
 
 <div id="tex-sablon" hidden>
+  <span data-k="bo2"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>S</mi><mi>t</mi></msub><mo>=</mo><msub><mi>Y</mi><mn>1</mn></msub><mo>+</mo><msub><mi>Y</mi><mn>2</mn></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>=</mo><msub><mi>S</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>Y</mi><mi>t</mi></msub></mrow></math></span>
+  <span data-k="bo3"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>S</mi><mi>t</mi></msub></mrow><mrow><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>t</mi></mrow></mfrac><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>t</mi></mrow></munderover><msub><mi>Y</mi><mi>i</mi></msub></mrow></math></span>
+  <span data-k="bo4"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>e</mi><mi>t</mi></msub><mo>=</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mi>t</mi></msub></mrow></math></span>
+  <span data-k="bo5"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>=</mo><mfrac><mrow><mi>t</mi><mspace width="0.167em" /><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow></math></span>
+  <span data-k="bo6"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mn>31</mn></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>S</mi><mrow><mn>30</mn></mrow></msub></mrow><mrow><mn>30</mn></mrow></mfrac></mrow></math></span>
+  <span data-k="ho2"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>M</mi><mi>t</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mrow><mi>k</mi></mrow></mfrac></mrow></math></span>
+  <span data-k="ho3"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>M</mi><mi>t</mi></msub></mrow></math></span>
+  <span data-k="ho4"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>e</mi><mi>t</mi></msub><mo>=</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mi>t</mi></msub><mo>,</mo><mspace width="2em" /><mtext>MSE</mtext><mo>=</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mi>n</mi></mrow></mfrac><mo>∑</mo><msubsup><mi>e</mi><mi>t</mi><mn>2</mn></msubsup></mrow></math></span>
+  <span data-k="ho5"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>M</mi><mi>t</mi></msub><mo>=</mo><msub><mi>M</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mfrac><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>−</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mi>k</mi></mrow></msub></mrow><mrow><mi>k</mi></mrow></mfrac></mrow></math></span>
+  <span data-k="ho6"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover><mrow><mn>31</mn></mrow></msub><mo>=</mo><msub><mi>M</mi><mrow><mn>30</mn></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>Y</mi><mrow><mn>30</mn></mrow></msub><mo>+</mo><msub><mi>Y</mi><mrow><mn>29</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>Y</mi><mrow><mn>31</mn><mo>−</mo><mi>k</mi></mrow></msub></mrow><mrow><mi>k</mi></mrow></mfrac></mrow></math></span>
   <span data-k="ch2"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>M</mi><mi>t</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow><mrow><mn>3</mn></mrow></mfrac></mrow></math></span>
   <span data-k="ch3"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msubsup><mi>M</mi><mi>t</mi><mi>′</mi></msubsup><mo>=</mo><mfrac><mrow><msub><mi>M</mi><mi>t</mi></msub><mo>+</mo><msub><mi>M</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>M</mi><mrow><mi>t</mi><mo>−</mo><mn>2</mn></mrow></msub></mrow><mrow><mn>3</mn></mrow></mfrac></mrow></math></span>
   <span data-k="ch4"><math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow><msub><mi>a</mi><mi>t</mi></msub><mo>=</mo><msub><mi>M</mi><mi>t</mi></msub><mo>+</mo><mo stretchy="false">(</mo><msub><mi>M</mi><mi>t</mi></msub><mo>−</mo><msubsup><mi>M</mi><mi>t</mi><mi>′</mi></msubsup><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><msub><mi>M</mi><mi>t</mi></msub><mo>−</mo><msubsup><mi>M</mi><mi>t</mi><mi>′</mi></msubsup></mrow></math></span>
@@ -989,43 +1069,55 @@ const KR = [654, 658, 665, 672, 673, 671, 693, 694, 701, 703, 702, 710, 712, 711
 // ---------- 4: düzeltilmiş naive (tek soru: 2008-1 öngörüsü) ----------
 (() => {
   // Her gözlem kendi rengiyle: tabloda hücre, formülde Y_t ve sayısı aynı renk (öğrenci hangi sayının nereden geldiğini görsün)
-  const RENK = { 24: 'k-tur', 23: 'k-mavi', 21: 'k-mor', 20: 'k-teal' };
+  const RENK = { 24: 'k-tur', 23: 'k-mavi', 22: 'k-yesil', 21: 'k-mor', 20: 'k-teal' };
   const Yk = t => `<span class="${RENK[t]}">Y<sub>${t}</sub></span>`, Nk = t => `<span class="${RENK[t]}">${TS[t - 1]}</span>`;
-  const Ok = t => `${Yk(t)} = ${Nk(t)} <small>(${TS_ET[t - 1]})</small>`;
+  const fr = (u, a) => `<span class="frac"><span>${u}</span><span>${a}</span></span>`;
+  const Y = x => `Y<sub>${x}</sub>`, F = 'Ŷ<sub>24+1</sub>';
+  // Slayttaki gibi: Ŷ_{24+1} = genel (t = 24 yazılmış), Ŷ25 = Y'lerle, Ŷ25 = sayılarla, Ŷ25 = sonuç
   const NV = [
     { ad: 'Naive', genel: 'Ŷ<sub>t+1</sub> = Y<sub>t</sub>', fikir: 'Son değer tekrar eder.', kul: [24], y: 650,
-      koy: `Ŷ<sub>25</sub> = ${Yk(24)}`, deger: `${Nk(24)}`,
+      zincir: [`${F} = ${Y(24)}`, Yk(24)],
       yorum: 'Naive öngörü 2007-4\'ün değerini aynen alır. Ama 1. çeyrek her yıl yüksek: model bunu bilmiyor, 200 adet eksik öngörüyor.' },
     { ad: 'Eğilim', genel: 'Ŷ<sub>t+1</sub> = Y<sub>t</sub> + (Y<sub>t</sub> − Y<sub>t−1</sub>)', fikir: 'Son değer + son artış.', kul: [23, 24], y: 900,
-      koy: `Ŷ<sub>25</sub> = ${Yk(24)} + (${Yk(24)} − ${Yk(23)})`, deger: `${Nk(24)} + (${Nk(24)} − ${Nk(23)}) = ${Nk(24)} + 250`,
+      zincir: [`${F} = ${Y(24)} + (${Y(24)} − ${Y('24−1')})`, `${Yk(24)} + (${Yk(24)} − ${Yk(23)})`, `${Nk(24)} + (${Nk(24)} − ${Nk(23)})`],
       yorum: '2007-3\'ten 2007-4\'e 250 artış var; model bunu "seri büyüyor" diye okuyup bir kez daha ekliyor. Bu kez hata küçük, ama artışın büyük kısmı mevsimden geliyor, eğilimden değil.' },
-    { ad: 'Oran', genel: 'Ŷ<sub>t+1</sub> = Y<sub>t</sub> × Y<sub>t</sub> / Y<sub>t−1</sub>', fikir: 'Son değer × son büyüme oranı.', kul: [23, 24], y: 1056.25,
-      koy: `Ŷ<sub>25</sub> = ${Yk(24)} × ${Yk(24)} / ${Yk(23)}`, deger: `${Nk(24)} × ${Nk(24)} / ${Nk(23)} = ${Nk(24)} × 1,625`,
+    { ad: 'Oran', genel: `Ŷ<sub>t+1</sub> = Y<sub>t</sub> ${fr('Y<sub>t</sub>', 'Y<sub>t−1</sub>')}`, fikir: 'Son değer × son büyüme oranı.', kul: [23, 24], y: 1056.25,
+      zincir: [`${F} = ${Y(24)} ${fr(Y(24), Y('24−1'))}`, `${Yk(24)} ${fr(Yk(24), Yk(23))}`, `${Nk(24)} ${fr(Nk(24), Nk(23))}`],
       yorum: 'Aynı artış bu kez oran olarak (%62,5) taşınıyor. Mevsimsel sıçrama büyüme sanılınca öngörü en çok burada şişiyor.' },
-    { ad: 'Mevsimsel', genel: 'Ŷ<sub>t+1</sub> = Y<sub>t−3</sub>', fikir: 'Geçen yılın aynı çeyreği tekrar eder.', kul: [21], y: 750, ek: 't − 3 = 24 − 3 = 21: 2007-1, yani geçen yılın 1. çeyreği.',
-      koy: `Ŷ<sub>25</sub> = ${Yk(21)}`, deger: `${Nk(21)}`,
+    { ad: 'Mevsimsel', genel: 'Ŷ<sub>t+1</sub> = Y<sub>t−3</sub>', fikir: 'Geçen yılın aynı çeyreği tekrar eder.', kul: [21], y: 750,
+      zincir: [`${F} = ${Y('24−3')}`, Yk(21)],
       yorum: 'Çeyreklik veride bir yıl önceki aynı çeyrek 4 dönem geridedir. 1. çeyreğin yüksekliği yakalanıyor; ama seri her yıl büyüdüğü için öngörü yine düşük kalıyor.' },
-    { ad: 'Mevsimsel + eğilim', genel: 'Ŷ<sub>t+1</sub> = Y<sub>t−3</sub> + [(Y<sub>t</sub> − Y<sub>t−1</sub>) + … + (Y<sub>t−3</sub> − Y<sub>t−4</sub>)] / 4', fikir: 'Geçen yılın aynı çeyreği + çeyrek başına ortalama artış.', kul: [20, 21, 24], y: 762.5, ek: 't − 3 = 21 (2007-1), t − 4 = 20 (2006-4). Dört farkın toplamı Y<sub>24</sub> − Y<sub>20</sub>\'ye iner: son bir yıldaki artış.',
-      koy: `Ŷ<sub>25</sub> = ${Yk(21)} + (${Yk(24)} − ${Yk(20)}) / 4`, deger: `${Nk(21)} + (${Nk(24)} − ${Nk(20)}) / 4 = ${Nk(21)} + 12,5`,
-      yorum: 'Mevsim (Y<sub>21</sub>) ve son bir yıldaki artışın dörtte biri birlikte. Mevsimi ve eğilimi birlikte hesaba kattığı için bu seride bütün dönemlerde en iyi sonuç bu modelde (13. bölüm).' },
+    { ad: 'Mevsimsel + eğilim', genel: `Ŷ<sub>t+1</sub> = Y<sub>t−3</sub> + ${fr('(Y<sub>t</sub> − Y<sub>t−1</sub>) + …<span class="nv-br"></span>+ (Y<sub>t−3</sub> − Y<sub>t−4</sub>)', '4')}`, fikir: 'Geçen yılın aynı çeyreği + çeyrek başına ortalama artış.', kul: [20, 21, 22, 23, 24], y: 762.5,
+      zincir: [`${F} = ${Y('24−3')} + ${fr(`(${Y(24)} − ${Y('24−1')}) + …<span class="nv-br"></span>+ (${Y('24−3')} − ${Y('24−4')})`, '4')}`,
+        `${Yk(21)} + ${fr(`(${Yk(24)} − ${Yk(23)}) + … + (${Yk(21)} − ${Yk(20)})`, '4')}`,
+        `${Nk(21)} + ${fr(`(${Nk(24)} − ${Nk(23)}) + (${Nk(23)} − ${Nk(22)})<span class="nv-br"></span>+ (${Nk(22)} − ${Nk(21)}) + (${Nk(21)} − ${Nk(20)})`, '4')}`,
+        `${Nk(21)} + 12,5`],
+      yorum: 'Mevsim (Y<sub>21</sub>) ve son dört çeyrekteki değişimin ortalaması birlikte. Mevsimi ve eğilimi birlikte hesaba kattığı için bu seride bütün dönemlerde en iyi sonuç bu modelde (13. bölüm).' },
   ];
   const ilk = 19, gercek = TS[24], nvv = x => v(x, Number.isInteger(x) ? 0 : 2).replace(/(,\d)0$/, '$1');
-  const goster = i => { const m = NV[i], kol = [...Array(25 - ilk)].map((_, k) => k + ilk + 1);   // t = 20 … 25
+  const ACIK = new Set(); let cur = 0;   // hesabı gösterilen modeller; sunum modunda hepsi açık (CSS)
+  const gz = d => `<span class="nv-cvp">${d}</span><span class="nv-soru">?</span>`;
+  const goster = i => { cur = i; $('s4').classList.toggle('nv-acik', ACIK.has(i)); const m = NV[i], kol = [...Array(25 - ilk)].map((_, k) => k + ilk + 1);   // t = 20 … 25
     $('nv-fikir').innerHTML = `<b>${i + 1}. ${m.ad}:</b> ${m.fikir}`;
+    document.querySelectorAll('#nv-liste [data-i]').forEach(x => x.classList.toggle('aktif', +x.dataset.i === i));
     // Holt tablosu gibi alt alta: her satır bir çeyrek; modelin kullandığı satırlar renkli
     let h = '<tr><th>t</th><th>Çeyrek</th><th class="ylab">Y<sub>t</sub></th><th>Testere</th><th class="c-tur">Ŷ<sub>t</sub></th><th>e<sub>t</sub></th></tr>';
     for (let t = 1; t <= 25; t++) { const kul = m.kul.includes(t), c = kul ? RENK[t] + '-h' : '';
       const not = t === 24 ? '<small>son gözlem</small>' : t === 25 ? '<small>öngörülecek</small>' : '';
       h += `<tr class="${t === 25 ? 'nv-25' : ''}"><td class="${c}">${t}</td><td class="${c}">${TS_ET[t - 1]}${not}</td><td class="ylab ${c}" data-k="Y-${t}">Y<sub>${t}</sub></td><td class="${t === 25 ? 'nv-gercek' : c}" data-k="Y-${t}">${TS[t - 1]}</td>`
-        + (t === 25 ? `<td class="nv-hedef" data-k="F-25" data-kaynak="${m.kul.map(k => 'Y-' + k).join(' ')}">${nvv(m.y)}</td><td class="nv-hata" data-kaynak="Y-25 F-25">${nvv(gercek - m.y)}</td>` : '<td></td><td></td>') + '</tr>'; }
+        + (t === 25 ? `<td class="nv-hedef" data-k="F-25" data-kaynak="${m.kul.map(k => 'Y-' + k).join(' ')}">${gz(nvv(m.y))}</td><td class="nv-hata" data-kaynak="Y-25 F-25">${gz(nvv(gercek - m.y))}</td>` : '<td></td><td></td>') + '</tr>'; }
     $('nv-tab').innerHTML = h; const kap = $('nv-kap'); kap.scrollTop = kap.scrollHeight;   // son çeyrekler görünsün
-    $('nv-hesap').innerHTML = `<div><b>1.</b> Formül: <span class="nv-genel">${m.genel}</span><br>Bugün 2007-4 (t = 24), öngörülecek dönem 2008-1 (t + 1 = 25). t yerine 24 yazın:<br>${m.koy}${m.ek ? `<br><small>${m.ek}</small>` : ''}</div>`
-      + `<div><b>2.</b> Değerleri tablodan okuyun: ${m.kul.slice().reverse().map(Ok).join(', ')}<br>Ŷ<sub>25</sub> = ${m.kul.length > 1 ? m.deger + ' = ' : ''}<b>${nvv(m.y)}</b></div>`
-      + `<div><b>3.</b> 2008-1'de gerçekleşen 850: e<sub>25</sub> = 850 − ${nvv(m.y)} = <b>${nvv(gercek - m.y)}</b></div>`;
+    const [ilkSat, ...kalan] = m.zincir, Yh = 'Ŷ<sub>25</sub>';
+    $('nv-hesap').innerHTML = `<div class="nv-soru nv-kendin">Önce Ŷ<sub>25</sub>'i kendiniz hesaplayın: tabloda renkli yanan değerleri işaretli formülde yerine koyun.<br><button class="nv-goster-btn" type="button">Hesabı göster</button></div>`
+      + `<div class="nv-cvp"><div><span class="nv-bas">2008-1 öngörüsü (t = 24):</span>`
+      + `<div class="nv-dk">${ilkSat}</div>` + kalan.map(z => `<div class="nv-dk">${Yh} = ${z}</div>`).join('')
+      + `<div class="nv-dk">${Yh} = <b>${nvv(m.y)}</b></div></div>`
+      + `<div><span class="nv-bas">Öngörü hatası:</span><div class="nv-dk">e<sub>25</sub> = Y<sub>25</sub> − ${Yh} = 850 − ${nvv(m.y)} = <b>${nvv(gercek - m.y)}</b></div></div></div>`;
     $('nv-ozet').innerHTML = '<tr><th>Model</th><th>Ŷ<sub>25</sub></th><th>e<sub>25</sub></th></tr>' + NV.map((n, k) => k > i ? `<tr class="nv-gizli"><td>${k + 1}. ${n.ad}</td><td>?</td><td></td></tr>` :
-      `<tr class="${k === i ? 'hl' : ''}"><td>${k + 1}. ${n.ad}</td><td>${nvv(n.y)}</td><td>${nvv(gercek - n.y)}</td></tr>`).join('');
+      `<tr class="${k === i ? 'hl' : ''}"><td>${k + 1}. ${n.ad}</td>` + (k === i ? `<td>${gz(nvv(n.y))}</td><td>${gz(nvv(gercek - n.y))}</td>` : `<td>${nvv(n.y)}</td><td>${nvv(gercek - n.y)}</td>`) + '</tr>').join('');
     $('nv-yorum').innerHTML = m.yorum; sunumSigdir($('nv-yorum'));
   };
+  $('nv-hesap').addEventListener('click', e => { if (e.target.closest('.nv-goster-btn')) { ACIK.add(cur); $('s4').classList.add('nv-acik'); } });
   grupla([...document.querySelectorAll('#nv-btn button')], b => goster(+b.dataset.i)); goster(0);
   // sunumda ok tuşu modelleri sırayla gezer
   let A = 0; const git = a => { A = a; document.querySelectorAll('#nv-btn button').forEach((b, k) => b.classList.toggle('active', k === a)); goster(a); };
@@ -1057,33 +1149,125 @@ function yakitSerit(id, kul = [], hedef = null) {
   $(id).innerHTML = h;
 }
 const aralik = (a, b) => [...Array(b - a + 1)].map((_, i) => 'Y-' + (a + i)).join(' ');
-// ---------- 5: basit ortalama ----------
+// ---------- 5: basit ortalama, adım adım (çift hareketli ortalama düzeniyle) ----------
 (() => {
-  const s28 = sum(YK.slice(0, 28)), y29 = s28 / 28, y30 = (28 * y29 + YK[28]) / 29, y31 = sum(YK) / 30;
-  yakitSerit('bo-serit', [...Array(28)].map((_, i) => i + 1));
-  $('bo-tab').innerHTML = `<tr><th>Hafta</th><th>Ŷ (öngörü)</th><th>Hesap</th><th class="ylab">Y<sub>t</sub></th><th>Gerçekleşen</th><th>e = Y − Ŷ</th></tr>
-    <tr><td>29</td><td data-k="F-29" data-kaynak="${aralik(1, 28)}"><b>Ŷ<sub>29</sub> = ${v(y29)}</b></td><td>(Y<sub>1</sub> + … + Y<sub>28</sub>) / 28 = ${s28} / 28<small>ilk 28 haftanın toplamı</small></td><td class="ylab" data-k="Y-29">Y<sub>29</sub></td><td data-k="Y-29">302</td><td data-kaynak="Y-29 F-29">${v(302 - y29)}</td></tr>
-    <tr><td>30</td><td data-k="F-30" data-kaynak="F-29 Y-29"><b>Ŷ<sub>30</sub> = ${v(y30)}</b></td><td>(28 × Ŷ<sub>29</sub> + Y<sub>29</sub>) / 29 = (28 × ${v(y29)} + 302) / 29<small>güncelleme formülü</small></td><td class="ylab" data-k="Y-30">Y<sub>30</sub></td><td data-k="Y-30">285</td><td data-kaynak="Y-30 F-30">${v(285 - y30)}</td></tr>
-    <tr><td>31</td><td data-kaynak="${aralik(1, 30)}"><b>Ŷ<sub>31</sub> = ${v(y31, 0)}</b></td><td>(Y<sub>1</sub> + … + Y<sub>30</sub>) / 30 = ${sum(YK)} / 30<small>30 haftanın toplamı</small></td><td class="ylab">Y<sub>31</sub></td><td class="bos">?</td><td class="bos"></td></tr>`;
-  const F = YK.map((_, t) => t === 0 ? null : sum(YK.slice(0, t)) / t);
-  ciz('c-bo', ekY({ type: 'line', data: { labels: [...YK.map((_, i) => i + 1), 31], datasets: [cizgi('Gerçekleşen', YK, C.blue), cizgi('Basit ortalama öngörü', [...F, y31], C.orange, { borderDash: [6, 4] })] },
+  const n = YK.length, S = []; YK.forEach((y, i) => S.push((i ? S[i - 1] : 0) + y));   // S[i] = S_{i+1}
+  const f29 = S[27] / 28, f30 = (28 * f29 + YK[28]) / 29, f31 = S[29] / 30, e29 = YK[28] - f29, e30 = YK[29] - f30;
+  const ADLAR = ['Veri', 'Toplam', 'Ortalama', 'Hata', 'Güncelleme', 'Ŷ₃₁'], N = 6; let A = 1, bildi = false;
+  const acik31 = () => bildi || document.body.classList.contains('sunum');   // sunumda cevap doğrudan görünür
+  const k1 = x => v(x, 1), kay = (...a) => `data-kaynak="${a.join(' ')}"`;
+  function tablo() {
+    const s = i => A >= i;
+    let h = `<tr><th>Hafta</th><th class="ylab">Y<sub>t</sub></th><th>Yakıt</th>${s(2) ? '<th class="c-mavi">Toplam S<sub>t</sub></th>' : ''}${s(3) ? '<th class="c-tur">Ŷ<sub>t</sub></th>' : ''}${s(4) ? '<th>e<sub>t</sub></th>' : ''}</tr>`;
+    const hl = { 2: 28, 3: 29, 4: 29, 5: 30, 6: 31 }[A];
+    for (let t = 1; t <= n + 1; t++) { const sin = t >= 29 && t <= 30, son = t === n + 1;
+      h += `<tr class="${t === hl ? 'hl' : ''}"><td>${t}</td><td class="ylab" data-k="Y-${t}">Y<sub>${t}</sub></td>`
+        + (son ? '<td class="bos">?</td>' : `<td data-k="Y-${t}" class="${sin ? 'bo-sin' : ''}">${YK[t - 1]}${t === 29 ? '<small>sınama</small>' : ''}</td>`);
+      if (s(2)) h += !son && (t <= 28 || A >= 6)
+        ? `<td class="c-mavi-y" data-k="S-${t}" ${t > 1 ? kay('S-' + (t - 1), 'Y-' + t) : kay('Y-1')}>${S[t - 1]}${t > 1 ? `<small>${S[t - 2]} + ${YK[t - 1]}</small>` : ''}</td>` : '<td></td>';
+      if (s(3)) h += t === 29 ? `<td class="c-tur-y" data-k="F-29" ${kay('S-28')}>${k1(f29)}<small>${S[27]} / 28</small></td>`
+        : t === 30 && A >= 5 ? `<td class="c-tur-y" data-k="F-30" ${kay('F-29', 'Y-29')}>${k1(f30)}<small>(28 × ${k1(f29)} + ${YK[28]}) / 29</small></td>`
+        : son && A >= 6 && acik31() ? `<td class="c-tur-y" data-k="F-31" ${kay('S-30')}>${k1(f31)}<small>${S[29]} / 30</small></td>`
+        : son && A >= 6 ? '<td class="bos">?</td>' : '<td></td>';
+      if (s(4)) h += t === 29 ? `<td data-k="E-29" ${kay('Y-29', 'F-29')}>${k1(e29)}<small>${YK[28]} − ${k1(f29)}</small></td>`
+        : t === 30 && A >= 5 ? `<td data-k="E-30" ${kay('Y-30', 'F-30')}>${k1(e30)}<small>${YK[29]} − ${k1(f30)}</small></td>` : '<td></td>';
+      h += '</tr>'; }
+    $('bo-tab').innerHTML = h; const kap = $('bo-kap'); kap.scrollTop = kap.scrollHeight;   // son haftalar görünsün
+  }
+  const ICERIK = {
+    1: () => `<h5>1. Veri</h5><p>Yakıt satışı 30 hafta. İlk 28 hafta (Y<sub>1</sub>, …, Y<sub>28</sub>) öngörü için kullanılır; 29 ve 30. haftalar (gri) öngörünün sınanması için ayrılır. Amaç 29. hafta için öngörü: Ŷ<sub>29</sub>.</p><p class="sg">Basit ortalama bütün geçmişi eşit ağırlıkla kullanır; önce 28 haftanın toplamı gerekir.</p>`,
+    2: () => `<h5>2. Toplam</h5><div class="rs-f">{F}</div><p>Toplam her hafta bir öncekine o haftanın satışı eklenerek bulunur: S<sub>2</sub> = ${S[0]} + ${YK[1]} = ${S[1]}. 28. haftada S<sub>28</sub> = <b class="c-mavi-y">${S[27]}</b>.</p>`,
+    3: () => `<h5>3. Ortalama: öngörü</h5><div class="rs-f">{F}</div><p>Ŷ<sub>29</sub> = S<sub>28</sub> / 28 = ${S[27]} / 28 = <b class="c-tur-y">${k1(f29)}</b>.</p><p class="sg">28 haftanın her biri öngörüye 1/28 ağırlıkla girer.</p>`,
+    4: () => `<h5>4. Hata</h5><div class="rs-f">{F}</div><p>29. haftada gerçekleşen ${YK[28]}: e<sub>29</sub> = Y<sub>29</sub> − Ŷ<sub>29</sub> = ${YK[28]} − ${k1(f29)} = <b class="c-mor-y">${k1(e29)}</b>. Öngörü ${k1(e29)} birim düşük kaldı.</p>`,
+    5: () => `<h5>5. Güncelleme</h5><div class="rs-f">{F}</div><p>Yeni gözlem gelince bütün toplamı yeniden almak gerekmez: eski ortalama ve yeni gözlem yeter. Ŷ<sub>30</sub> = (28 × ${k1(f29)} + ${YK[28]}) / 29 = <b class="c-teal-y">${k1(f30)}</b>.</p><p class="sg">28 × Ŷ<sub>29</sub> = S<sub>28</sub> olduğundan bu, S<sub>29</sub> / 29 = ${S[28]} / 29 ile aynıdır. Hata: e<sub>30</sub> = ${YK[29]} − ${k1(f30)} = ${k1(e30)}.</p>`,
+    6: () => `<h5>6. 31. hafta</h5><div class="rs-f">{F}</div><p>30 hafta gözlendi. 31. hafta için öngörü bütün gözlemlerin ortalamasıdır; toplam sütunu artık 30. haftaya kadar dolu.</p>
+      <div class="kendin">31. hafta için öngörü nedir? <input id="bo-in" inputmode="decimal" placeholder="Ŷ31"> <button id="bo-kontrol">Kontrol et</button><div class="geri" id="bo-geri-b"></div></div>`,
+  };
+  function git(a) { A = Math.max(1, Math.min(N, a)); adimCubugu('bo-adimlar', ADLAR, A, git); tablo();
+    $('bo-icerik').innerHTML = ICERIK[A]().replace('{F}', () => TEX('bo' + A));
+    panoDol('bo-p-s', A >= 2 ? String(S[27]) : null); panoDol('bo-p-f29', A >= 3 ? k1(f29) : null); panoDol('bo-p-e29', A >= 4 ? k1(e29) : null);
+    panoDol('bo-p-f30', A >= 5 ? k1(f30) : null); panoDol('bo-p-f31', A >= 6 && acik31() ? k1(f31) : null);
+    if (A === 6) $('bo-kontrol').onclick = () => { const x = sayi($('bo-in').value), g = $('bo-geri-b'); let s = 'yanlis', m;
+      if (Number.isNaN(x)) m = 'Bir sayı yazın.';
+      else if (Math.abs(x - f31) < 0.06) { s = 'dogru'; m = `Doğru: S<sub>30</sub> / 30 = ${S[29]} / 30 = ${k1(f31)}.`; }
+      else if (Math.abs(x - f29) < 0.06) m = 'Bu Ŷ<sub>29</sub>: yalnız 28 hafta. 29 ve 30. haftalar da artık ortalamaya girer.';
+      else if (Math.abs(x - f30) < 0.06) m = 'Bu Ŷ<sub>30</sub>: 29 hafta. 30. hafta da eklenmeli.';
+      else if (Math.abs(x - f31) < 0.6) { s = 'sari'; m = `Olur, yuvarlama farkı; tam değer ${S[29]} / 30 = ${v(f31, 2)}.`; }
+      else if (Math.abs(x - YK[29]) < 0.06) m = 'Bu son gözlem, yani naive öngörü. Basit ortalama bütün haftaları kullanır.';
+      else if (Math.abs(x - S[27] / 30) < 0.6 || Math.abs(x - S[29] / 28) < 0.6) m = 'Toplam ile bölen aynı haftaları kapsamalı: 30 haftanın toplamı / 30.';
+      else m = 'Tekrar deneyin: Ŷ<sub>31</sub> = (Y<sub>1</sub> + … + Y<sub>30</sub>) / 30.';
+      g.className = 'geri ' + s; g.innerHTML = m;
+      if (s !== 'yanlis') { bildi = true; tablo(); panoDol('bo-p-f31', k1(f31)); }
+      sunumSigdir(g); };
+    sunumSigdir($('bo-kutu')); }
+  $('bo-geri').onclick = () => git(A - 1); $('bo-ileri').onclick = () => git(A + 1);
+  adimliKaydet($('bo-kutu'), () => A, N, git); git(1);
+
+  const F = YK.map((_, t) => t === 0 ? null : S[t - 1] / t);
+  ciz('c-bo', ekY({ type: 'line', data: { labels: [...YK.map((_, i) => i + 1), 31], datasets: [cizgi('Gerçekleşen', YK, C.blue), cizgi('Basit ortalama öngörü', [...F, f31], C.orange, { borderDash: [6, 4] })] },
     options: eksen('Hafta', 'Yakıt') }));
 })();
 
-// ---------- 6: hareketli ortalama ----------
+// ---------- 6: hareketli ortalama, adım adım (çift hareketli ortalama düzeniyle) ----------
 (() => {
-  const HO = (k, t) => sum(YK.slice(t - k, t)) / k;   // t. haftanın (0 tabanlı t) öngörüsü
-  const kur = () => { const k = +$('ho-k').value; $('ho-k-l').textContent = k;
-    const F = YK.map((_, t) => t >= k ? HO(k, t) : null), e = YK.slice(10, 28).map((y, i) => y - HO(k, i + 10));
-    const son = YK.slice(28 - k, 28), y29 = HO(k, 28), y31 = HO(k, 30);
-    yakitSerit('ho-serit', [...Array(k)].map((_, i) => 28 - i), 29);
-    const ys = [...Array(k)].map((_, i) => `Y<sub>${28 - i}</sub>`).join(' + ');
-    $('ho-hesap').innerHTML = `Ŷ<sub>29</sub> = (${ys}) / ${k} = (${son.slice().reverse().join(' + ')}) / ${k} = ${sum(son)} / ${k} = <b data-k="F-29" data-kaynak="${aralik(29 - k, 28)}">${v(y29)}</b><br>e<sub>29</sub> = Y<sub>29</sub> − Ŷ<sub>29</sub> = 302 − ${v(y29)} = <b data-kaynak="Y-29 F-29">${v(302 - y29)}</b>`;
-    $('ho-y29').textContent = v(y29); $('ho-e29').textContent = v(302 - y29); $('ho-mse').textContent = v(mse(e)); $('ho-y31').textContent = v(y31);
-    ciz('c-ho', ekY({ type: 'line', data: { labels: [...YK.map((_, i) => i + 1), 31], datasets: [cizgi('Gerçekleşen', YK, C.blue), cizgi(`HO(${k}) öngörü`, [...F, y31], C.orange, { borderDash: [6, 4] })] },
-      options: eksen('Hafta', 'Yakıt') }));
+  const n = YK.length, ADLAR = ['Veri', 'Mₜ', 'Öngörü', 'Hata', 'Pencere kayar', 'Ŷ₃₁'], N = 6; let A = 1, k = 5, bildi = false;
+  const acik31 = () => bildi || document.body.classList.contains('sunum');
+  const k1 = x => v(x, 1), kay = (...a) => `data-kaynak="${a.join(' ')}"`;
+  const Mt = t => t >= k ? sum(YK.slice(t - k, t)) / k : null;   // t: 1 tabanlı hafta; M_t = son k haftanın ortalaması
+  const pen = t => [...Array(k)].map((_, i) => t - k + 1 + i);  // M_t'nin penceresi
+  const acik = t => k <= 5 ? `(${pen(t).map(j => YK[j - 1]).join(' + ')}) / ${k}` : `(Y<sub>${t - k + 1}</sub> + … + Y<sub>${t}</sub>) / ${k} = ${sum(YK.slice(t - k, t))} / ${k}`;
+  const acikY = t => k <= 5 ? `(${pen(t).slice().reverse().map(j => `Y<sub>${j}</sub>`).join(' + ')}) / ${k}` : `(Y<sub>${t}</sub> + … + Y<sub>${t - k + 1}</sub>) / ${k}`;
+  function tablo() {
+    const s = i => A >= i, Mgor = t => t <= 28 || (t === 29 && A >= 5) || (t === 30 && A >= 6 && acik31());
+    const Fgor = t => t >= k + 1 && (t <= 29 || (t === 30 && A >= 5) || (t === 31 && A >= 6 && acik31()));
+    let h = `<tr><th>Hafta</th><th class="ylab">Y<sub>t</sub></th><th>Yakıt</th>${s(2) ? '<th class="c-mavi">M<sub>t</sub></th>' : ''}${s(3) ? '<th class="c-tur">Ŷ<sub>t</sub></th>' : ''}${s(4) ? '<th>e<sub>t</sub></th>' + hataTh : ''}</tr>`;
+    const hl = { 2: 28, 3: 29, 4: 29, 5: 30, 6: 31 }[A], liste = [];
+    for (let t = 1; t <= n + 1; t++) { const sin = t >= 29 && t <= 30, son = t === n + 1, M = Mt(t), F = Mt(t - 1);
+      h += `<tr class="${t === hl ? 'hl' : ''}"><td>${t}</td><td class="ylab" data-k="Y-${t}">Y<sub>${t}</sub></td>`
+        + (son ? '<td class="bos">?</td>' : `<td data-k="Y-${t}" class="${sin ? 'bo-sin' : ''}">${YK[t - 1]}${t === 29 ? '<small>sınama</small>' : ''}</td>`);
+      if (s(2)) h += !son && M !== null && Mgor(t)
+        ? (t === 29 && A >= 5 ? `<td class="c-mavi-y" data-k="M-29" ${kay('M-28', 'Y-29', 'Y-' + (29 - k))}>${k1(M)}<small>${k1(Mt(28))} + (${YK[28]} − ${YK[28 - k]}) / ${k}</small></td>`
+          : `<td class="c-mavi-y" data-k="M-${t}" ${kay(...pen(t).map(j => 'Y-' + j))}>${k1(M)}<small>${acik(t)}</small></td>`) : '<td></td>';
+      if (s(3)) h += Fgor(t) ? `<td class="c-tur-y" data-k="F-${t}" ${kay('M-' + (t - 1))}>${k1(F)}<small>M<sub>${t - 1}</sub></small></td>` : t === 31 && A >= 6 ? '<td class="bos">?</td>' : '<td></td>';
+      if (s(4)) { if (t >= 11 && t <= 28) { const e = YK[t - 1] - F; liste.push({ k: t, e }); h += `<td data-k="E-${t}" ${kay('Y-' + t, 'F-' + t)}>${k1(e)}</td>` + hataTd(t, e); }
+        else if (t === 29 || (t === 30 && A >= 5)) h += `<td data-k="E-${t}" ${kay('Y-' + t, 'F-' + t)}>${k1(YK[t - 1] - F)}<small>${YK[t - 1]} − ${k1(F)}</small></td><td class="bos"></td><td class="bos"></td>`;
+        else h += '<td></td><td></td><td></td>'; }
+      h += '</tr>'; }
+    $('ho-tab').innerHTML = h + (A >= 4 ? hataAlt(liste, 6, 'hafta 11-28') : '');
+    $('ho-tab').closest('.rk-yan').classList.toggle('genis', A >= 4);
+    const kap = $('ho-kap'); kap.scrollTop = kap.scrollHeight;
+  }
+  const hata = () => YK.slice(10, 28).map((y, i) => y - Mt(i + 10));
+  const ICERIK = {
+    1: () => `<h5>1. Veri</h5><p>Yakıt satışı 30 hafta. İlk 28 hafta öngörü için, 29 ve 30. haftalar (gri) sınama için. k = ${k}: her öngörü son ${k} haftanın ortalamasıdır. Amaç Ŷ<sub>29</sub>.</p><p class="sg">k küçükse öngörü değişime hızlı tepki verir, büyükse düzgünleşir. k çubuğunu değiştirin, bütün adımlar yeniden hesaplanır.</p>`,
+    2: () => `<h5>2. Hareketli ortalama</h5><div class="rs-f">{F}</div><p>İlk değer ${k}. haftada: M<sub>${k}</sub> = ${acik(k)} = ${k1(Mt(k))}. Her yeni haftada pencere bir kayar: en eski hafta çıkar, yenisi girer. M<sub>28</sub> = ${acikY(28)} = <b class="c-mavi-y">${k1(Mt(28))}</b>.</p>`,
+    3: () => `<h5>3. Öngörü</h5><div class="rs-f">{F}</div><p>Her satırın öngörüsü bir üst satırın M değeridir; ilk öngörü ${k + 1}. haftada. Ŷ<sub>29</sub> = M<sub>28</sub> = <b class="c-tur-y">${k1(Mt(28))}</b>.</p>`,
+    4: () => `<h5>4. Hata ve MSE</h5><div class="rs-f">{F}</div><p>Hata ölçüleri 11-28. haftalardan hesaplanır; böylece k = 1'den 10'a kadar her k aynı haftalarla karşılaştırılır. MSE = <b class="c-mor-y">${k1(mse(hata()))}</b>. Sınama haftası: e<sub>29</sub> = ${YK[28]} − ${k1(Mt(28))} = ${k1(YK[28] - Mt(28))}.</p>`,
+    5: () => `<h5>5. Pencere kayar</h5><div class="rs-f">{F}</div><p>29. hafta gelince toplamı yeniden almak gerekmez: yeni hafta (Y<sub>29</sub>) girer, en eski hafta (Y<sub>${29 - k}</sub>) çıkar. M<sub>29</sub> = ${k1(Mt(28))} + (${YK[28]} − ${YK[28 - k]}) / ${k} = <b class="c-teal-y">${k1(Mt(29))}</b>, yani Ŷ<sub>30</sub> = ${k1(Mt(29))}. Hata: e<sub>30</sub> = ${YK[29]} − ${k1(Mt(29))} = ${k1(YK[29] - Mt(29))}.</p>`,
+    6: () => `<h5>6. 31. hafta</h5><div class="rs-f">{F}</div><p>30 hafta gözlendi; pencere son ${k} haftaya kaydı.</p>
+      <div class="kendin">31. hafta için öngörü nedir? <input id="ho-in" inputmode="decimal" placeholder="Ŷ31"> <button id="ho-kontrol">Kontrol et</button><div class="geri" id="ho-geri-b"></div></div>`,
   };
-  $('ho-k').oninput = kur; kur();
+  function pano() { panoDol('ho-p-m', A >= 2 ? k1(Mt(28)) : null); panoDol('ho-p-f29', A >= 3 ? k1(Mt(28)) : null); panoDol('ho-p-mse', A >= 4 ? k1(mse(hata())) : null);
+    panoDol('ho-p-f30', A >= 5 ? k1(Mt(29)) : null); panoDol('ho-p-f31', A >= 6 && acik31() ? k1(Mt(30)) : null); }
+  function git(a) { A = Math.max(1, Math.min(N, a)); adimCubugu('ho-adimlar', ADLAR, A, git); tablo();
+    $('ho-icerik').innerHTML = ICERIK[A]().replace('{F}', () => TEX('ho' + A)); pano();
+    if (A === 6) $('ho-kontrol').onclick = () => { const x = sayi($('ho-in').value), g = $('ho-geri-b'), f31 = Mt(30); let s = 'yanlis', m;
+      if (Number.isNaN(x)) m = 'Bir sayı yazın.';
+      else if (Math.abs(x - f31) < 0.06) { s = 'dogru'; m = `Doğru: M<sub>30</sub> = ${acikY(30)} = ${k1(f31)}.`; }
+      else if (Math.abs(x - Mt(29)) < 0.06) m = 'Bu Ŷ<sub>30</sub> = M<sub>29</sub>. Pencere bir hafta daha kaymalı: Y<sub>30</sub> girer.';
+      else if (k > 1 && Math.abs(x - YK[29]) < 0.06) m = 'Bu son gözlem, yani naive öngörü (k = 1). Burada son ' + k + ' hafta kullanılır.';
+      else if (Math.abs(x - sum(YK) / 30) < 0.06) m = 'Bu basit ortalama: bütün 30 hafta. Hareketli ortalama yalnız son ' + k + ' haftayı alır.';
+      else if (Math.abs(x - f31) < 0.6) { s = 'sari'; m = `Olur, yuvarlama farkı; tam değer ${v(f31, 2)}.`; }
+      else m = `Tekrar deneyin: Ŷ<sub>31</sub> = (Y<sub>30</sub> + … + Y<sub>${31 - k}</sub>) / ${k}.`;
+      g.className = 'geri ' + s; g.innerHTML = m;
+      if (s !== 'yanlis') { bildi = true; tablo(); pano(); }
+      sunumSigdir(g); };
+    sunumSigdir($('ho-kutu')); }
+  const grafik = () => { const F = YK.map((_, i) => Mt(i)); ciz('c-ho', ekY({ type: 'line', data: { labels: [...YK.map((_, i) => i + 1), 31],
+    datasets: [cizgi('Gerçekleşen', YK, C.blue), cizgi(`HO(${k}) öngörü`, [...F, Mt(30)], C.orange, { borderDash: [6, 4] })] }, options: eksen('Hafta', 'Yakıt') })); };
+  $('ho-k').oninput = () => { k = +$('ho-k').value; $('ho-k-l').textContent = k; bildi = false; git(A); grafik(); };
+  $('ho-geri').onclick = () => git(A - 1); $('ho-ileri').onclick = () => git(A + 1);
+  adimliKaydet($('ho-kutu'), () => A, N, git); git(1); grafik();
 })();
 
 // ---------- 7-8: çift hareketli ortalama (k = 3) ----------
@@ -1148,16 +1332,52 @@ const CH = (() => { const n = KR.length, M = KR.map((_, t) => t >= 2 ? (KR[t] + 
 })();
 
 // ---------- 9: üstel ağırlıklar ----------
-(() => { const kur = () => { const a = +$('ua').value; $('ua-l').textContent = va(a);
-    const w = [...Array(12)].map((_, j) => a * (1 - a) ** j);
-    ciz('c-ua', ekY({ type: 'bar', data: { labels: w.map((_, j) => j === 0 ? 'Yₜ' : `Yₜ₋${j}`), datasets: [{ label: 'Ağırlık', data: w, backgroundColor: C.purple }] },
-      options: { ...eksen('Gözlem', 'Ağırlık'), plugins: { legend: { display: false } } } }));
-    const ilk3 = sum(w.slice(0, 3));
-    $('ua-not').innerHTML = `α = ${va(a)} iken son gözlemin ağırlığı ${va(a)}, son üç gözlemin toplam ağırlığı ${v(ilk3, 2)}. Ağırlıklar geriye doğru (1 − α) oranında üstel azalır; adı buradan gelir. α büyüdükçe öngörü son gözleme yaklaşır (α → 1 naive öngörüdür).`; };
-  $('ua').oninput = kur; kur(); })();
+const sesF = a => { const F = [TS[0], TS[0]]; for (let t = 2; t <= 24; t++) F.push(F[t - 1] + a * (TS[t - 1] - F[t - 1])); return F; };  // F[t]: t. (0 tabanlı) gözlem için öngörü, t = 0..24
+(() => { let uaT = 6;   // öngörünün yapıldığı dönem: tabloda üzerine gelinen satır (başta 2003-2)
+  const vw = w => w > 0 && w < 0.0005 ? '<0,001' : v(w, 3).replace(/0+$/, '').replace(/,$/, '');
+  const kur = () => { const a = +$('ua').value, t = uaT, F = sesF(a), A = va(a), B = va(1 - a); $('ua-l').textContent = A;
+    // w[i]: Y_{i+1} gözleminin Ŷ_{t+1} içindeki ağırlığı; i = 0 başlangıç değerinin payıdır (Ŷ₂ = Y₁)
+    const w = [...Array(t)].map((_, i) => i === 0 ? (1 - a) ** (t - 1) : a * (1 - a) ** (t - 1 - i));
+    let h = `<tr><th>t</th><th>Çeyrek</th><th class="ylab">Y<sub>t</sub></th><th>Testere</th><th class="c-tur">Ağırlık (Ŷ<sub>${t + 1}</sub>)</th><th>Katkı</th></tr>`;
+    for (let j = 1; j <= 24; j++) {
+      h += `<tr data-t="${j}" class="${j === t ? 'sec' : ''}"><td>${j}</td><td>${TS_ET[j - 1]}</td><td class="ylab" data-k="UY-${j}">Y<sub>${j}</sub></td><td data-k="UY-${j}">${TS[j - 1]}</td>`
+        + (j <= t ? `<td class="c-A" data-k="UW-${j}">${vw(w[j - 1])}${j === 1 ? '<small>başlangıç</small>' : ''}</td><td data-k="UK-${j}" data-kaynak="UY-${j} UW-${j}">${v(w[j - 1] * TS[j - 1])}</td>` : '<td></td><td></td>') + '</tr>'; }
+    h += `<tr class="top"><td colspan="4">Toplam</td><td>1</td><td data-kaynak="${w.map((_, i) => 'UK-' + (i + 1)).join(' ')}">${v(F[t])}</td></tr>`;
+    $('ua-tab').innerHTML = h;
+    const i = t - 1; let p = `<div style="font-weight:700;color:var(--navy)">t = ${t} (${TS_ET[i]}) döneminde yapılan öngörü: Ŷ<sub>${t + 1}</sub></div>`;
+    if (t === 1) p += `<div>Ŷ<sub>2</sub> = Y<sub>1</sub> = <b>500</b> (başlangıç değeri)</div>`;
+    else { const yt = TS[i], ft = F[i], son = F[t], ter = [];
+      for (let j = t; j >= 2; j--) ter.push([j, w[j - 1]]);   // yeniden eskiye
+      const gos = ter.length > 4 ? ter.slice(0, 3) : ter, ara = ter.length > 4 ? ' + …' : '';
+      p += `<div><span class="o">Ağırlıklı ortalama:</span> Ŷ<sub>${t + 1}</sub> = α × Y<sub>${t}</sub> + (1 − α) × Ŷ<sub>${t}</sub></div>
+        <div class="ud-ic">= ${A} × ${yt} + ${B} × ${v(ft)} = <b>${v(son)}</b></div>
+        <div><span class="e">Hata düzeltme:</span> Ŷ<sub>${t + 1}</sub> = Ŷ<sub>${t}</sub> + α × (Y<sub>${t}</sub> − Ŷ<sub>${t}</sub>)</div>
+        <div class="ud-ic">= ${v(ft)} + ${A} × (${yt} − ${v(ft)}) = <b>${v(son)}</b></div>
+        <div><span class="d">Açılım:</span> Ŷ<sub>${t + 1}</sub> = ${gos.map(([j, x]) => `${vw(x)} × Y<sub>${j}</sub>`).join(' + ')}${ara} + ${vw(w[0])} × Y<sub>1</sub></div>
+        <div class="ud-ic">= ${gos.map(([j, x]) => `${vw(x)} × ${TS[j - 1]}`).join(' + ')}${ara} + ${vw(w[0])} × 500 = <b>${v(son)}</b></div>
+        <div><small>Üç yol aynı sayıyı verir. Son terim başlangıç değerinin payıdır (Ŷ<sub>2</sub> = Y<sub>1</sub> = 500); bütün terimler tablonun katkı sütunundadır.</small></div>`; }
+    $('ua-hesap').innerHTML = p; sunumSigdir($('ua-hesap'));
+    // Canlı formüller: üstteki iki formül seçilen dönemin indisleriyle (MathML; kurucunun ürettiği yapının aynısı)
+    const M = s => `<math xmlns="http://www.w3.org/1998/Math/MathML" displaystyle="true"><mrow>${s}</mrow></math>`;
+    const ix = k => `<mn class="ua-i" mathcolor="#c06f00">${k}</mn>`, mo = c => `<mo>${c}</mo>`, AL = '<mi>α</mi>';
+    const yh = k => `<msub><mover accent="true"><mrow><mi>Y</mi></mrow><mo>^</mo></mover>${ix(k)}</msub>`, yy = k => `<msub><mi>Y</mi>${ix(k)}</msub>`;
+    const pa = k => '<mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi>' + (k === 1 ? '<mo stretchy="false">)</mo>' : `<msup><mo stretchy="false">)</mo><mn>${k}</mn></msup>`);
+    const et = `<span class="ua-et"><button type="button" class="ua-ok" data-d="-1" aria-label="önceki dönem"${t === 1 ? ' disabled' : ''}>◀</button>t = ${t}<button type="button" class="ua-ok" data-d="1" aria-label="sonraki dönem"${t === 24 ? ' disabled' : ''}>▶</button></span>`; $('uat').value = t; $('uat-l').textContent = t; let f1, f2;
+    if (t === 1) f1 = f2 = M(yh(2) + mo('=') + yy(1));
+    else { f1 = M(yh(t + 1) + mo('=') + AL + yy(t) + mo('+') + pa(1) + yh(t) + mo('=') + yh(t) + mo('+') + AL + '<mspace width="0.167em" /><mo stretchy="false">(</mo>' + yy(t) + mo('−') + yh(t) + '<mo stretchy="false">)</mo>');
+      const ts = [AL + yy(t)]; if (t >= 3) ts.push(AL + pa(1) + yy(t - 1)); if (t >= 4) ts.push(AL + pa(2) + yy(t - 2));
+      f2 = M(yh(t + 1) + mo('=') + ts.join(mo('+')) + mo('+') + (t >= 4 ? mo('…') : pa(t - 1) + yy(1))); }
+    $('ua-f1').innerHTML = et + f1; $('ua-f2').innerHTML = et + f2; eqSigdir();
+    $('ua-not').innerHTML = (t === 1 ? `İlk dönemde elde yalnız başlangıç değeri vardır.` : `α = ${A} ve t = ${t} için son gözlemin (Y<sub>${t}</sub>) ağırlığı ${A}, ${t >= 4 ? `son üç gözlemin toplam ağırlığı ${v(sum(w.slice(-3)), 2)}, ` : ''}başlangıç değerinin payı ${v(w[0], 2)}.`)
+      + ` Ağırlıklar geriye doğru (1 − α) oranında üstel azalır; adı buradan gelir. α büyüdükçe öngörü son gözleme yaklaşır (α → 1 naive öngörüdür). α küçükken ve seri kısayken başlangıç değeri öngörüde ağır basar.`; };
+  const sec = e => { const tr = e.target.closest('tr[data-t]'); if (!tr) return; const t = +tr.dataset.t; if (t === uaT) return; uaT = t; kur(); };
+  $('ua-tab').addEventListener('mouseover', sec); $('ua-tab').addEventListener('click', sec);
+  const kaydir = () => { const r = $('ua-tab').querySelector('tr.sec'); if (r) $('ua-kap').scrollTop = Math.max(0, r.offsetTop - 130); };
+  $('uat').oninput = () => { uaT = +$('uat').value; kur(); kaydir(); };
+  $('s9').addEventListener('click', e => { const b = e.target.closest('.ua-ok'); if (!b) return; uaT = Math.min(24, Math.max(1, uaT + (+b.dataset.d))); kur(); kaydir(); });
+  $('ua').oninput = kur; kur(); kaydir(); })();
 
 // ---------- 10: α seçimi ----------
-const sesF = a => { const F = [TS[0], TS[0]]; for (let t = 2; t <= 24; t++) F.push(F[t - 1] + a * (TS[t - 1] - F[t - 1])); return F; };  // F[t]: t. (0 tabanlı) gözlem için öngörü, t = 0..24
 (() => {
   const AL = [...Array(99)].map((_, i) => (i + 1) / 100), MS = AL.map(a => { const F = sesF(a); return mse(TS.slice(1, 24).map((y, i) => y - F[i + 1])); });
   const iMin = MS.indexOf(Math.min(...MS));
